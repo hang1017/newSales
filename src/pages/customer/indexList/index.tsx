@@ -108,16 +108,16 @@ const IndexListPage: FC<PageProps> = ({ indexList, dispatch }) => {
           }, 500);
           return;
         }
-        // 查询首页轮播图
-        if (carouselList.length === 0) {
-          dispatch!({
-            type: 'indexList/qryPageDetailCacheModal',
-            payload: {
-              pageId: '7002',
-              storeId: '1006',
-            },
-          });
-        }
+        // // 查询首页轮播图
+        // if (carouselList.length === 0) {
+        //   dispatch!({
+        //     type: 'indexList/qryPageDetailCacheModal',
+        //     payload: {
+        //       pageId: '7002',
+        //       storeId: '1006',
+        //     },
+        //   });
+        // }
         dispatch!({
           type: 'indexList/queryGoodsByFgCategoryModels',
         }).then((data: any) => {
@@ -504,36 +504,33 @@ const IndexListPage: FC<PageProps> = ({ indexList, dispatch }) => {
    * banner 图点击事件
    *
    */
-  // const bannerClick = () => {
-  //   const source = Utils.getQueryString('source');
-  //   const sn = Utils.getQueryString('sn');
-  //   const salesCode = Utils.getQueryString('salesCode');
-  //   const test = Utils.getQueryString('test');
-  //   history.push({
-  //     pathname: '/starPkg',
-  //     query: {
-  //       source,
-  //       sn,
-  //       salesCode,
-  //       skuId: '636870',
-  //       test,
-  //     },
-  //   });
-  // };
+  const bannerClick = () => {
+    const test = Utils.getQueryString('test');
+    history.push({
+      pathname: '/starPkg',
+      query: {
+        source,
+        sn,
+        salesCode,
+        skuId: '636870',
+        test,
+      },
+    });
+  };
 
   return (
     <div className={styles.indexListStyle}>
       {/* <input type="file" accept="image/*" capture="camera"></input> */}
       <div className={styles.indeListContent}>
         <div className={styles.ilTopBg}>
-          {/* <img
+          <img
             id="topBgId"
             src={IndexListBgPng}
             alt=""
             className={styles.ilTopImg}
             onClick={bannerClick}
-          /> */}
-          <Carousel autoplay infinite>
+          />
+          {/* <Carousel autoplay infinite>
             {carouselList.map((val: any) => (
               <img
                 src={val?.imageUrl}
@@ -548,7 +545,7 @@ const IndexListPage: FC<PageProps> = ({ indexList, dispatch }) => {
                 onClick={() => carouselClick(val)}
               />
             ))}
-          </Carousel>
+          </Carousel> */}
           <div
             className={styles.ilTop}
             onClick={() => {

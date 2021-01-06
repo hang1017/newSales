@@ -361,9 +361,11 @@ const QuantityQueryPage: FC<PageProps> = ({ quantityQuery, dispatch }) => {
   };
   return (
     <div className={styles.center} style={{ height: document.documentElement.clientHeight - 280 }}>
-      {localStorage.getItem('source') !== '4' &&
-        localStorage.getItem('source') !== 'wxamp' &&
-        renderHeader()}
+      {
+        // localStorage.getItem('source') !== '4' &&
+        //   localStorage.getItem('source') !== 'wxamp' &&
+        renderHeader()
+      }
       <div className={styles.toalAmount}>
         <div>
           <div className={styles.price}>{allTotal + totalUnit}</div>

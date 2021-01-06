@@ -19,22 +19,22 @@ const InvoicePage: FC<PageProps> = ({ location }) => {
   const refTodo = useRef();
   const refcompleted = useRef();
   // 这里发起了初始化请求
-  useEffect(() => {
-    if (localStorage.getItem('source') === '4' || localStorage.getItem('source') === 'wxamp') {
-      const layoutNo = document.getElementsByClassName('rumtime-keep-alive-layout-no');
-      const layoutHead = document.getElementsByClassName('alita-layout-head');
-      const layoutFixed = document.getElementsByClassName('alita-layout-fixed');
-      if (layoutNo && layoutNo.length) {
-        layoutNo[0].style.height = '100%';
-      }
-      if (layoutHead && layoutHead.length) {
-        layoutHead[0].style.display = 'none';
-      }
-      if (layoutFixed && layoutFixed.length) {
-        layoutFixed[0].style.display = 'none';
-      }
-    }
-  }, [localStorage.getItem('source'), location.pathname]);
+  // useEffect(() => {
+  //   if (localStorage.getItem('source') === '4' || localStorage.getItem('source') === 'wxamp') {
+  //     const layoutNo = document.getElementsByClassName('rumtime-keep-alive-layout-no');
+  //     const layoutHead = document.getElementsByClassName('alita-layout-head');
+  //     const layoutFixed = document.getElementsByClassName('alita-layout-fixed');
+  //     if (layoutNo && layoutNo.length) {
+  //       layoutNo[0].style.height = '100%';
+  //     }
+  //     if (layoutHead && layoutHead.length) {
+  //       layoutHead[0].style.display = 'none';
+  //     }
+  //     if (layoutFixed && layoutFixed.length) {
+  //       layoutFixed[0].style.display = 'none';
+  //     }
+  //   }
+  // }, [localStorage.getItem('source'), location.pathname]);
   // 注意，上面这里写空数组，表示初始化，如果需要监听某个字段变化再发起请求，可以在这里写明
   const tabs = [
     { title: '未开票', ref: refTodo },

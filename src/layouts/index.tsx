@@ -4,22 +4,22 @@ import { getQueryString } from '@/utils/tool';
 const Layout: FC = ({ children, location }) => {
   const [show, setShow] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (localStorage.getItem('source') === '4' || localStorage.getItem('source') === 'wxamp') {
-      const layoutNo = document.getElementsByClassName('rumtime-keep-alive-layout-no');
-      const layoutHead = document.getElementsByClassName('alita-layout-head');
-      const layoutFixed = document.getElementsByClassName('alita-layout-fixed');
-      if (layoutNo && layoutNo.length) {
-        layoutNo[0].style.height = '100%';
-      }
-      if (layoutHead && layoutHead.length) {
-        layoutHead[0].style.display = 'none';
-      }
-      if (layoutFixed && layoutFixed.length) {
-        layoutFixed[0].style.display = 'none';
-      }
-    }
-  }, [location.pathname, localStorage.getItem('source')]);
+  // useEffect(() => {
+  //   if (localStorage.getItem('source') === '4' || localStorage.getItem('source') === 'wxamp') {
+  //     const layoutNo = document.getElementsByClassName('rumtime-keep-alive-layout-no');
+  //     const layoutHead = document.getElementsByClassName('alita-layout-head');
+  //     const layoutFixed = document.getElementsByClassName('alita-layout-fixed');
+  //     if (layoutNo && layoutNo.length) {
+  //       layoutNo[0].style.height = '100%';
+  //     }
+  //     if (layoutHead && layoutHead.length) {
+  //       layoutHead[0].style.display = 'none';
+  //     }
+  //     if (layoutFixed && layoutFixed.length) {
+  //       layoutFixed[0].style.display = 'none';
+  //     }
+  //   }
+  // }, [location.pathname, localStorage.getItem('source')]);
 
   useEffect(() => {
     const myHref = window.location.href;

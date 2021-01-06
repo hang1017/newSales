@@ -23,20 +23,20 @@ const CustomerHoneyPage: FC<PageProps> = ({ customerHoney, dispatch, location })
 
   // 发送宝贝后，页面回到本地，需要跑到底部
   useEffect(() => {
-    if (localStorage.getItem('source') === '4' || localStorage.getItem('source') === 'wxamp') {
-      const layoutNo = document.getElementsByClassName('rumtime-keep-alive-layout-no');
-      const layoutHead = document.getElementsByClassName('alita-layout-head');
-      const layoutFixed = document.getElementsByClassName('alita-layout-fixed');
-      if (layoutNo && layoutNo.length) {
-        layoutNo[0].style.height = '100%';
-      }
-      if (layoutHead && layoutHead.length) {
-        layoutHead[0].style.display = 'none';
-      }
-      if (layoutFixed && layoutFixed.length) {
-        layoutFixed[0].style.display = 'none';
-      }
-    }
+    // if (localStorage.getItem('source') === '4' || localStorage.getItem('source') === 'wxamp') {
+    //   const layoutNo = document.getElementsByClassName('rumtime-keep-alive-layout-no');
+    //   const layoutHead = document.getElementsByClassName('alita-layout-head');
+    //   const layoutFixed = document.getElementsByClassName('alita-layout-fixed');
+    //   if (layoutNo && layoutNo.length) {
+    //     layoutNo[0].style.height = '100%';
+    //   }
+    //   if (layoutHead && layoutHead.length) {
+    //     layoutHead[0].style.display = 'none';
+    //   }
+    //   if (layoutFixed && layoutFixed.length) {
+    //     layoutFixed[0].style.display = 'none';
+    //   }
+    // }
     scrollBottom();
   }, [location.pathname, localStorage.getItem('source')]);
 
