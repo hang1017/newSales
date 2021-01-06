@@ -1,0 +1,48 @@
+.actionModel {
+  .actionBg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .actAlert {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10000;
+    height: 75%;
+    padding: 30px 24px;
+    background: #fff;
+    transform: translateY(100%);
+    transition: all 0.3s ease-in-out;
+    &.show {
+      transform: translateY(0);
+    }
+    .alertHead {
+      display: flex;
+
+      .alertTitle {
+        flex: 5;
+        padding-left: 13%;
+        color: rgba(4, 28, 30, 1);
+        font-weight: 500;
+        font-size: 36px;
+        text-align: center;
+      }
+
+      .rightClose {
+        flex: 1;
+        text-align: right;
+
+        img {
+          width: 48px;
+        }
+      }
+    }
+  }
+}

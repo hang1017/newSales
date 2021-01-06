@@ -1,0 +1,183 @@
+@import '../../../../global.less';
+
+.orderCell {
+  position: relative;
+  padding: 30px 32px;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 24px;
+
+  .finishOrder {
+    position: absolute;
+    top: -30px;
+    right: 88px;
+    width: 112px;
+    height: 112px;
+  }
+
+  .storeInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 40px;
+
+    .storeMain {
+      flex: 1;
+      width: 0;
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+
+      .storeName {
+        margin-left: 8px;
+        color: #a4a4a4;
+        font-size: 26px;
+        line-height: 40px;
+      }
+
+      .tagName {
+        display: inline-block;
+        margin-right: 16px;
+        margin-left: 16px;
+        padding: 4px;
+        color: rgba(255, 255, 255, 1);
+        font-weight: 500;
+        font-size: 16px;
+        vertical-align: middle;
+        background: @themeBg;
+        border-radius: 5px;
+      }
+    }
+
+    .orderStatus {
+      color: #242424;
+      font-size: 26px;
+      line-height: 34px;
+    }
+
+    .redStatus {
+      color: #fe4854;
+      font-size: 26px;
+      line-height: 34px;
+    }
+  }
+
+  .orderInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0;
+
+    .goodsPic {
+      width: 124px;
+      height: 124px;
+      flex-shrink: 0;
+    }
+
+    .goodsName {
+      display: -webkit-box;
+      width: 100%;
+      padding: 0 32px;
+      overflow: hidden;
+      color: #242424;
+      font-weight: 400;
+      font-size: 32px;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .price {
+      color: #242424;
+      font-weight: 500;
+      // font-size: 32px;
+
+      span {
+        font-size: 28px;
+      }
+    }
+
+    .leftContent {
+      display: flex;
+      flex: 2;
+    }
+
+    .skuNum {
+      padding-left: 32px;
+      color: rgba(105, 109, 108, 1);
+    }
+  }
+
+  .footerBtns {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    margin-top: 32px;
+
+    div {
+      height: 56px;
+      padding: 12px 30px;
+      line-height: 32px;
+      border: 1px solid #cbcacf;
+      border-radius: 28px;
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 30px;
+  }
+}
+
+.promotion {
+  color: @themeColor;
+  text-align: right;
+
+  span {
+    font-size: 20px;
+  }
+}
+
+.bottomContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .bottomDes {
+    color: #a4a4a4;
+    font-weight: 400;
+    font-size: 26px;
+
+    span {
+      font-size: 36px;
+    }
+  }
+}
+
+.bottomView {
+  display: flex;
+  flex-direction: row-reverse;
+
+  .btnRedView {
+    min-width: 172px;
+    margin-left: 24px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: @themeColor;
+    text-align: center;
+    border: 1px solid @themeColor;
+    border-radius: 36px;
+  }
+
+  .btnGreyView {
+    min-width: 172px;
+    margin-left: 24px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #333;
+    text-align: center;
+    border: 1px solid #b3b5b7;
+    border-radius: 36px;
+  }
+}

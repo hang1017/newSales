@@ -1,0 +1,38 @@
+.friendListStyle {
+  display: grid;
+  grid-gap: 48px 52px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+  .friendItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .friendImg {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 26px;
+    }
+
+    .friendName {
+      font-size: 24px;
+      font-weight: 600;
+      color: #333333;
+      line-height: 34px;
+    }
+
+    .friendNameNo {
+      font-size: 24px;
+      font-weight: 400;
+      color: #999999;
+      line-height: 34px;
+    }
+
+    .friendNameDark {
+      font-size: 24px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.81);
+      line-height: 34px;
+    }
+  }
+}

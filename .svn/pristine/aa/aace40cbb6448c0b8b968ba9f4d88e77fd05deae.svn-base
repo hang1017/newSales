@@ -1,0 +1,95 @@
+.orderConfirm {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  overflow: auto;
+
+  .myForm {
+    // height: calc(100vh - 610px);
+    // flex: 1;
+    overflow: scroll;
+  }
+
+  .regLoginCodeImg {
+    width: 150px;
+    height: 66px;
+  }
+
+  :global {
+    #alita-dform-certName {
+      margin-right: 70px !important;
+    }
+
+    #alita-dform-code {
+      margin-right: 40px !important;
+    }
+
+    #alita-dform-homeAddr {
+      margin-right: 13px !important;
+    }
+
+    // textarea {
+    //   margin-left: -16px !important;
+    // }
+
+    .alitajs-dform-title {
+      color: #000;
+      font-weight: 400;
+      font-size: 32px !important;
+    }
+
+    .alitajs-dform-input {
+      padding: 16px 0;
+    }
+
+    .am-list-item .am-input-extra {
+      flex-shrink: 0;
+      max-height: 66px;
+      line-height: 2;
+    }
+
+    .alitajs-dform-address-value-item-label {
+      text-align: center;
+    }
+  }
+
+  .normalBtn() {
+    padding: 4px 10px;
+    font-weight: 400;
+    font-size: 26px;
+    border-radius: 39px;
+  }
+
+  .getCode {
+    .normalBtn();
+
+    color: #1f90ec;
+    border: 2px solid #2ca5ff;
+  }
+
+  .disableSend {
+    .normalBtn();
+
+    color: #d4d4d4;
+    border: 2px solid #d4d4d4;
+  }
+
+  .changeText {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    color: #fff;
+    font-size: 26px;
+    background-color: rgb(81, 165, 248);
+    border-radius: 30px;
+  }
+}
+
+.tipMsg {
+  margin-top: 30px;
+  padding-left: 32px;
+  color: #1f90ec;
+  font-size: 26px;
+
+}

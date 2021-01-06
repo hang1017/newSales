@@ -1,0 +1,238 @@
+.payConfirm {
+  height: calc(100% - 90px);
+  background: #f5f5f5;
+  padding-top: 20px;
+  // display: flex;
+  // flex-direction: column;
+  // flex: 1;
+
+  .sendTypeStyle {
+    margin-top: 20px;
+
+    :global {
+      .am-list-item .am-list-line .am-list-arrow {
+        background-image: url('../../../assets/img/goodsdetail/shop-action.png');
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+
+  .payConfirmContent {
+    // flex: 1;
+    height: 100vh;
+    overflow: auto;
+
+    .payConfirmRef {
+      padding-bottom: 100px;
+    }
+  }
+
+  :global {
+    .am-list-body {
+      border: none;
+    }
+
+    .alitajs-dform-title {
+      color: rgba(0, 0, 0, 0.85);
+      font-size: 28px;
+      font-weight: 400;
+    }
+  }
+
+  .addrInfo {
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    margin-top: 20px;
+    padding: 30px;
+    background: #fff;
+
+    img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .nameAndPhone {
+      color: #242424;
+      font-weight: 500;
+      font-size: 32px;
+    }
+
+    .userAddr {
+      color: #808080;
+      font-weight: 400;
+      font-size: 28px;
+    }
+  }
+
+  .orderContent {
+    height: auto;
+    max-height: 48%;
+    margin-top: 20px;
+    overflow: scroll;
+    background: #fff;
+
+    .orderCell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 32px;
+      color: #000;
+      font-weight: 500;
+      font-size: 26px;
+    }
+
+    .allAmount {
+      color: #fe4854;
+    }
+  }
+
+  .invoice {
+    margin-top: 20px;
+  }
+
+  .selectNum {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    height: 100px;
+    padding: 0 32px;
+    margin-bottom: 20px;
+
+    :global {
+      .am-input-label {
+        font-size: 28px;
+        font-weight: 400;
+        color: #041C1E;
+        line-height: 48px;
+      }
+
+      .am-list-item.am-input-item {
+        padding-left: 0;
+      }
+
+      .am-list {
+        width: 100%;
+      }
+
+      .am-list-line {
+        padding-right: 0px;
+      }
+    }
+
+    .selectNumContent {
+      display: flex;
+      align-items: center;
+
+      .showPhone {
+
+        .closeImg {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      .selectNumText {
+        width: 56px;
+        height: 48px;
+        font-size: 28px;
+        font-weight: 400;
+        color: #041C1E;
+        line-height: 48px;
+      }
+
+      .selectNumTextLabel {
+        padding: 10px 24px;
+        background: #F4F7F6;
+        border-radius: 24px;
+        font-size: 22px;
+        font-weight: 400;
+        color: #041C1E;
+        line-height: 28px;
+        margin-left: 32px;
+
+      }
+    }
+  }
+
+  .selectAddr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 30px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f4f7f6;
+    background-color: #fff;
+
+    .selectLeft {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      width: 0;
+
+      .label {
+        color: #041c1e;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 40px;
+      }
+
+      .addrValue {
+        flex: 1;
+        padding-left: 38px;
+        overflow: hidden;
+        color: #041c1e;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 40px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-align: right;
+      }
+    }
+
+    .selectRight {
+      display: flex;
+      align-items: center;
+
+      .tipsIcon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .tipsText {
+        padding-right: 16px;
+        padding-left: 8px;
+        color: #b3b5b7;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 34px;
+      }
+
+      .rightIcon {
+        width: 48px;
+        height: 48px;
+        margin-left: 16px;
+      }
+    }
+  }
+}
+
+.orderInfoFoot {
+  padding-left: 66px;
+  color: #808080;
+  font-size: 28px;
+
+  span {
+    color: #2ca5ff;
+    font-size: 36px;
+  }
+}
+
+:global {
+  #root>div {
+    background: transparent !important;
+  }
+}

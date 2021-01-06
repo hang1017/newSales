@@ -1,0 +1,11 @@
+.details {
+  height: 94%;
+  overflow-y: scroll;
+  background: #f1f2f3;
+  .trackBlock {
+    margin-top: 24px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 24px;
+  }
+}

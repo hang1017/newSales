@@ -1,0 +1,609 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-shadow */
+import React, { FC, useEffect, useState, useRef } from 'react';
+import {
+  LoginModelState,
+  ConnectProps,
+  connect,
+  router,
+  dropByCacheKey,
+  setPageNavBar,
+} from 'alita';
+import { Button, Modal, Toast } from 'antd-mobile';
+import _ from 'lodash';
+import { Base64 } from 'js-base64';
+import CommonInput from '@/components/CommonInput';
+import { setEmergencyData, getVerificationCodeImgUrl } from '@/utils';
+import { PageType, sysParams } from '@/utils/AppContext';
+import SlipCheck from '@/pages/customer/components/SlipCheck';
+
+
+import styles from './index.less';
+
+let timer: NodeJS.Timeout | null = null;
+let seconds = 60;
+
+interface PageProps extends ConnectProps {
+  login: LoginModelState;
+}
+
+const LoginPage: FC<PageProps> = ({ login, dispatch, location }) => {
+  const [btnText, updateBtnText] = useState('获取验证码');
+  const [btnFlag, setBtnFlag] = useState<boolean>(false);
+  const [loginType] = useState(location?.query?.type || '');
+  const [code, setCode] = useState<string>('');
+  const [showSpliItem, updateShowSpliItem] = useState(false);
+  const codeRef = useRef();
+  const uuidRef = useRef();
+
+  const [codeFail, updateCodeFail] = useState(false);
+  const [appletImg, updateAppletImg] = useState('');
+  const [appletBlock, upateApplectBlock] = useState(false);
+
+  const getBlobImageUrl = (url: any) => {
+    const request = new window.XMLHttpRequest();
+    request.responseType = 'blob';
+    request.open('get', url, true);
+    request.onreadystatechange = () => {
+      if (request.readyState === window.XMLHttpRequest.DONE && request.status === 200) {
+        codeRef.current.src = URL.createObjectURL(request.response);
+        // 提取UUID
+        uuidRef.current = request.getResponseHeader('uuid');
+        codeRef.current.onload = () => {
+          URL.revokeObjectURL(codeRef.current.src);
+        };
+      }
+    };
+    request.send(null);
+  };
+
+  /**
+   * 获取图形验证码点击事件
+   */
+  const imgCodeUrlClick = () => {
+    const url = getVerificationCodeImgUrl();
+    getBlobImageUrl(url);
+  };
+
+  // 这里发起了初始化请求
+  useEffect(() => {
+    // 进入登录页面清除 客服keepalive
+    dropByCacheKey('/customerhoney');
+
+    // 清空客服模块model 数据
+    dispatch!({
+      type: 'customerHoney/save',
+      payload: {
+        chatList: [],
+        chatPage: 1,
+        hasMore: true,
+      },
+    });
+
+    // 清空紧急挂失模块数据
+    setEmergencyData({});
+    dispatch!({
+      type: 'emerPayConfirm/save',
+      payload: {
+        phone: '',
+        orderInfo: {},
+        addressInfo: {},
+        idCardInfo: {},
+        invoiceContent: { personal: {}, company: {} },
+      },
+    });
+    dispatch!({
+      type: 'emergencyList/save',
+      payload: {
+        emList: [],
+      },
+    });
+
+    setPageNavBar({
+      pagePath: location.pathname,
+      navBar: {
+        onLeftClick: () => {
+          router.go(-2);
+          // const source = localStorage.getItem('source') || '';
+          // const sn = localStorage.getItem('sn') || '';
+          // router.replace({
+          //   pathname: '/customer/indexList',
+          //   query: { source, sn },
+          // });
+        },
+      },
+    });
+
+    // imgCodeUrlClick();
+    return () => {
+      // 这里写一些需要消除副作用的代码
+      // 如: 声明周期中写在 componentWillUnmount
+      dispatch!({
+        type: 'login/save',
+        payload: {
+          account: '',
+          password: '',
+          phoneNumber: '',
+          isAccountLogin: true,
+          showRegisterModal: false,
+        },
+      });
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+        seconds = 60;
+      }
+    };
+  }, []);
+  // 注意，上面这里写空数组，表示初始化，如果需要监听某个字段变化再发起请求，可以在这里写明
+  const { isAccountLogin, showRegisterModal, phoneNumber, account, password, slipInfo } = login;
+  const { shadeImage, cutoutImage, x, y } = slipInfo;
+
+  // 短信验证码登录
+  // const toVercode = () => {
+  //   dispatch!({
+  //     type: 'login/save',
+  //     payload: {
+  //       isAccountLogin: false,
+  //     },
+  //   });
+  // };
+
+  const toAccount = () => {
+    dispatch!({
+      type: 'login/save',
+      payload: {
+        isAccountLogin: true,
+      },
+    });
+  };
+  /**
+   * 是否开启验证码
+   */
+  const getIsSlidVerify = () => {
+    dispatch!({
+      type: 'login/save',
+      payload: {
+        password: '34',
+      },
+    });
+
+    dispatch!({
+      type: 'login/getSlideVerificationCode'
+    }).then(res => {
+      const { uuId } = res;
+      if (uuId) {
+
+        updateShowSpliItem(true);
+      }
+
+    });
+
+
+  }
+  const gotoVercode = () => {
+
+
+    setBtnFlag(false);
+    if (seconds === 60) {
+      // eslint-disable-next-line no-shadow
+      const { account = '' } = login;
+      // 校验手机号
+      if (account === '') {
+        Toast.info('手机号不能为空！');
+        return false;
+      }
+      const re = /^1\d{10}$/;
+      if (!re.test(account)) {
+        Toast.info('请输入正确的手机号');
+        return false;
+      }
+      // if (!code) {
+      //   Toast.info('图形验证码不能为空！');
+      //   return false;
+      // }
+      dispatch!({
+        type: 'verificationCode/save',
+        payload: {
+          userCode: account,
+          isLogin: true,
+          pageType: PageType.login,
+        },
+      });
+      timer = setInterval(() => {
+        if (seconds === 0) {
+          if (timer) clearInterval(timer);
+          timer = null;
+          seconds = 60;
+          updateBtnText(`获取验证码`);
+        } else {
+          seconds -= 1;
+          updateBtnText(`已发送(${seconds}s)`);
+        }
+      }, 1000);
+      dispatch!({
+        type: 'orderSearch/genAppLoginMsgCode',
+        payload: {
+          phone: Base64.encode(account),
+          // phone: account,
+          uuid: uuidRef.current,
+          graphValidateCode: code,
+          callback: (flag: boolean) => {
+            if (!flag && timer) {
+              clearInterval(timer);
+              timer = null;
+              seconds = 60;
+              // imgCodeUrlClick();
+            }
+          },
+        },
+      });
+    }
+
+
+
+
+  };
+
+  /**
+   * 点击发送验证码
+   */
+  const sendVerifyCode = () => {
+    if (codeFail) {
+      getIsSlidVerify();
+    }
+    else {
+      gotoVercode();
+    }
+  }
+
+
+
+  const toLogin = () => {
+    const { account = '', password = '' } = login;
+    // 校验用户名
+    if (account === '') {
+      Toast.info('用户名不能为空！');
+      return;
+    }
+    // if (code === '') {
+    //   Toast.info('图形验证码不能为空！');
+    //   return;
+    // }
+    if (password === '') {
+      Toast.info('短信验证码不能为空！');
+      return;
+    }
+    // if (btnFlag) {
+    //   Toast.info('请重新获取验证码');
+    //   return;
+    // }
+    setBtnFlag(true);
+
+    localStorage.setItem('myAccNbr', account);
+
+    dispatch!({
+      type: 'login/smsLogin',
+      payload: {
+        phone: Base64.encode(account),
+        // phone: account,
+        validationCode: password,
+        loginType,
+        uuid: uuidRef.current,
+        graphValidateCode: code,
+      },
+    }).then((res: any) => {
+      if (!res) {
+        return false;
+      }
+      const { success, errCode = '', errMessage } = res;
+      if (!success) {
+        // if (timer) clearInterval(timer);
+        // timer = null;
+        // seconds = 60;
+        // updateBtnText(`获取验证码`);
+        // setBtnFlag(false);
+
+        if (errCode === 'BMS_VERIFICATIONCODEWRONG_LOGIN_005') {
+
+          dispatch!({
+            type: 'payConfirm/getH5ConfigurationModel',
+            payload: {
+              propertyName: sysParams.slidVerify,
+            },
+          }).then((flag: boolean) => {
+            Toast.fail(errMessage, 1);
+            if (flag) {// 开启验证码
+              updateCodeFail(true);
+            }
+          });
+
+        }
+        else {
+          Toast.fail(errMessage, 1);
+        }
+
+      }
+    });
+  };
+
+  // 账号密码登录
+  const accountLogin = () => (
+    <div>
+      <CommonInput
+        onChange={(value: string) => {
+          dispatch!({
+            type: 'login/save',
+            payload: {
+              account: value,
+            },
+          });
+        }}
+        inputType="number"
+        value={account}
+        placeholder="请输入手机号"
+        showDelete
+        maxLength={11}
+      />
+      {/* <CommonInput
+        onChange={(e: string) => setCode(e)}
+        value={code}
+        regex={/^[0-9a-zA-Z]+$/}
+        placeholder="请输入图形验证码"
+        // showDelete
+        maxLength={4}
+      />
+      <img className={styles.loginCodeImg} ref={codeRef} onClick={() => imgCodeUrlClick()} /> */}
+      <CommonInput
+        onChange={(value: string) => {
+          dispatch!({
+            type: 'login/save',
+            payload: {
+              password: value,
+            },
+          });
+        }}
+        value={password}
+        placeholder="请输入短信验证码"
+        inputType="number"
+        // showDelete
+        maxLength={6}
+      />
+      <span
+        className={btnText === '获取验证码' ? styles.verifyCode : styles.disableBtn}
+        onClick={_.debounce(sendVerifyCode, 300)}
+      >
+        {btnText}
+      </span>
+
+      {/*  <div className={styles.tipMsg}> 未注册的手机号验证后，自动创建账户</div> */}
+      <Button className={styles.btn} onClick={toLogin}>
+        登录
+      </Button>
+      <div
+        className={styles.emergenText}
+        onClick={() => {
+          router.push({
+            pathname: '/emergency/emergencyList',
+          });
+        }}
+      >
+        紧急业务办理
+      </div>
+      <div
+        className={styles.emergenText}
+        onClick={() => {
+
+          if (!appletBlock) {
+            dispatch!({
+              type: 'login/getSystemParamsCacheByCode',
+              payload: {
+                paramCode: 'smallProgramUrl_activate'
+              }
+            }).then((res) => {
+              const { paramVal } = res.data;
+              if (paramVal) {
+                updateAppletImg(paramVal);
+              }
+
+            });
+
+          }
+          upateApplectBlock(!appletBlock);
+        }}
+      >
+        订单激活入口
+      </div>
+
+      {
+        // <div className={styles.otherView}>
+        //   <div className={styles.tovercode} onClick={toVercode}>
+        //     短信验证码登录
+        // </div>
+        //   <div className={styles.forget} onClick={forgetPw}>
+        //     忘记密码
+        // </div>
+        // </div>
+      }
+    </div>
+  );
+
+  // 手机验证码登录
+  const phoneLogin = () => (
+    <div>
+      <CommonInput
+        onChange={(value: string) => {
+          dispatch!({
+            type: 'login/save',
+            payload: {
+              phoneNumber: value,
+            },
+          });
+        }}
+        value={phoneNumber}
+        inputType="tel"
+        placeholder="请输入手机号码"
+        showDelete
+      />
+      <Button className={styles.btn} onClick={sendVerifyCode}>
+        获取验证码
+      </Button>
+
+      <div className={styles.otherView}>
+        <div className={styles.tovercode} onClick={toAccount}>
+          使用账号密码登录
+        </div>
+      </div>
+    </div>
+  );
+
+  // const toShowRegister = () => {
+  //   dispatch!({
+  //     type: 'login/save',
+  //     payload: {
+  //       showRegisterModal: true,
+  //     },
+  //   });
+  // };
+
+  const closeRegisterModal = () => {
+    dispatch!({
+      type: 'login/save',
+      payload: {
+        showRegisterModal: false,
+      },
+    });
+  };
+
+  // 跳转到注册页面
+  const toRegisterPage = () => {
+    closeRegisterModal();
+    dispatch!({
+      type: 'registerPhone/save',
+      payload: {
+        pageType: PageType.register,
+      },
+    });
+    dispatch!({
+      type: 'verificationCode/save',
+      payload: {
+        pageType: PageType.register,
+      },
+    });
+    dispatch!({
+      type: 'setPassword/save',
+      payload: {
+        pageType: PageType.register,
+      },
+    });
+    dispatch!({
+      type: 'commonSuccessPage/save',
+      payload: {
+        pageType: PageType.register,
+      },
+    });
+    router.push({ pathname: '/register/registerPhone' });
+  };
+
+  // // 忘记密码
+  // const forgetPw = () => {
+  //   dispatch!({
+  //     type: 'registerPhone/save',
+  //     payload: {
+  //       pageType: PageType.forgetPw,
+  //     },
+  //   });
+  //   dispatch!({
+  //     type: 'verificationCode/save',
+  //     payload: {
+  //       pageType: PageType.forgetPw,
+  //     },
+  //   });
+  //   dispatch!({
+  //     type: 'setPassword/save',
+  //     payload: {
+  //       pageType: PageType.forgetPw,
+  //     },
+  //   });
+  //   dispatch!({
+  //     type: 'commonSuccessPage/save',
+  //     payload: {
+  //       pageType: PageType.forgetPw,
+  //     },
+  //   });
+  //   router.push({ pathname: '/register/registerPhone' });
+  // };
+
+  const { clientHeight, clientWidth } = document.documentElement;
+  const heigth = clientHeight / window.devicePixelRatio;
+
+
+  console.log(`heigth:${heigth}`);
+  return (
+    <div style={{ overflow: 'hidden', }}>
+      <div className={styles.center} style={{ height: document.documentElement.clientHeight - 90 }}>
+        {isAccountLogin ? accountLogin() : null}
+        {isAccountLogin ? null : phoneLogin()}
+        {
+          appletBlock && <div className={styles.appletImg} >
+            <img src={appletImg} alt='' style={{ width: heigth > 667 ? clientWidth * 0.85 : clientHeight * 0.36 }} />
+            <div>请打开微信扫一扫或者截图保存后打开微信扫一扫</div>
+          </div>
+        }
+      </div>
+
+
+      {
+        // <div className={styles.loginHint}>
+        //   <span>
+        //     登录即表示您同意<span className={styles.agreement}>《新销售平台用户协议》</span>
+        //   </span>
+        // </div>
+      }
+
+      <Modal visible={showRegisterModal} transparent maskClosable={false} title="注册协议">
+        <div className={styles.modalView}>
+          <div style={{ overflow: 'scroll', maxHeight: 720, fontSize: 44, textAlign: 'left' }}>
+            <span className={styles.hintText}>【审慎阅读】</span>
+            您在神奇注册流程中点击同意前，应当认真阅读以下协议。请您务必审慎阅读、充分理解协议中相关条款内容，其中包括：
+            1、条款123444； 2、条款123444； 3、条款123444； 4、条款123444； 5、条款123444；
+            您在神奇注册流程中点击同意前，应当认真阅读以下协议。请您务必审慎阅读、充分理解协议中相关条款内容，其中包括：
+            1、条款123444； 2、条款123444； 3、条款123444； 4、条款123444； 5、条款123444；
+            您在神奇注册流程中点击同意前，应当认真阅读以下协议。请您务必审慎阅读、充分理解协议中相关条款内容，其中包括：
+          </div>
+          <div className={styles.modalButView}>
+            <div onClick={closeRegisterModal} className={styles.noAgree}>
+              不同意
+            </div>
+            <div onClick={toRegisterPage} className={styles.agree}>
+              同意
+            </div>
+          </div>
+        </div>
+      </Modal >
+
+      {
+
+        showSpliItem && <SlipCheck
+          slipInfo={slipInfo}
+          dispatch={dispatch}
+          onRefresh={() => {
+            dispatch!({
+              type: 'login/getSlideVerificationCode'
+            })
+          }}
+          onCheckSuccess={() => {
+            updateShowSpliItem(false);
+            updateCodeFail(false);
+            gotoVercode();
+          }}
+
+        />
+
+
+      }
+    </div >
+  );
+};
+
+export default connect(({ login }: { login: LoginModelState }) => ({ login }))(LoginPage);

@@ -1,0 +1,503 @@
+.goose {
+  background: #0F1383;
+  overflow-y: auto;
+  height: 100%;
+
+  .allWhiteBg {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 2;
+  }
+
+  .gooseTop {
+    position: relative;
+
+    .bigGoose {
+      width: 100%;
+    }
+
+    .joinBgImg {
+      position: absolute;
+      right: 70px;
+      top: 240px;
+      width: 77%;
+      // animation: moveJoinAnimation 2s infinite;
+    }
+
+    .gooseRule {
+      position: absolute;
+      right: 0;
+      top: 80px;
+      background: linear-gradient(90deg, #AB47FF 0%, #0048FF 100%);
+      border-radius: 100px 0 0 100px;
+      padding: 14px 38px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 34px;
+
+
+      .right {
+        width: 8px;
+        height: 16px;
+        margin-left: 10px;
+      }
+    }
+
+    .goosePersonCenter {
+      position: absolute;
+      right: 0;
+      top: 170px;
+      background: linear-gradient(90deg, #AB47FF 0%, #0048FF 100%);
+      border-radius: 100px 0 0 100px;
+      padding: 14px 38px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 34px;
+
+      .right {
+        width: 8px;
+        height: 16px;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .gooseTimeDiv {
+    padding: 0 32px;
+    height: 160px;
+
+    .redBg {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #FF7F81 0%, #FD1F22 100%);
+      border-radius: 100px;
+      position: relative;
+
+      .phonePng {
+        width: 136px;
+        height: 178px;
+        position: absolute;
+        left: 0;
+        top: -7px;
+      }
+
+      .iphonePng {
+        width: 98px;
+        height: 38px;
+        position: absolute;
+        left: 20px;
+        top: -50px;
+      }
+
+      .goBtnPng {
+        width: 128px;
+        height: 128px;
+        position: absolute;
+        right: 14px;
+        top: 14px;
+        animation: goBtnAnimation 0.5s infinite;
+      }
+
+      .handPng {
+        width: 106px;
+        height: 100px;
+        position: absolute;
+        right: -14px;
+        top: 108px;
+        animation: handAnimation 0.5s infinite;
+      }
+
+      .surplus {
+        background-image: url('../../../assets/img/goose/redBg.png');
+        position: absolute;
+        right: -14px;
+        top: -2px;
+        padding: 6px 16px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #FFF8FF;
+        line-height: 28px;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .redContent {
+        padding: 0 150px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .timeItem {
+          flex: 1;
+          text-align: center;
+          padding-top: 28px;
+
+          .time {
+            font-size: 38px;
+            font-family: PingFangSC-Semibold,
+              PingFang SC;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 52px;
+            opacity: 0.5;
+          }
+
+          .timeActive {
+            opacity: 1;
+            font-size: 38px;
+            color: #FFFFFF;
+          }
+
+          .timeLabel {
+            font-size: 24px;
+            font-family: PingFangSC-Semibold,
+              PingFang SC;
+            font-weight: 600;
+            color: #FFFFFF;
+            line-height: 34px;
+            padding-top: 6px;
+            opacity: 0.5;
+          }
+
+          .timeLabelIng {
+            background: linear-gradient(180deg, #FFFBFC 0%, #FFBFC3 100%);
+            box-shadow: 0px 2px 8px 0px rgba(163, 0, 0, 0.5);
+            border-radius: 20px;
+            font-size: 22px;
+            font-weight: 400;
+            color: #F9093E;
+            line-height: 32px;
+            margin-top: 6px;
+            padding: 4px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+
+  .gooseNumDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .downImg {
+      width: 28px;
+      height: 18px;
+      margin-top: -2px;
+    }
+
+    .numText {
+      font-size: 24px;
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 34px;
+      padding-top: 24px;
+      padding-bottom: 36px;
+
+      span {
+        color: #FECA2F;
+      }
+    }
+  }
+
+  .troDiv {
+    width: 100%;
+    padding: 0 40px;
+
+    .likeGooseImg {
+      width: 100%;
+      padding-bottom: 40px;
+    }
+
+    .proIntro {
+      padding: 14px 20px 32px 40px;
+
+      .moreDetail {
+        text-align: center;
+        font-size: 24px;
+        font-family: PingFangSC-Regular,
+          PingFang SC;
+        font-weight: 400;
+        color: #2074FB;
+        line-height: 34px;
+        padding-top: 52px;
+      }
+
+      .subTitle {
+        font-size: 32px;
+        font-family: PingFangSC-Semibold,
+          PingFang SC;
+        font-weight: 600;
+        color: #2074FB;
+        line-height: 44px;
+        padding-bottom: 8px;
+        padding-top: 32px;
+      }
+
+      .troContent {
+        font-size: 26px;
+        font-weight: 400;
+        color: #333333;
+        line-height: 36px;
+        display: flex;
+
+        span {
+          color: #2074FB;
+        }
+      }
+
+      .fullGift {
+        font-size: 32px;
+        font-weight: 600;
+        color: #2074FB;
+        line-height: 44px;
+        margin-top: 24px;
+        padding-bottom: 8px;
+      }
+    }
+
+    .moreRightProStyle {
+      padding: 0px 30px 0px 30px;
+
+      .mTitle {
+        font-size: 32px;
+        font-weight: 600;
+        color: #2074FB;
+        line-height: 44px;
+        padding-top: 38px;
+        padding-bottom: 34px;
+      }
+
+      .moreRightImg {
+        width: 100%;
+      }
+
+      .mTwoTitle {
+        font-size: 32px;
+        font-weight: 600;
+        color: #2074FB;
+        line-height: 44px;
+        padding-top: 60px;
+        padding-bottom: 16px;
+      }
+
+      .shortDiv {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    .postageDetailStyle {
+      width: 100%;
+      padding: 84px 0px 0px 36px;
+
+      .flowPkg {
+        padding-left: 55%;
+        font-size: 28px;
+        font-family: PingFangSC-Semibold,
+          PingFang SC;
+        font-weight: 600;
+        color: #666666;
+        line-height: 40px;
+        padding-bottom: 20px;
+      }
+
+      .rows {
+        width: 100%;
+        display: flex;
+        padding-bottom: 40px;
+
+        .lan1 {
+          width: 23%;
+          font-size: 28px;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: #666666;
+          line-height: 40px;
+        }
+
+        .lan2 {
+          width: 32%;
+          font-size: 28px;
+          font-family: PingFangSC-Semibold,
+            PingFang SC;
+          font-weight: 600;
+          color: #2074FB;
+          line-height: 40px;
+        }
+
+        .lan3 {
+          width: 55%;
+          font-size: 26px;
+          font-family: PingFangSC-Semibold,
+            PingFang SC;
+          font-weight: 600;
+          color: #2074FB;
+          line-height: 36px;
+
+          .spans {
+            font-size: 26px;
+            font-family: PingFangSC-Semibold,
+              PingFang SC;
+            font-weight: 600;
+            color: #666666;
+            line-height: 40px;
+          }
+
+          .span1 {
+            .spans();
+          }
+
+          .span2 {
+            .spans();
+            color: #2074FB;
+            padding-left: 26px;
+          }
+
+          .span3 {
+            .spans();
+            color: #2074FB;
+            padding-left: 14px;
+          }
+        }
+
+        .lan4 {
+          width: 50%;
+          font-size: 26px;
+          font-family: PingFangSC-Semibold,
+            PingFang SC;
+          font-weight: 600;
+          color: #2074FB;
+          line-height: 36px;
+        }
+      }
+    }
+  }
+
+  .hotTips {
+    font-size: 32px;
+    font-family: PingFangSC-Semibold,
+      PingFang SC;
+    font-weight: 600;
+    color: #FFFFFF;
+    line-height: 44px;
+    padding-top: 40px;
+    padding-bottom: 16px;
+  }
+
+  .smallText {
+    font-size: 26px;
+    font-family: PingFangSC-Regular,
+      PingFang SC;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 44px;
+    opacity: 0.6;
+  }
+
+}
+
+.gooseContent {
+  position: relative;
+
+  .btnDiv {
+    position: fixed;
+    bottom: 84px;
+    left: 50px;
+    right: 50px;
+    z-index: 10;
+
+    .btn {
+      background: linear-gradient(139deg, #FEEB9E 0%, #FFD841 67%, #FCA800 100%, #FDAE0C 100%);
+      box-shadow: 0px 0px 12px 0px rgba(252, 53, 0, 0.39),
+        0px 2px 4px 0px rgba(149, 13, 13, 0.27),
+        0px -6px 4px 0px rgba(146, 13, 13, 0.5);
+      border-radius: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      font-family: PingFangSC-Medium,
+        PingFang SC;
+      font-weight: 500;
+      color: #E85406;
+      line-height: 56px;
+      transition: height 0.5s;
+    }
+
+    .btns {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btnHide {
+      height: 0;
+      opacity: 0;
+      transition: height 0.5s;
+    }
+  }
+}
+
+.gooseHeight {
+  height: 40px;
+  width: 100%;
+}
+
+.gooseHeightFooter {
+  height: 320px;
+  width: 100%;
+}
+
+@keyframes goBtnAnimation {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes handAnimation {
+  0% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes moveJoinAnimation {
+  0% {
+    top: 240px;
+  }
+
+  50% {
+    top: 270px;
+  }
+
+  100% {
+    top: 240px;
+  }
+}

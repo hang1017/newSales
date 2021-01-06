@@ -1,0 +1,12 @@
+.serviceTitle {
+  font-weight: bold;
+  text-align: center;
+}
+
+.paddingDiv {
+  padding-left: 32px;
+}
+
+.footCompanyName {
+  text-align: right;
+}

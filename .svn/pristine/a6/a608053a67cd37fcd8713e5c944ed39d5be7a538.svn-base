@@ -1,0 +1,136 @@
+import { Reducer } from 'redux';
+import { Toast } from 'antd-mobile';
+import {
+  faseIDCardAnalysis,
+  natEmblemIDCardAnalysis,
+  livingCertification,
+  realPersonAuthService,
+} from '@/services/memberApi';
+import { Effect } from 'alita';
+import Tools from '@/utils/tool';
+
+export interface NameAuthenticationModelState {
+  userInfo: any;
+  catchTime: any;
+}
+
+export interface NameAuthenticationModelType {
+  namespace: 'nameAuthentication';
+  state: NameAuthenticationModelState;
+  effects: {
+    faseIDCardAnalysis: Effect;
+    natEmblemIDCardAnalysis: Effect;
+    livingCertification: Effect;
+    realPersonAuthModels: Effect; // 实名认证接口
+  };
+  reducers: {
+    save: Reducer<NameAuthenticationModelState>;
+  };
+}
+
+const NameAuthenticationModel: NameAuthenticationModelType = {
+  namespace: 'nameAuthentication',
+
+  state: {
+    userInfo: {},
+    catchTime: 0, // 三张图片的上传的入参增加时间戳，三个接口保持时间戳一致
+  },
+
+  effects: {
+    *faseIDCardAnalysis({ payload }, { call, put, select }) {
+      let { catchTime = 0, userInfo = {} } = yield select((_: any) => _.nameAuthentication);
+      if (catchTime === 0) catchTime = new Date().getTime();
+      const { certName = '', certNum = '' } = payload;
+      // const params = { certName: '陈书航', certNum: '350600199703192517', date: '123' };
+      // yield put({
+      //   type: 'save',
+      //   payload: {
+      //     userInfo: params,
+      //   },
+      // });
+      // payload.callback(params);
+      const data = yield call(faseIDCardAnalysis, {
+        imag: payload.image,
+        bsFlag: payload.bsFlag,
+        catchTime,
+        certName,
+        certNum,
+      });
+      if (data) {
+        if (payload.callback) {
+          payload.callback(data);
+        }
+        yield put({
+          type: 'save',
+          payload: {
+            userInfo: {
+              ...userInfo,
+              ...data,
+            },
+            catchTime,
+          },
+        });
+      }
+    },
+
+    *natEmblemIDCardAnalysis({ payload }, { call, put, select }) {
+      const { userInfo } = yield select((_) => _.nameAuthentication);
+      const data = yield call(natEmblemIDCardAnalysis, {
+        imag: payload.image,
+        bsFlag: payload.bsFlag,
+        catchTime: payload.catchTime,
+      });
+
+      if (data) {
+        if (payload.callback) {
+          payload.callback();
+        }
+        yield put({
+          type: 'save',
+          payload: {
+            userInfo: {
+              ...userInfo,
+              date: data,
+            },
+          },
+        });
+      }
+    },
+
+    *livingCertification({ payload }, { call, put, select }) {
+      const { cartOrderId = '' } = yield select((_: any) => _.oldUserLoginSuccess);
+      const data = yield call(livingCertification, {
+        imag: payload.image,
+        catchTime: payload.catchTime,
+        cartOrderId,
+      });
+
+      if (data) {
+        payload.callback && payload.callback();
+      } else {
+        payload.fail && payload.fail();
+      }
+    },
+    *realPersonAuthModels({ payload = {} }, { call, select }) {
+      const { cartOrderId = '' } = yield select((_: any) => _.oldUserLoginSuccess);
+      const { success = false, errMessage = '' } = yield call(realPersonAuthService, {
+        catchTime: payload.catchTime,
+        cartOrderId,
+      });
+      if (!success) {
+        Toast.show(errMessage, 1);
+      }
+      return success;
+    },
+  },
+  reducers: {
+    save(state, action) {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
+  },
+};
+
+export default NameAuthenticationModel;

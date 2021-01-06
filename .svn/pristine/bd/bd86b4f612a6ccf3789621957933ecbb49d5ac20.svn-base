@@ -1,0 +1,13 @@
+.invoicePdfStyle {
+  background-color: rgb(245, 247, 249);
+
+  :global {
+    .am-modal-content {
+      background-color: rgb(245, 247, 249);
+    }
+
+    .am-navbar-left-icon {
+      color: #000;
+    }
+  }
+}

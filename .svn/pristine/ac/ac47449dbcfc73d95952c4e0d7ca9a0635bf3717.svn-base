@@ -1,0 +1,9 @@
+.headerSection {
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.smsCode {
+  color: rgba(31, 144, 236, 1);
+  font-size: 28px;
+}

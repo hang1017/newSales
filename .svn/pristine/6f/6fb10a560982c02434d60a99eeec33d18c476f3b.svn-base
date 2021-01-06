@@ -1,0 +1,33 @@
+.container {
+  height: 100%;
+  background: #ffffff;
+  // background-color: #f5f7f9;
+  .titleLayout {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-top: 58px;
+    .normalText {
+      width: 170px;
+      height: 66px;
+      background: #EDEDED;
+      border-radius: 0px 8px 8px 0px;
+      font-size: 28px;
+      font-weight: 400;
+      color: #6B6B6B;
+      line-height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .leftNormalText {
+      .normalText;
+      border-radius: 8px 0px 0px 8px;
+    }
+    .activeText {
+      background: #1C60FF;
+      color: #FFFFFF;
+    }
+  }
+}

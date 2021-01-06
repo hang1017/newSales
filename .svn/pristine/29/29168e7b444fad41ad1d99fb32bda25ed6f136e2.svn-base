@@ -1,0 +1,50 @@
+@import '../../../global.less';
+
+.orderList {
+  height: 100%;
+  overflow: scroll;
+  background-color: #f5f7f9;
+
+  :global {
+    .am-list-body {
+      background-color: transparent;
+    }
+  }
+}
+
+:global {
+  .am-modal-button-group-h .am-modal-button:last-child {
+    color: #888;
+  }
+}
+
+.tabList {
+  display: flex;
+  padding: 10px 0;
+  background: #fff;
+
+  .tabItem () {
+    flex: 1;
+    font-weight: 400;
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .normalTab {
+    .tabItem ();
+
+    color: #a4a4a4;
+  }
+
+  .selectTab {
+    .tabItem ();
+
+    color: @themeColor;
+    font-weight: bold;
+
+    span {
+      padding: 10px 0;
+      border-bottom: solid 6px @themeColor;
+    }
+  }
+}

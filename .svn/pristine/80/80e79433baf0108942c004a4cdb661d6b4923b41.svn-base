@@ -1,0 +1,420 @@
+import React, { FC, useEffect, useState, useRef } from 'react';
+import moment from 'moment';
+import { CustomerHoneyModelState, ConnectProps, connect, setPageNavBar, router } from 'alita';
+import { SendMessage } from '@/components';
+import { random, showTimeFlag, transformFile } from '@/utils';
+import { HoneyPng } from '@/assets';
+import { Chat } from './components';
+import styles from './index.less';
+
+interface PageProps extends ConnectProps {
+  customerHoney: CustomerHoneyModelState;
+}
+const CustomerHoneyPage: FC<PageProps> = ({ customerHoney, dispatch, location }) => {
+  const { chatList = [], hasMore = false } = customerHoney;
+  const [inputValue, setInputValue] = useState<string | undefined>('');
+  const [sendBabyFlag, setSendBabyFlag] = useState<boolean>(true);
+
+  let inputRef = useRef(''); // 输入框绑定事件
+  let listRef = useRef([]);
+  let currentSocket = useRef(null);
+
+  let timer: NodeJS.Timeout | null = null;
+
+  // 发送宝贝后，页面回到本地，需要跑到底部
+  useEffect(() => {
+    scrollBottom();
+  }, [location.pathname]);
+
+  /**
+   *  聊天记录改变事件
+   */
+  useEffect(() => {
+    if (chatList.length) {
+      listRef.current = chatList;
+      // setChatList(chatList);
+      dispatch!({
+        type: 'customerHoney/save',
+        payload: {
+          chatList,
+        },
+      });
+    }
+  }, [chatList]);
+
+  /**
+   * 输入框改变事件
+   */
+  useEffect(() => {
+    inputRef.current = inputValue;
+    setInputValue(inputValue);
+  }, [inputValue]);
+
+  /**
+   * 页面初始化
+   * socket 获取连接
+   */
+  useEffect(() => {
+    // 这是导航栏
+    setPageNavBar({
+      pagePath: location.pathname,
+      navBar: {
+        onLeftClick: () => {
+          // if (currentSocket.current) currentSocket.current.disconnect();
+          if (window.socket) window.socket.removeAllListeners('messageReply');
+          router.goBack();
+        },
+        // rightContent: [<img src={HoneyPng} alt="" className={styles.honeyIconStyle} />],
+      },
+    });
+
+    dispatch!({
+      type: 'customerHoney/queryHistory',
+    }).then(() => {
+      setTimeout(() => {
+        scrollBottom();
+      }, 0);
+    });
+
+    if (!window.socket) window.connectSocket();
+
+    return () => {
+      listRef.current = [];
+      inputRef.current = '';
+      if (timer) clearInterval(timer);
+      timer = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (window.socket) {
+      if (window.socket) window.socket.removeAllListeners('messageReply');
+      window.socket.on('messageReply', function (event: any) {
+        console.log('接受消息2', event);
+        // let timeFlag = '1';
+        // if (
+        //   listRef.current &&
+        //   listRef.current.length > 0 &&
+        //   listRef.current[listRef.current.length - 1].timestamp
+        // ) {
+        //   timeFlag = showTimeFlag(listRef.current[listRef.current.length - 1].timestamp);
+        // }
+        if (event.userType === 'staff') {
+          dispatch!({
+            type: 'customerHoney/save',
+            payload: {
+              chatList: [...listRef.current, { ...event, timeFlag: queryTimeFlag() }],
+            },
+          });
+        } else {
+          const newList = [...listRef.current].map((item: any) => {
+            if (item.randomId === event.randomId) item.loadding = false;
+            return item;
+          });
+          dispatch!({
+            type: 'customerHoney/save',
+            payload: {
+              chatList: newList,
+            },
+          });
+        }
+        setTimeout(() => {
+          scrollBottom();
+        }, 0);
+      });
+    }
+  }, [window.socket]);
+
+  /**
+   * socket 消息发送事件
+   */
+  const wsSend = () => {
+    // socket.emit('message', 'this is a test');
+    // console.log(inputRef.current.trim());
+    if (!inputRef.current.trim()) {
+      // Toast.fail('请输入消息', 1);
+      return;
+    }
+    // 是否展示时间的判断标识
+    // let timeFlag = '1';
+    // if (
+    //   listRef.current &&
+    //   listRef.current.length > 0 &&
+    //   listRef.current[listRef.current.length - 1].timestamp
+    // ) {
+    //   timeFlag = showTimeFlag(listRef.current[listRef.current.length - 1].timestamp);
+    // }
+    const params = {
+      msgType: 'text',
+      msgObj: JSON.stringify({
+        msg: inputRef.current,
+      }),
+      userType: 'member', // member: 用户， staff：客服
+      timestamp: moment(new Date()).valueOf(),
+      randomId: random(),
+      timeFlag: queryTimeFlag(),
+    };
+    setInputValue('');
+    if (window.socket) {
+      window.socket.emit('messageEvent', params);
+      // 发送ws 消息
+      console.log('成功发送消息', params, window.socket);
+    }
+    // 保存消息数据
+    dispatch!({
+      type: 'customerHoney/save',
+      payload: {
+        chatList: [
+          ...listRef.current,
+          {
+            ...params,
+            loadding: true,
+          },
+        ],
+      },
+    });
+    setTimeout(() => {
+      scrollBottom();
+    }, 0);
+  };
+
+  /**
+   * 发送商品详情给客服
+   */
+  const sendGoods = (e: any, goodsDetail: any) => {
+    e.stopPropagation();
+    if (!sendBabyFlag) return;
+    setSendBabyFlag(false);
+    const params = {
+      userType: 'member', // member: 用户， staff：客服
+      msgType: 'baby',
+      msgObj: JSON.stringify(goodsDetail) || '{}',
+      randomId: random(),
+      timeFlag: queryTimeFlag(),
+      timestamp: moment(new Date()).valueOf(),
+    };
+    let newList = listRef.current.filter((li: any) => li.msgType !== 'goods');
+    // 保存消息数据
+    dispatch!({
+      type: 'customerHoney/save',
+      payload: {
+        chatList: [
+          ...newList,
+          {
+            ...params,
+            loadding: true,
+          },
+        ],
+      },
+    });
+    if (window.socket) {
+      window.socket.emit('messageEvent', params);
+      console.log('成功发送消息', params, window.socket);
+    }
+    setTimeout(() => {
+      scrollBottom();
+    }, 10);
+  };
+
+  /**
+   * 输入值改变事件
+   */
+  const valueChange = (e: string | undefined) => {
+    setInputValue(e);
+  };
+
+  /**
+   * 滚动到最底部
+   */
+  const scrollBottom = () => {
+    const labelNode = document.getElementById('messageId');
+    if (labelNode) {
+      labelNode.scrollIntoView({ block: 'end' });
+    }
+  };
+
+  /**
+   * 查询历史记录
+   */
+  const queryHistoryList = () => {
+    // const firstMessage = chatList[0];
+    // const hisList = Array.from(new Array(10)).map((val, i) => ({
+    //   message: {
+    //     type: 'text',
+    //     data: `${i}${i}`,
+    //   },
+    //   timestamp: moment(new Date()).valueOf(),
+    //   randomId: random(),
+    // }));
+    // dispatch!({
+    //   type: 'customerHoney/save',
+    //   payload: {
+    //     chatList: [...hisList, ...chatList],
+    //   },
+    // });
+    // const labelNode = document.getElementById(firstMessage.randomId);
+    // if (labelNode) {
+    //   labelNode.scrollIntoView(true);
+    // }
+    dispatch!({
+      type: 'customerHoney/queryHistory',
+    });
+  };
+
+  /**
+   * 查询是否展示时间的标识
+   */
+  const queryTimeFlag = () => {
+    let timeFlag = '1';
+    if (
+      listRef.current &&
+      listRef.current.length > 0 &&
+      listRef.current[listRef.current.length - 1].timestamp
+    ) {
+      timeFlag = showTimeFlag(listRef.current[listRef.current.length - 1].timestamp);
+    }
+    return timeFlag;
+  };
+
+  /**
+   * 拍照上传事件
+   */
+  const cameraChange = (e: any[]) => {
+    if (e.length === 0) return;
+    let fileList: any[] = [];
+    let sendFlag = false;
+    Object.keys(e).map((item: any, index: number) => {
+      var reader = new FileReader();
+      reader.readAsDataURL(e[item]);
+      reader.onloadend = function (ie) {
+        let params = {
+          userType: 'member', // member: 用户， staff：客服
+          msgType: 'img',
+          msgObj: JSON.stringify({
+            msg: ie?.target?.result,
+          }),
+          randomId: random(),
+          loadding: true,
+          timestamp: moment(new Date()).valueOf(),
+          timeFlag: queryTimeFlag(),
+        };
+        // transformFile(e[item]).then((newFile: any) => {
+        //   fileList.push({
+        //     ...params,
+        //     uploadFile: newFile,
+        //   });
+        //   if (index === Object.keys(e).length - 1) sendFlag = true;
+        // });
+        fileList.push({
+          ...params,
+          uploadFile: e[item],
+        });
+        if (index === Object.keys(e).length - 1) sendFlag = true;
+      };
+    });
+    timer = setInterval(() => {
+      if (sendFlag) {
+        dispatch!({
+          type: 'customerHoney/save',
+          payload: {
+            chatList: [...listRef.current, ...fileList],
+          },
+        });
+        const newFileList = JSON.parse(JSON.stringify(fileList));
+        newFileList.forEach((item: any, index: number) => {
+          dispatch!({
+            type: 'customerHoney/uploadFileModels',
+            payload: {
+              attach: fileList[index].uploadFile,
+            },
+          }).then(({ flag = false, data }) => {
+            // newUrl = data?.url.replace(/\//g, 'replacegang');
+            if (!flag) return;
+            // item.msgObj = `'{'msg': '${data?.outUrl}','msgUrl': '${data?.url}'}'`;
+            item.msgObj = JSON.stringify({
+              msg: data?.outUrl,
+              msgUrl: data?.url,
+            });
+            item.uploadFile = '';
+            window.socket.emit('messageEvent', item);
+            console.log('成功发送消息', JSON.stringify(item));
+          });
+        });
+        if (timer) clearInterval(timer);
+        timer = null;
+        scrollBottom();
+      }
+    }, 1000);
+    // e.map((item) => {
+    //   const newItem = JSON.parse(JSON.stringify(item));
+    //   newItem.loadding = false;
+    //   // ws.send(JSON.stringify(newItem));
+    //   // socket.emit('message', JSON.stringify(newItem));
+    // });
+  };
+
+  const faceClick = (menu: string) => {
+    const params = {
+      msgType: 'face',
+      msgObj: JSON.stringify({
+        msg: menu,
+      }),
+      userType: 'member', // member: 用户， staff：客服
+      timestamp: moment(new Date()).valueOf(),
+      randomId: random(),
+      timeFlag: queryTimeFlag(),
+    };
+    if (window.socket) {
+      window.socket.emit('messageEvent', params);
+      // 发送ws 消息
+      console.log('成功发送消息', params, window.socket);
+    }
+    // 保存消息数据
+    dispatch!({
+      type: 'customerHoney/save',
+      payload: {
+        chatList: [
+          ...listRef.current,
+          {
+            ...params,
+            loadding: true,
+          },
+        ],
+      },
+    });
+    setTimeout(() => {
+      scrollBottom();
+    }, 0);
+  };
+
+  return (
+    <div className={styles.customerHoneyStyle}>
+      <div className={styles.customerHoneyChat}>
+        {hasMore && chatList && chatList.length > 0 && (
+          <div className={styles.showHistory}>
+            <div className={styles.showHistoryText} onClick={queryHistoryList}>
+              点击可查询之前咨询的记录
+            </div>
+          </div>
+        )}
+        <Chat data={listRef.current} sendGoods={sendGoods} />
+      </div>
+      <SendMessage
+        value={inputValue}
+        valueChange={valueChange}
+        confirm={() => wsSend()}
+        cameraChange={cameraChange}
+        selectClick={() => {
+          setTimeout(() => {
+            scrollBottom();
+          }, 0);
+        }}
+        faceClick={faceClick}
+      />
+    </div>
+  );
+};
+
+export default connect(({ customerHoney }: { customerHoney: CustomerHoneyModelState }) => ({
+  customerHoney,
+}))(CustomerHoneyPage);

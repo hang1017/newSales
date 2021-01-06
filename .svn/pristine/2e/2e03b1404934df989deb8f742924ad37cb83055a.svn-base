@@ -1,0 +1,141 @@
+.InvoiceCard {
+  position: relative;
+  margin: 0 0 24px 0;
+  padding: 36px 32px 24px 32px;
+  color: rgba(4, 28, 30, 1);
+  font-weight: 400;
+  font-size: 28px;
+  background-image: url('../../assets/invoiceBg.png');
+  background-size: 100% 100%;
+  // background: transparent;
+  border-radius: 24px;
+
+  .icTitle {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    .icTitleIcon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+    }
+
+    .icTitleText {
+      flex: 1;
+      width: 0;
+      padding-left: 16px;
+      overflow: hidden;
+      color: rgba(51, 51, 51, 1);
+      font-size: 28px;
+      white-space: nowrap;
+      text-align: justify;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .prodInfoBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 36px;
+    padding-bottom: 28px;
+    border-bottom: 2px solid #f4f7f6;
+
+    .prodLeft {
+      display: flex;
+      align-items: center;
+      width: 500px;
+      overflow: auto;
+      box-shadow: 4px 0 6px -4px rgba(0, 0, 0, 0.1);
+
+      .prodItemImg {
+        flex-shrink: 0;
+        width: 156px;
+        height: 156px;
+        margin-right: 18px;
+      }
+    }
+
+    .prodSingleLeft {
+      display: flex;
+      flex: 3;
+      // align-items: center;
+      width: 0;
+
+      .prodSingleImg {
+        flex-shrink: 0;
+        width: 154px;
+        height: 154px;
+      }
+
+      .prodSingleText {
+        padding-left: 24px;
+
+        .prodSingleTitle {
+          display: -webkit-box;
+          overflow: hidden;
+          color: rgba(6, 4, 30, 1);
+          font-size: 28px;
+          line-height: 32px;
+          text-align: justify;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+
+        .prodSingleDate {
+          padding-top: 16px;
+          color: rgba(179, 181, 183, 1);
+          font-size: 24px;
+          line-height: 32px;
+          text-align: justify;
+        }
+      }
+    }
+
+    .prodRight {
+      flex: 1;
+      // padding-left: 80px;
+      color: rgba(6, 4, 30, 1);
+      font-size: 28px;
+      text-align: right;
+
+      .prodTotalNum {
+        padding-top: 8px;
+        color: rgba(179, 181, 183, 1);
+        font-size: 24px;
+        line-height: 32px;
+        text-align: right;
+      }
+    }
+  }
+
+  .buttonDiv {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-top: 24px;
+
+    .button {
+      padding: 12px 30px;
+      color: rgba(4, 28, 30, 1);
+      font-size: 24px;
+      line-height: 32px;
+      text-align: center;
+      background-color: rgba(255, 255, 255, 1);
+      border: 1px solid rgba(179, 181, 183, 1);
+      border-radius: 38px;
+    }
+  }
+
+  .statusImg {
+    position: absolute;
+    top: 18px;
+    right: 14px;
+    width: 152px;
+    height: 108px;
+  }
+}

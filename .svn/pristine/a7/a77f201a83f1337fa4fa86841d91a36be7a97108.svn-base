@@ -1,0 +1,156 @@
+.sendMessageStyle {
+  // position: fixed;
+  // bottom: 0;
+  width: 100%;
+  background: #f6f6f6;
+
+  .sendMessageContent {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 32px;
+  }
+
+  .voiceIcon {
+    width: 48px;
+    height: 48px;
+    margin-top: 14px;
+  }
+
+  .selectIcon {
+    width: 48px;
+    height: 48px;
+    margin-top: 14px;
+  }
+
+  .expressIcon {
+    // position: absolute;
+    // top: 14px;
+    // right: 48px;
+    width: 48px;
+    height: 48px;
+    margin-top: 14px;
+    margin-right: 14px;
+  }
+
+  .inputStyle {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    padding-right: 24px;
+
+    .sendBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 12px;
+      color: #fff;
+      // background-color: red;
+      background: linear-gradient(90deg, #6db4ff 0%, #187dfb 100%);
+      border-radius: 20px;
+    }
+
+    :global {
+      .am-list-item {
+        min-height: 76px;
+        border-radius: 8px;
+      }
+
+      .am-input-extra {
+        max-height: 66px;
+      }
+
+      .am-list-line {
+        padding-right: 10px;
+      }
+
+      .am-textarea-control {
+        padding: 0;
+      }
+
+      // .am-textarea-item {
+      //   padding-right: 80px;
+      // }
+
+      .am-textarea-control textarea::placeholder {
+        color: #b3b5b7 !important;
+      }
+    }
+  }
+
+  .selectContentStyle {
+    width: 100%;
+    padding: 30px 10px 60px 10px;
+    transition: 2s;
+
+    .selectItem {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .selectItemTop {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 112px;
+        height: 112px;
+        margin-bottom: 16px;
+        background: #fff;
+        border-radius: 8px;
+
+        .selectItemImg {
+          width: 64px;
+          height: 64px;
+        }
+      }
+
+      .selectItemText {
+        color: #696d6c;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 40px;
+      }
+
+      .selectItemCamera {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        .selectItemCameraInput {
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+.faceContentStyle {
+  height: 300px;
+  padding: 20px;
+  overflow: auto;
+
+  .faceContent {
+    display: grid;
+    grid-gap: 8px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    .faceItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+
+      .faceItemImg {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+}

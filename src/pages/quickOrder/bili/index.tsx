@@ -1,0 +1,203 @@
+import React, { FC, useEffect, useState, useRef } from 'react';
+import { QuickOrderModelState, ConnectProps, connect, history } from 'alita';
+import BetterScroll from 'better-scroll';
+import { Toast } from 'antd-mobile';
+import { BScrollConstructor } from '@better-scroll/core/dist/types/BScroll';
+import { AllWhiteLoading } from '@/components';
+import Utils from '@/utils/tool';
+import { FormCard } from '@/pages/quickOrder/components';
+import PickerTopPng from '@/assets/img/quickOrder/pickerTop.png';
+import Picker2Png from '@/assets/img/quickOrder/picker2.png';
+import Picker3Png from '@/assets/img/quickOrder/picker3.png';
+import Picker4Png from '@/assets/img/quickOrder/picker4.png';
+import Picker5Png from '@/assets/img/quickOrder/picker5.png';
+import Picker6Png from '@/assets/img/quickOrder/picker6.png';
+import Picker7Png from '@/assets/img/quickOrder/picker7.png';
+import Picker8Png from '@/assets/img/quickOrder/picker8.png';
+import Picker9Png from '@/assets/img/quickOrder/picker9.png';
+import styles from './index.less';
+
+interface PageProps extends ConnectProps {
+  quickOrder: QuickOrderModelState;
+}
+
+let bs: BScrollConstructor<{}> | null = null;
+
+const QuickOrderPage: FC<PageProps> = ({ quickOrder, dispatch, location }) => {
+  const {
+    source = localStorage.getItem('source'),
+    sn = localStorage.getItem('sn'),
+    salesCode = localStorage.getItem('salesCode'),
+    skuId = '',
+    type = 'user',
+  } = location?.query;
+  const [loadingFlag, setLoadingFlag] = useState<boolean>(true);
+  const ref = useRef(null);
+  useEffect(() => {
+    localStorage.setItem('leave', '0'); // 用完值要设置成初始值
+    localStorage.setItem('tokenCode', '');
+    document.getElementsByClassName('rumtime-keep-alive-layout-no')[0].style.height = '100%';
+    localStorage.setItem('source', source);
+    localStorage.setItem('sn', sn);
+    localStorage.setItem('salesCode', salesCode);
+
+    Utils.accessPermission({
+      sn,
+      source,
+      dispatch,
+      successCallBack: () => {
+        dispatch!({
+          type: 'indexList/dmosbrowse',
+          payload: {
+            sn: sn || '',
+            source: source || '',
+          },
+        });
+      },
+    });
+  }, []);
+
+  if ((document.readyState === 'complete' || document.readyState === 'interactive') && !bs) {
+    setTimeout(() => {
+      bs = new BetterScroll(ref.current, {
+        probeType: 3,
+        scrollY: true,
+        scrollX: false,
+        click: true,
+        bounce: false,
+      });
+    }, 100);
+  }
+
+  const submitOrderFun = (values: any, newNumData: any, addrRes?: any) => {
+    dispatch!({
+      type: 'oldUserLoginSuccess/commitCartQuick',
+      payload: {
+        goodsList: [
+          {
+            skuId,
+            quantity: 1,
+          },
+        ],
+        commonAttrList: [
+          {
+            attrCode: 'HM',
+            attrValue: values?.selectNum,
+            extMap: { ...newNumData },
+          },
+        ],
+        receiveAddrId: addrRes ? addrRes?.receiveAddrId : undefined,
+      },
+    }).then((data: any) => {
+      if (data) {
+        dispatch!({
+          type: 'payConfirm/save',
+          payload: {
+            orderInfo: data,
+          },
+        });
+        dispatch!({
+          type: 'payConfirm/commitOrderBfCheck',
+          payload: {
+            certData: {
+              certName: values?.username,
+              certNum: values?.idenCode,
+              certType: '1',
+            },
+          },
+        }).then((data: boolean) => {
+          if (data === true) {
+            history.push({
+              pathname: '/nameAuthentication',
+            });
+          }
+        });
+      }
+    });
+  };
+
+  /**
+   * 表单提交
+   */
+  const formSubmit = (values: any, newNumData: any) => {
+    dispatch!({
+      type: 'payConfirm/save',
+      payload: {
+        nameAndNo: {
+          name: values?.username.trim(),
+          idCard: values?.idenCode.trim(),
+        },
+      },
+    });
+
+    const { homeAddr = {} } = values;
+    const { label = {}, value = {} } = homeAddr;
+    if (!localStorage.getItem('tokenCode')) {
+      Toast.fail('验证码不正确或验证码已经过期', 1);
+      return;
+    }
+    if (source !== 'store') {
+      dispatch!({
+        type: 'quickOrder/addAddressModal',
+        payload: {
+          name: values?.username,
+          phoneNumber: values?.accNum,
+          detailAddress: values?.detailAddr,
+          defaultAddr: '1000',
+          provinceId: value[0],
+          province: label[0],
+          cityId: value[1],
+          city: label[1],
+          regionId: value[2],
+          region: label[2],
+        },
+      }).then((addrRes: any) => {
+        if (addrRes) {
+          submitOrderFun(values, newNumData, addrRes);
+        }
+      });
+    } else {
+      submitOrderFun(values, newNumData);
+    }
+  };
+
+  return (
+    <div className={styles.biliStyle} style={{ height: document.documentElement.clientHeight }}>
+      {loadingFlag && <AllWhiteLoading />}
+      <div
+        className={styles.content}
+        // ref={ref}
+      >
+        <div>
+          <img src={PickerTopPng} alt="" className={styles.biliTop} />
+          <div className={styles.biliContent}>
+            <img src={Picker5Png} alt="" className={styles.biliImg} />
+            <div className={styles.formCardCompStyle}>
+              <FormCard
+                type={'user'}
+                onSubmit={formSubmit}
+                paramAction="biliQuickOrder"
+                addr={source !== 'store'}
+              />
+            </div>
+            <img src={Picker3Png} alt="" className={styles.biliImg} />
+            <img src={Picker4Png} alt="" className={styles.biliImg} />
+            <img src={Picker6Png} alt="" className={styles.biliImg} />
+            <img src={Picker7Png} alt="" className={styles.biliImg} />
+            <img src={Picker8Png} alt="" className={styles.biliImg} />
+            <img
+              src={Picker9Png}
+              alt=""
+              className={styles.biliImg}
+              onLoad={() => setLoadingFlag(false)}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default connect(({ quickOrder }: { quickOrder: QuickOrderModelState }) => ({ quickOrder }))(
+  QuickOrderPage,
+);

@@ -1,0 +1,89 @@
+@import '../../../../../global.less';
+
+.itemDiv {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 22px 24px 0 24px;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 16px;
+  position: relative;
+
+  .leftDiv {
+    display: flex;
+  }
+
+  img {
+    position: absolute;
+    right: 28px;
+    top: 0px;
+    // margin-top: -100px;
+    width: 110px;
+    height: 110px;
+  }
+
+  .normalDiv() {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+  }
+
+  .itemLeftDiv {
+    .normalDiv();
+
+    background: @themeBg;
+  }
+
+  .disableDiv {
+    .normalDiv();
+
+    background: #b3b5b7;
+  }
+
+  .price {
+    color: #fff;
+    font-weight: 600;
+    font-size: 44px;
+  }
+
+  .remark {
+    margin-top: 8px;
+    color: #fff;
+    font-size: 20px;
+  }
+
+  .itemRightDiv {
+    display: flex;
+    flex-direction: column;
+    padding: 36px 0 36px 16px;
+
+    .dcTitleKey {
+      margin-bottom: 16px;
+      color: #041c1e;
+      font-size: 28px;
+    }
+
+    span {
+      margin-top: 8px;
+      color: #696d6c;
+      font-size: 20px;
+    }
+  }
+
+  .rightBtn {
+    padding-right: 32px;
+    padding-top: 50px;
+    white-space: nowrap;
+
+    span {
+      padding: 8px 36px;
+      color: @themeColor;
+      font-size: 28px;
+      border: 2px solid @themeColor;
+      border-radius: 28px;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+import React, { FC, useState, useEffect } from 'react';
+import { getQueryString } from '@/utils/tool';
+const Layout: FC = ({ children }) => {
+  const [show, setShow] = useState<boolean>(false);
+
+  useEffect(() => {
+    const myHref = window.location.href;
+    if (myHref.indexOf('fromType') > -1) {
+      const loginData = getQueryString('loginData');
+      const fromType = getQueryString('fromType');
+      const source = getQueryString('source');
+      const sn = getQueryString('sn');
+      const data = JSON.parse(decodeURIComponent(loginData));
+      console.log(JSON.parse(decodeURIComponent(loginData)));
+      const { tokenCode = '', grayFlag = '', memberId = '' } = data || {};
+      localStorage.setItem('fromType', fromType);
+      localStorage.setItem('source', source);
+      localStorage.setItem('sn', sn);
+      if (tokenCode && tokenCode !== null) {
+        console.log('tokenCode: ', tokenCode);
+        localStorage.setItem('tokenCode', tokenCode);
+      }
+      if (grayFlag && grayFlag !== null) {
+        localStorage.setItem('grayFlag', grayFlag);
+      }
+      if (loginData && loginData !== null) {
+        localStorage.setItem('memberInfo', decodeURIComponent(loginData));
+      }
+      if (memberId && memberId !== null) {
+        whaleCollect.set('user_id', memberId);
+      }
+      setShow(true);
+    } else {
+      setShow(true);
+    }
+  }, []);
+  return <div style={{ height: '100%' }}>{show && children}</div>;
+};
+
+export default Layout;

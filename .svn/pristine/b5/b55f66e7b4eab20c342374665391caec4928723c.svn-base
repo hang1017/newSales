@@ -1,0 +1,33 @@
+.addrListBlock {
+  height: auto;
+  margin-top: 20px;
+  padding: 0 24px;
+  overflow: scroll;
+  background: #fff;
+  flex: 1;
+}
+
+.viewStyle {
+  display: flex;
+  flex-direction: column;
+  // height: calc(100% - 60px);
+  padding-bottom: 60px;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  margin-top: 20px;
+  color: #2ca5ff;
+  font-weight: 400;
+  font-size: 30px;
+  background: #fff;
+
+  img {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+  }
+}

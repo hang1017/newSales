@@ -1,0 +1,55 @@
+@import '../../../global.less';
+
+.paySuccessPage {
+  .payInfo {
+    height: 450px;
+    padding: 30px;
+    color: rgba(255, 255, 255, 1);
+    background: @themeBg;
+
+    .payIconBlock {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 40px;
+
+      img {
+        width: 64px;
+      }
+
+      span {
+        margin-left: 15px;
+        font-weight: 600;
+        font-size: 36px;
+      }
+    }
+
+    .priceBlock {
+      margin-top: 30px;
+      font-weight: 400;
+      font-size: 26px;
+      text-align: center;
+    }
+
+    .btnBlock {
+      margin-top: 60px;
+      text-align: center;
+
+      span {
+        margin: 0 16px;
+        padding: 12px 26px;
+        color: rgba(255, 255, 255, 1);
+        font-weight: 400;
+        font-size: 28px;
+        border: 2px solid rgba(255, 255, 255, 1);
+        border-radius: 38px;
+      }
+    }
+  }
+}
+
+.footBlock {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

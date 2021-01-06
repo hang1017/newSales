@@ -1,0 +1,46 @@
+.applyPage {
+    // height: calc(100vh - 130px);
+
+    .pageTitle {
+        color: #333;
+        font-weight: 600;
+        font-size: 28px;
+    }
+
+    .serviceType {
+        margin-bottom: 50px;
+        padding: 32px;
+        background: #fff;
+
+        .serviceCell {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .leftDiv {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .letftIcon {
+            width: 44px;
+            height: 44px;
+            margin-right: 10px;
+        }
+
+        .typeText {
+            color: #333;
+            font-weight: 600;
+            font-size: 30px;
+        }
+
+        .subText {
+            color: #999;
+            font-weight: 400;
+            font-size: 26px;
+        }
+    }
+}

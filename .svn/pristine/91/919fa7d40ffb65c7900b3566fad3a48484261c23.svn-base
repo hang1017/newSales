@@ -1,0 +1,33 @@
+.honeyIconStyle {
+  width: 48px;
+  height: 48px;
+}
+
+.customerHoneyStyle {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #f5f7f9;
+
+  .customerHoneyChat {
+    flex: 1;
+    height: 100%;
+    overflow: auto;
+
+    .showHistory {
+      display: flex;
+      justify-content: center;
+      padding: 12px 0 40px 0;
+
+      .showHistoryText {
+        padding: 12px 24px;
+        color: #041c1e;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 40px;
+        background: #e9ebec;
+        border-radius: 32px;
+      }
+    }
+  }
+}

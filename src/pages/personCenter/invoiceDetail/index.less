@@ -1,0 +1,95 @@
+.invoiceDetailStyle {
+  height: 100%;
+  padding: 24px;
+  background-color: rgb(245, 247, 249);
+
+  .idsCenter {
+    width: 100%;
+
+    .idsImg {
+      width: 100%;
+    }
+
+    .idsContent {
+      margin-top: -6px;
+      background-color: #fff;
+
+      :global {
+        .am-list-body {
+          border: none;
+        }
+
+        .am-list-body div:not(:last-child) .am-list-line {
+          border-bottom: 0;
+        }
+
+        .alitajs-dform-title {
+          color: #041c1e;
+          font-weight: 400;
+          font-size: 28px;
+          line-height: 40px;
+        }
+
+        .alitajs-dform-text-text {
+          color: #696d6c;
+          font-weight: 400;
+          font-size: 28px;
+          line-height: 40px;
+        }
+      }
+
+      .idsImgDiv {
+        display: flex;
+        // flex-direction: column;
+        justify-content: center;
+
+        .idsInvoiceImg {
+          width: 260px;
+          height: 260px;
+        }
+      }
+
+      .idsDform {
+        margin-top: -40px;
+      }
+    }
+
+    .idsLookInv {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 34px 22px 24px;
+      color: #041c1e;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 40px;
+      border-top: 2px solid #f4f7f6;
+      border-bottom: 2px solid #f4f7f6;
+
+      .idsRightImg {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
+    .idsBtnDiv {
+      display: flex;
+      justify-content: flex-end;
+      padding: 32px;
+
+      .idsBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 76px;
+        padding: 16px 76px;
+        color: #696d6c;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 40px;
+        border: 2px solid #b3b5b7;
+        border-radius: 36px;
+      }
+    }
+  }
+}

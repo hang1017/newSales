@@ -1,0 +1,139 @@
+@import '../../../../global.less';
+
+.seriveItem {
+  padding: 32px 0;
+  border-bottom: solid 1px #E9E9E9;
+
+  .mySText {
+    font-size: 30px;
+    font-weight: 400;
+    color: #808080;
+    line-height: 44px;
+  }
+
+  div {
+    display: flex;
+    padding-top: 8px;
+  }
+
+  .serviceName {
+    color: #464646;
+    font-weight: 600;
+    font-size: 34px;
+
+  }
+
+  .serviceContent {
+    display: -webkit-box;
+    width: 100%;
+    overflow: hidden;
+    color: #808080;
+    font-weight: 400;
+    font-size: 30px;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    span {
+      color: @themeColor;
+    }
+
+  }
+
+  .flexBlock {
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
+
+  }
+
+  .subServiceName {
+    color: #242424;
+    font-weight: 400;
+    font-size: 30px;
+  }
+
+  .serviceNum {
+    display: block;
+    margin-top: -11px;
+    padding: 0 10px;
+    color: #464646;
+    font-weight: 500;
+    font-size: 36px;
+
+  }
+
+  .price {
+    margin-top: -6px;
+    color: @themeColor;
+    font-size: 36px;
+  }
+
+  .normalBtn {
+    width: 200px;
+    padding: 12px;
+    font-weight: 500;
+    font-size: 34px;
+    text-align: center;
+    border-radius: 40px;
+  }
+
+  .signUpBtn {
+    .normalBtn();
+
+    color: #FFF;
+    background: @themeBg;
+
+  }
+
+  .cancleContract {
+    .normalBtn();
+
+    color: @themeColor;
+    border: @themeColor 2px solid;
+  }
+
+  .cancleContractGray {
+    .normalBtn();
+
+    color: gray;
+    border: gray 2px solid;
+  }
+}
+
+.tipMsg {
+  padding-top: 32px;
+  color: @themeColor;
+  font-size: 28px;
+
+}
+
+.protcolContent {
+  height: 75%;
+  margin-top: 10px;
+  overflow: scroll;
+}
+
+.promotoContent {
+  font-size: 30px;
+
+  .promotoName {
+    margin-right: 30px;
+    color: #808080;
+    ;
+
+
+  }
+}
+
+
+:global {
+  .am-modal-button-group-h .am-modal-button:last-child {
+    color: @themeColor  !important;
+  }
+
+}

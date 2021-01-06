@@ -1,0 +1,273 @@
+import React, { FC, useEffect, useState, useRef } from 'react';
+import { QuickOrderModelState, ConnectProps, connect, history } from 'alita';
+import { Toast } from 'antd-mobile';
+import BetterScroll from 'better-scroll';
+import { AllWhiteLoading } from '@/components';
+import { BScrollConstructor } from '@better-scroll/core/dist/types/BScroll';
+import Utils from '@/utils/tool';
+import { FormCard } from '@/pages/quickOrder/components';
+import Blue2Png from '@/assets/img/quickOrder/blue2.png';
+import Blue3Png from '@/assets/img/quickOrder/blue3.png';
+import Blue4Png from '@/assets/img/quickOrder/blue4.png';
+import BlueTopPng from '@/assets/img/quickOrder/blueTop.png';
+import styles from './index.less';
+
+interface PageProps extends ConnectProps {
+  quickOrder: QuickOrderModelState;
+}
+
+let bs: BScrollConstructor<{}> | null = null;
+
+const QuickOrderPage: FC<PageProps> = ({ quickOrder, dispatch, location }) => {
+  const { source = '', sn = '', type = '', skuId = '', salesCode = '' } = location?.query;
+  const [loadingFlag, setLoadingFlag] = useState<boolean>(true);
+
+  const ref = useRef(null);
+  useEffect(() => {
+    localStorage.setItem('leave', '0'); // 用完值要设置成初始值
+    localStorage.setItem('tokenCode', '');
+    document.getElementsByClassName('rumtime-keep-alive-layout-no')[0].style.height = '100%';
+    localStorage.setItem('source', source);
+    localStorage.setItem('sn', sn);
+    localStorage.setItem('salesCode', salesCode);
+
+    Utils.accessPermission({
+      sn,
+      source,
+      dispatch,
+      successCallBack: () => {
+        dispatch!({
+          type: 'indexList/dmosbrowse',
+          payload: {
+            sn: sn || '',
+            source: source || '',
+          },
+        });
+      },
+    });
+  }, []);
+
+  if ((document.readyState === 'complete' || document.readyState === 'interactive') && !bs) {
+    setTimeout(() => {
+      bs = new BetterScroll(ref.current, {
+        probeType: 3,
+        scrollY: true,
+        scrollX: false,
+        click: true,
+        bounce: false,
+      });
+    }, 100);
+  }
+
+  const selectModalEvent = (flag: boolean) => {
+    if (flag) {
+      ref.current = null;
+      bs = null;
+    }
+  };
+
+  const submitOrderFun = (values: any, newNumData: any, addrRes?: any) => {
+    dispatch!({
+      type: 'oldUserLoginSuccess/commitCartQuick',
+      payload: {
+        goodsList: [
+          {
+            skuId,
+            quantity: 1,
+          },
+        ],
+        commonAttrList: [
+          {
+            attrCode: 'HM',
+            attrValue: values?.selectNum,
+            extMap: { ...newNumData },
+          },
+        ],
+        receiveAddrId: addrRes ? addrRes?.receiveAddrId : undefined,
+      },
+    }).then((data: any) => {
+      if (data) {
+        dispatch!({
+          type: 'payConfirm/save',
+          payload: {
+            orderInfo: data,
+          },
+        });
+        dispatch!({
+          type: 'payConfirm/commitOrderBfCheck',
+          payload: {
+            certData: {
+              certName: values?.username,
+              certNum: values?.idenCode,
+              certType: '1',
+            },
+          },
+        }).then((data: boolean) => {
+          if (data === true) {
+            history.push({
+              pathname: '/nameAuthentication',
+            });
+          }
+        });
+      }
+    });
+  };
+
+  /**
+   * 表单提交
+   */
+  const formSubmit = (values: any, newNumData: any) => {
+    dispatch!({
+      type: 'payConfirm/save',
+      payload: {
+        nameAndNo: {
+          name: values?.username.trim(),
+          idCard: values?.idenCode.trim(),
+        },
+      },
+    });
+    const { homeAddr = {} } = values;
+    const { label = {}, value = {} } = homeAddr;
+    const proxyParams = {
+      commonAttrList: [
+        {
+          attrCode: 'HM',
+          attrValue: values?.selectNum,
+          extMap: { ...newNumData },
+        },
+      ],
+      memLoginCO: {
+        extValues: {},
+        graphValidateCode: values?.graphValidateCode,
+        phone: values?.accNum,
+        uuId: values?.uuid,
+      },
+      memberBaseData: {
+        memberName: values?.username,
+        certType: '1',
+        certNum: values?.idenCode,
+        certName: values?.username,
+      },
+      goodsList: [
+        {
+          quantity: 1,
+          skuId,
+        },
+      ],
+      sn,
+      orderType: '1000',
+      orderBusiTypeKind: '1000',
+      sourceType: source,
+    };
+
+    if (source !== 'store') {
+      proxyParams.memberReceiveAddr = {
+        name: values?.username,
+        phoneNumber: values?.accNum,
+        defaultAddr: '1000',
+        provinceId: value[0],
+        province: label[0],
+        cityId: value[1],
+        city: label[1],
+        regionId: value[2],
+        region: label[2],
+        detailAddress: values?.detailAddr,
+      };
+    }
+
+    /**
+     * 代理商的接口
+     * 执行 commitCartQuickByMember 接口后执行 commitOrderBfCheck 最后跳转页面
+     */
+    if (type === 'proxy') {
+      dispatch!({
+        type: 'quickOrder/commitCartQuickByMemberModal',
+        payload: proxyParams,
+      }).then((res: any) => {
+        if (res) {
+          dispatch!({
+            type: 'payConfirm/commitOrderBfCheck',
+            payload: {
+              certData: {
+                certName: values?.username,
+                certNum: values?.idenCode,
+                certType: '1',
+              },
+            },
+          }).then((data: boolean) => {
+            if (data === true) {
+              history.push({
+                pathname: '/nameAuthentication',
+              });
+            }
+          });
+        }
+      });
+    } else if (type === 'user') {
+      if (!localStorage.getItem('tokenCode')) {
+        Toast.fail('验证码不正确或验证码已经过期', 1);
+        return;
+      }
+      if (source !== 'store') {
+        dispatch!({
+          type: 'quickOrder/addAddressModal',
+          payload: {
+            name: values?.username,
+            phoneNumber: values?.accNum,
+            detailAddress: values?.detailAddr,
+            defaultAddr: '1000',
+            provinceId: value[0],
+            province: label[0],
+            cityId: value[1],
+            city: label[1],
+            regionId: value[2],
+            region: label[2],
+          },
+        }).then((addrRes: any) => {
+          if (addrRes) {
+            submitOrderFun(values, newNumData, addrRes);
+          }
+        });
+      } else {
+        submitOrderFun(values, newNumData);
+      }
+    }
+  };
+
+  return (
+    <div className={styles.commonStyle} style={{ height: document.documentElement.clientHeight }}>
+      {loadingFlag && <AllWhiteLoading />}
+      <div
+        className={styles.content}
+        // ref={ref}
+      >
+        <div>
+          <img src={BlueTopPng} alt="" className={styles.commonTop} />
+          <div className={styles.commonContent}>
+            <img src={Blue4Png} alt="" className={styles.commonImg} />
+            <div className={styles.formCardCompStyle}>
+              <FormCard
+                type={type}
+                onSubmit={formSubmit}
+                selectModalFlag={selectModalEvent}
+                paramAction="commonQuickOrder"
+                addr={source !== 'store'}
+              />
+            </div>
+            <img src={Blue2Png} alt="" className={styles.commonImg} />
+            <img
+              src={Blue3Png}
+              alt=""
+              className={styles.commonImg}
+              onLoad={() => setLoadingFlag(false)}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default connect(({ quickOrder }: { quickOrder: QuickOrderModelState }) => ({ quickOrder }))(
+  QuickOrderPage,
+);

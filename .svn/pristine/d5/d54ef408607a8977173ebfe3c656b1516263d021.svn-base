@@ -1,0 +1,1050 @@
+import { ResponseError, Context } from 'umi-request';
+import {
+  NavBarProps,
+  TitleListItem,
+  NavBarListItem,
+  TabBarProps,
+  TabBarListItem,
+  history,
+} from 'alita';
+import { Toast, Modal } from 'antd-mobile';
+import { popViewController, isMallSaleContainerApp } from '@/utils/NativeBridge';
+import goodsGreyIcon from '@/assets/img/index/goods_grey.png';
+import goodsRedIcon from '@/assets/img/index/goods_red.png';
+import myGreyIcon from '@/assets/img/index/my_grey.png';
+import myRedIcon from '@/assets/img/index/my_red.png';
+//
+import React from 'react';
+import Utils from '@/utils/tool';
+import backIcon from './assets/img/back.png';
+
+// 请求中间件 就是发起请求和响应之后需要统一操作数据就写这
+// https://github.com/umijs/umi-request#example-1
+const middleware = async (ctx: Context, next: any) => {
+  await next();
+};
+
+export const request = {
+  prefix: '', // 统一的请求头
+  middlewares: [middleware],
+  errorHandler: (error: ResponseError) => {
+    Toast.hide();
+    if (!error) return;
+    if (!error.response) {
+      return;
+    }
+    // 集中处理错误
+    if (`${error.response.status}` === '401') {
+      if (error.data.errCode === 'CELE_TOKEN_COMMON_004') {
+        if (window.location.href.indexOf('10.45.46.226:8086') !== -1) {
+          // 替换路由，这样可以不返回到上个页面
+          window.location.replace(
+            `${window.location.origin}/polarisApp/#/defaultPage?errMessage=您访问的页面已失效`,
+          );
+        } else {
+          window.location.replace(
+            `${window.location.origin}/#/defaultPage?errMessage=您访问的页面已失效`,
+          );
+        }
+        return;
+      }
+      if (
+        window.location.href.indexOf('customer/cGoodsDetails') === -1 &&
+        window.location.href.indexOf('/goose/indexPage') === -1
+      ) {
+        Utils.clear();
+        history.push({
+          pathname: '/login',
+          query: {
+            type: 'back',
+          },
+        });
+      }
+    } else if (`${error.response.status}` === '404') {
+      // Toast.info('接口不存在');
+      // Modal.alert('提示', '接口不存在', [{ text: '确定' }]);
+    }
+  },
+};
+
+const titleList: TitleListItem[] = [
+  {
+    pagePath: '/',
+    title: '精选商品',
+  },
+  {
+    pagePath: '/list',
+    title: '列表',
+  },
+  {
+    pagePath: '/settings',
+    title: '设置',
+  },
+  {
+    pagePath: '/discovery/discovery',
+    title: '发现',
+  },
+  {
+    pagePath: '/shopProcess/goodsDetail',
+    title: '商品详情',
+  },
+  {
+    pagePath: '/shopProcess/productReview',
+    title: '',
+  },
+
+  {
+    pagePath: '/shopProcess/fillOrder',
+    title: '填写订单',
+  },
+  {
+    pagePath: '/shopProcess/deliveryAddr',
+    title: '收货地址',
+  },
+  {
+    pagePath: '/shopProcess/addDeliveryAddr',
+    title: '新建收货地址',
+  },
+  {
+    pagePath: '/shopProcess/checkoutCounter',
+    title: '收银台',
+  },
+
+  {
+    pagePath: '/login',
+    title: '我有我样，青年一派',
+  },
+  {
+    pagePath: '/verificationCode',
+    title: '短信验证',
+  },
+  {
+    pagePath: '/register/registerPhone',
+    title: '注册-手机号',
+  },
+  {
+    pagePath: '/register/setPassword',
+    title: '设置密码',
+  },
+  {
+    pagePath: '/commonSuccessPage',
+    title: '成功',
+  },
+  {
+    pagePath: '/shopProcess/emptyShopCart',
+    title: '购物车',
+  },
+  {
+    pagePath: '/shopProcess/shopCart',
+    title: '购物车',
+  },
+  {
+    pagePath: '/order/myOrder',
+    title: '我的订单',
+  },
+  {
+    pagePath: '/order/orderTracking',
+    title: '',
+  },
+  {
+    pagePath: '/order/maintenanceRecords',
+    title: '',
+  },
+  {
+    pagePath: '/order/beEvaluatedPages',
+    title: '待评价',
+  },
+  {
+    pagePath: '/order/progressDetails',
+    title: '进度详情',
+  },
+  {
+    pagePath: '/order/evaluate',
+    title: '评价',
+  },
+  {
+    pagePath: '/selectedPackages',
+    title: '精选商品',
+  },
+  {
+    pagePath: '/shopProcess/payResult',
+    title: '',
+  },
+  {
+    pagePath: '/customer/generalSuccess',
+    title: '成功',
+  },
+  {
+    pagePath: '/salesWarranty',
+    title: '选择服务类型',
+  },
+  {
+    pagePath: '/salesWarranty/refund',
+    title: '申请退款',
+  },
+  {
+    pagePath: '/salesWarranty/returnsSRefunds',
+    title: '申请退货退款',
+  },
+  {
+    pagePath: '/salesWarranty/result',
+    title: '',
+  },
+  {
+    pagePath: '/salesWarranty/warrantyList',
+    title: '退换/售后',
+  },
+  {
+    pagePath: '/salesWarranty/applyDetail',
+    title: '',
+  },
+  {
+    pagePath: '/order/storeEvaluate',
+    title: '商品评价',
+  },
+  {
+    pagePath: '/nameAuthentication',
+    title: '实名认证',
+  },
+  {
+    pagePath: '/nameAuthentication/authenticationInfo',
+    title: '实名信息',
+  },
+  {
+    pagePath: '/nameAuthentication/uploadPhotos',
+    title: '实名认证',
+  },
+  {
+    pagePath: '/bili/orderSearch',
+    title: '订单查询',
+  },
+  {
+    pagePath: '/bili/orderList',
+    title: '订单列表',
+  },
+  {
+    pagePath: '/bili/commitOrder',
+    title: '填写订单',
+  },
+  {
+    pagePath: '/paymentView',
+    title: '收银台',
+  },
+  {
+    pagePath: '/personCenter/discountCounpon',
+    title: '我的权益',
+  },
+  {
+    pagePath: '/bili/biliPayResult',
+    title: '',
+  },
+  {
+    pagePath: '/customerHoney',
+    title: '客服小蜜',
+  },
+  {
+    pagePath: '/customerCenter',
+    title: '选择宝贝',
+  },
+  {
+    pagePath: '/personCenter/my',
+    title: '个人中心',
+  },
+  {
+    pagePath: '/personCenter/invoice',
+    title: '电子发票',
+  },
+  {
+    pagePath: '/personCenter/editCenter',
+    title: '开具发票',
+  },
+  {
+    pagePath: '/personCenter/electronicBusiness',
+    title: '电信业务管理',
+  },
+  {
+    pagePath: '/personCenter/quantityQuery',
+    title: '用量查询',
+  },
+  {
+    pagePath: '/personCenter/invoiceDetail',
+    title: '发票详情',
+  },
+  {
+    pagePath: '/personCenter/recharge',
+    title: '优惠充值',
+  },
+  {
+    pagePath: '/personCenter/editInvoice',
+    title: '开具发票',
+  },
+  {
+    pagePath: '/selectNumber',
+    title: '选择号码',
+  },
+  {
+    pagePath: '/personCenter/editPersonalInfo',
+    title: '账户信息',
+  },
+  {
+    pagePath: '/personCenter/editUserName',
+    title: '修改用户名',
+  },
+  // 新版内容
+  {
+    pagePath: '/customer/myPage',
+    title: Utils.getQueryString('fromType') === 'weChat' ? '' : '个人中心',
+  },
+  {
+    pagePath: '/customer/payConfirm',
+    title: '订单填写',
+  },
+  {
+    pagePath: '/customer/indexList',
+    title: '青年一派下单',
+  },
+  {
+    pagePath: '/customer/paySuccess',
+    title: '支付结果',
+  },
+  {
+    pagePath: '/customer/cGoodsDetails',
+    title: '商品详情',
+  },
+  {
+    pagePath: '/customer/snapshot',
+    title: '交易快照',
+  },
+  {
+    pagePath: '/customer/consumerRights',
+    title: '消费满额送权益',
+  },
+  {
+    pagePath: '/customer/indexList',
+    title: '新版首页',
+  },
+  {
+    pagePath: '/customer/orderConfirm',
+    title: '我有我样，青年一派',
+  },
+  {
+    pagePath: '/customer/oldUserLoginSuccess',
+    title: ' ',
+  },
+  {
+    pagePath: '/customer/cDeliveryAddr',
+    title: '收货地址',
+  },
+  {
+    pagePath: '/customer/cAddDeliveryAddr',
+    title: '收货地址管理',
+  },
+  {
+    pagePath: '/customer/cMyOrder',
+    title: '我的订单',
+  },
+  {
+    pagePath: '/customer/equityExchange',
+    title: '我的权益',
+  },
+  {
+    pagePath: '/wallPaper',
+    title: '商品详情',
+  },
+  {
+    pagePath: '/customer/myServices',
+    title: '我的服务',
+  },
+  {
+    pagePath: '/customer/advertBili',
+    title: '青年一派',
+  },
+  {
+    pagePath: '/customer/waitPage',
+    title: ' ',
+  },
+  {
+    pagePath: '/customer/emergency',
+    title: '应急留单',
+  },
+  {
+    pagePath: '/customer/qryBalance',
+    title: '余额查询',
+  },
+  {
+    pagePath: '/order/orderDetail',
+    title: '订单详情',
+  },
+  {
+    pagePath: '/emergency/emergencyList',
+    title: '紧急电信业务',
+  },
+  {
+    pagePath: '/emergency/loseAccount',
+    title: '挂失账户',
+  },
+  {
+    pagePath: '/emergency/checkIdentity',
+    title: '身份验证',
+  },
+  {
+    pagePath: '/emergency/checkResult',
+    title: '订单录入',
+  },
+  {
+    pagePath: '/emergency/checkCommitment',
+    title: '订单录入',
+  },
+  {
+    pagePath: '/emergency/checkError',
+    title: '验证信息',
+  },
+  {
+    pagePath: '/emergency/emerPayConfirm',
+    title: '订单确认',
+  },
+  {
+    pagePath: '/queryDetailList/detailListLogin',
+    title: '身份验证',
+  },
+  {
+    pagePath: '/queryDetailList/detailList',
+    title: '详单查询',
+  },
+  {
+    pagePath: '/sect/normalSect',
+    title: '',
+  },
+  {
+    pagePath: '/sect/headSect',
+    title: '',
+  },
+  {
+    pagePath: '/goose/indexPage',
+    title: '鹅外惊喜',
+  },
+  {
+    pagePath: '/goose/luckDraw',
+    title: '鹅外惊喜',
+  },
+  {
+    pagePath: '/goose/rules',
+    title: '抽奖活动说明',
+  },
+  {
+    pagePath: '/goose/gooseDetail',
+    title: '喜鹅派商品详情',
+  },
+  {
+    pagePath: '/sect/searchSects',
+    title: '搜索圈子',
+  },
+  {
+    pagePath: '/sect/sectInfo',
+    title: '',
+  },
+  {
+    pagePath: '/sect/playDes',
+    title: '玩法说明',
+  },
+  {
+    pagePath: '/sect/createSect',
+    title: '编辑圈子信息',
+  },
+  {
+    pagePath: '/sect/martailInvite',
+    title: '圈子邀请',
+  },
+  {
+    pagePath: '/sect/allMember',
+    title: '所有成员',
+  },
+  {
+    pagePath: '/sect/shiftSect',
+    title: '转移圈子',
+  },
+  {
+    pagePath: '/sect/intoSectApply',
+    title: '入派申请',
+  },
+  {
+    pagePath: '/sect/intoSectAudit',
+    title: '入派审批',
+  },
+  {
+    pagePath: '/sect/sectCoupon',
+    title: '券',
+  },
+  {
+    pagePath: '/sect/sectSetting',
+    title: '圈子信息',
+  },
+  {
+    pagePath: '/personCenter/editUserPhone',
+    title: '更换绑定手机号码',
+  },
+  {
+    pagePath: '/marketingLink',
+    title: '营销链接',
+  },
+  {
+    pagePath: '/quickOrder/common',
+    title: '青年一派',
+  },
+  {
+    pagePath: '/quickOrder/bili',
+    title: '青年一派',
+  },
+  {
+    pagePath: '/quickOrder/experience',
+    title: '青年一派',
+  },
+  {
+    pagePath: '/afterSale/afterSaleList',
+    title: '退款',
+  },
+  {
+    pagePath: '/afterSale/refundResult',
+    title: '售后详情',
+  },
+  {
+    pagePath: '/afterSale/applyAfterSale',
+    title: '申请售后',
+  },
+  {
+    pagePath: '/afterSale/fillApply',
+    title: '申请售后',
+  },
+  {
+    pagePath: '/afterSale/updateApply',
+    title: '退款',
+  },
+  {
+    pagePath: '/starPkg',
+    title: '青年一派',
+  },
+  {
+    pagePath: '/onlineCar',
+    title: '青年一派',
+  },
+  {
+    pagePath: '/defaultPage',
+    title: '',
+  },
+  {
+    pagePath: '/starPkg/starHelp',
+    title: '下单助力',
+  },
+  {
+    pagePath: '/starPkg/starHelpOrder',
+    title: '下单助力',
+  },
+  {
+    pagePath: '/upgradePage',
+    title: '',
+  },
+];
+
+const navList: NavBarListItem[] = [
+  {
+    pagePath: '/nameAuthentication',
+    navBar: {
+      onLeftClick: () => {
+        if (isMallSaleContainerApp()) {
+          popViewController();
+        } else {
+          history.goBack();
+        }
+      },
+    },
+  },
+  {
+    pagePath: '/nameAuthentication/authenticationInfo',
+    navBar: {
+      onLeftClick: () => {
+        if (isMallSaleContainerApp()) {
+          popViewController();
+        } else {
+          history.goBack();
+        }
+      },
+    },
+  },
+  {
+    pagePath: '/queryDetailList/detailListLogin',
+    navBar: {},
+  },
+  {
+    pagePath: '/queryDetailList/detailList',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/emergency/emergencyList',
+    navBar: {},
+  },
+  {
+    pagePath: '/emergency/loseAccount',
+    navBar: {},
+  },
+  {
+    pagePath: '/emergency/checkIdentity',
+    navBar: {},
+  },
+  {
+    pagePath: '/emergency/checkError',
+    navBar: {},
+  },
+  {
+    pagePath: '/emergency/emerPayConfirm',
+    navBar: {},
+  },
+  {
+    pagePath: '/shopProcess/checkoutCounter',
+    navBar: {},
+  },
+  {
+    pagePath: '/order/storeEvaluate',
+    navBar: {},
+  },
+  {
+    pagePath: '/discovery/discovery',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/shopProcess/productReview',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+
+  {
+    pagePath: '/shopProcess/payResult',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+
+  {
+    pagePath: '/personCenter/mineeQuities',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+
+  {
+    pagePath: '/login',
+    navBar: {},
+  },
+  {
+    pagePath: '/customer/payConfirm',
+    navBar: {},
+  },
+  {
+    pagePath: '/register/registerPhone',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/commonSuccessPage',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/shopProcess/shopCart',
+    navBar: {},
+  },
+  {
+    pagePath: '/register/setPassword',
+    navBar: {},
+  },
+  {
+    pagePath: '/salesWarranty/result',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/salesWarranty/warrantyList',
+    navBar: {
+      onLeftClick: () => {
+        if (isMallSaleContainerApp()) {
+          popViewController();
+        } else {
+          history.goBack();
+        }
+      },
+    },
+  },
+  {
+    pagePath: '/order/myOrder',
+    navBar: {
+      onLeftClick: () => {
+        history.goBack();
+      },
+    },
+  },
+  {
+    pagePath: '/order/maintenanceRecords',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/order/orderTracking',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/order/orderSearch',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/order/orderDetail',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/shopProcess/addDeliveryAddr',
+    navBar: {},
+  },
+
+  {
+    pagePath: '/order/evaluate',
+    navBar: {},
+  },
+  {
+    pagePath: '/salesWarranty',
+    navBar: {},
+  },
+  {
+    pagePath: '/salesWarranty/applyDetail',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/bili/biliPayResult',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/customerHoney',
+    navBar: {},
+  },
+  {
+    pagePath: '/customerCenter',
+    navBar: {},
+  },
+  {
+    pagePath: '/personCenter/my',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/personCenter/mineeQuities',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/personCenter/editCenter',
+    navBar: {},
+  },
+  {
+    pagePath: '/personCenter/invoiceDetail',
+    navBar: {},
+  },
+  {
+    pagePath: '/personCenter/editInvoice',
+    navBar: {},
+  },
+  {
+    pagePath: '/quantityQuery',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/personCenter/recharge',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/personCenter/quantityQuery',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/selectNumber',
+    navBar: {},
+  },
+  {
+    pagePath: '/personCenter/editUserName',
+    navBar: {},
+  },
+  {
+    pagePath: '/customer/indexList',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/customer/cAddDeliveryAddr',
+    navBar: {},
+  },
+  {
+    pagePath: '/customer/paySuccess',
+    navBar: {
+      onLeftClick: () => {
+        history.push({
+          pathname: '/customer/myPage',
+        });
+      },
+    },
+  },
+  {
+    pagePath: '/customer/myPage',
+    navBar: {
+      onLeftClick: () => {
+        history.push({
+          pathname: '/customer/indexList',
+        });
+      },
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/customer/generalSuccess',
+    navBar: {
+      // onLeftClick: () => {
+      //   history.push({
+      //     pathname: '/customer/myPage',
+      //   });
+      // },
+    },
+  },
+
+  {
+    pagePath: '/customer/orderConfirm',
+    navBar: {},
+  },
+  {
+    pagePath: '/wallPaper',
+    navBar: {},
+  },
+  {
+    pagePath: '/customer/advertBili',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/customer/emergency',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/customer/waitPage',
+    navBar: {},
+  },
+  {
+    pagePath: '/sect/normalSect',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/sect/headSect',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+
+  {
+    pagePath: '/goose/indexPage',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/goose/luckDraw',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/goose/rules',
+    navBar: {},
+  },
+  {
+    pagePath: '/goose/gooseDetail',
+    navBar: {},
+  },
+  {
+    pagePath: '/sect/sectInfo',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/quickOrder/common',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/quickOrder/bili',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/quickOrder/experience',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/starPkg',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/onlineCar',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/sect/createSect',
+    navBar: {},
+  },
+  {
+    pagePath: '/customer/cGoodsDetails',
+    navBar: {},
+  },
+  {
+    pagePath: '/emergency/checkResult',
+    navBar: {},
+  },
+  {
+    pagePath: '/starPkg/starHelp',
+    navBar: {},
+  },
+  {
+    pagePath: '/starPkg/starHelpOrder',
+    navBar: {},
+  },
+  {
+    pagePath: '/activityPreview',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/defaultPage',
+    navBar: {
+      hideNavBar: true,
+    },
+  },
+  {
+    pagePath: '/afterSale/afterSaleList',
+    navBar: {
+      onLeftClick: () => {
+        history.push({
+          pathname: '/customer/myPage',
+          query: {
+            type: 'index',
+          },
+        });
+      },
+    },
+  },
+  {
+    pagePath: '/afterSale/refundResult',
+    navBar: {
+      onLeftClick: () => {
+        history.push({
+          pathname: '/afterSale/afterSaleList',
+        });
+      },
+    },
+  },
+
+  {
+    pagePath: '/upgradePage',
+    navBar: {
+      hideNavBar: true,
+    }
+  },
+];
+const navBar: NavBarProps = {
+  mode: 'light',
+  navList,
+  fixed: true,
+  // hideNavBar: Utils.getQueryString('fromType') === 'weChat',
+  icon: <img src={backIcon} alt="" />,
+  onLeftClick: () => {
+    history.goBack();
+  },
+};
+const tabList: TabBarListItem[] = [
+  {
+    pagePath: '/',
+    text: '商品中心',
+    iconPath: goodsGreyIcon,
+    selectedIconPath: goodsRedIcon,
+    title: '商品中心',
+    iconSize: '',
+    badge: '',
+  },
+  {
+    pagePath: '/personCenter/my',
+    text: '个人中心',
+    iconPath: myGreyIcon,
+    selectedIconPath: myRedIcon,
+    title: '个人中心',
+    iconSize: '',
+    badge: '',
+  },
+  // {
+  //   pagePath: '/settings',
+  //   text: '设置',
+  //   iconPath: SetGary,
+  //   selectedIconPath: SetBlue,
+  //   title: '设置',
+  //   iconSize: '',
+  //   badge: '',
+  // },
+];
+
+const tabBar: TabBarProps = {
+  color: `#041C1E`,
+  selectedColor: '#F53C54',
+  borderStyle: 'white',
+  position: 'bottom',
+  list: tabList,
+};
+
+export const mobileLayout = {
+  documentTitle: '默认标题',
+  navBar,
+  tabBar,
+  titleList,
+};

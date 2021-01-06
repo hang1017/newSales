@@ -1,0 +1,220 @@
+.formCardStyle {
+  border-radius: 20px;
+  padding: 44px 0 52px 0;
+  background-color: #000;
+
+  :global {
+    .am-list-body {
+      border: none;
+      background-color: transparent;
+    }
+
+    .alitajs-dform-input-text {
+      background-color: transparent;
+      color: #fff !important;
+    }
+
+    .am-input-control input {
+      font-size: 28px !important;
+      color: #fff;
+    }
+
+    .am-list-item {
+      background-color: transparent;
+    }
+
+    .am-list-item .am-list-line {
+      padding-right: 0px;
+    }
+
+    .am-list-body div .am-list-line {
+      border-bottom: 1px solid rgb(205, 205, 205);
+    }
+
+    .am-list-item .am-list-line .am-list-arrow {
+      background-image: url('../../../../assets/img/starPkg/right.png');
+      width: 14px;
+      height: 22px;
+    }
+
+    .alitajs-dform-text-text {
+      font-size: 28px;
+    }
+
+    .alitajs-dform-text-content .alitajs-dform-text-text {
+      color: #fff !important;
+    }
+
+    .alitajs-dform-placeholder .alitajs-dform-text-text {
+      color: rgb(164, 170, 182);
+    }
+
+    .alitajs-dform-placeholder .alitajs-dform-title {
+      font-size: 28px;
+      font-family: PingFangSC-Semibold,
+        PingFang SC;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 40px;
+      text-shadow: 0px 0px 16px #00CBFF;
+    }
+
+    .alitajs-dform-value-content .alitajs-dform-title {
+      font-size: 28px;
+      font-family: PingFangSC-Semibold,
+        PingFang SC;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 40px;
+      text-shadow: 0px 0px 16px #00CBFF;
+
+    }
+
+    .am-input-control input::placeholder {
+      // 自定义样式
+      font-size: 28px;
+      color: rgb(164, 170, 182) !important;
+    }
+
+    .alitajs-dform-input-text::placeholder {
+      // 自定义样式
+      font-size: 28px !important;
+      color: rgb(164, 170, 182) !important;
+    }
+
+    .alitajs-dform-input-value::placeholder {
+      // 自定义样式
+      font-size: 28px !important;
+      color: rgb(164, 170, 182) !important;
+    }
+  }
+
+  .formTitle {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+
+    .blingImg {
+      width: 238px;
+      height: 36px;
+    }
+  }
+
+  .formStyle {
+    padding-left: 18px;
+    padding-right: 58px;
+  }
+
+  .busPay {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 48px;
+    padding-top: 36px;
+
+    .payCheckImg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .payText {
+      font-size: 26px;
+      font-family: PingFangSC-Semibold,
+        PingFang SC;
+      font-weight: 600;
+      color: #999999;
+      line-height: 36px;
+      padding-left: 22px;
+      color: #00E4FF;
+    }
+  }
+
+  .formStyle2 {
+    padding-left: 18px;
+    padding-right: 58px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 1s;
+  }
+
+  .formShow {
+    height: 180px;
+  }
+
+  .fcBtnDiv {
+    padding: 44px 164px 24px 172px;
+
+    .fcBtn {
+      background: linear-gradient(180deg, #38CEFF 0%, #0F55FC 100%);
+      box-shadow: 0px 0px 12px 0px rgba(0, 80, 252, 0.39),
+        0px 2px 4px 0px rgba(31, 122, 255, 0.27),
+        0px -6px 10px 0px rgba(0, 69, 222, 0.5);
+      border-radius: 200px;
+      border: none;
+      font-size: 36px;
+      font-family: PingFangSC-Semibold,
+        PingFang SC;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .fcBtns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .footBtnDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 48px;
+    padding-top: 36px;
+
+    .checkImg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .text {
+      font-size: 26px;
+      font-family: PingFangSC-Semibold,
+        PingFang SC;
+      font-weight: 600;
+      color: #999999;
+      line-height: 36px;
+      padding-left: 22px;
+      color: #00E4FF;
+
+      // span {
+      //   text-decoration: underline;
+      // }
+    }
+  }
+
+  .codeText {
+    font-size: 28px;
+    font-family: PingFangSC-Semibold,
+      PingFang SC;
+    font-weight: 600;
+    color: #00E4FF;
+    line-height: 40px;
+  }
+
+  .rightImg {
+    width: 14px;
+    height: 22px;
+  }
+
+  .validateCodeImg {
+    width: 200px;
+    height: 66px;
+  }
+}

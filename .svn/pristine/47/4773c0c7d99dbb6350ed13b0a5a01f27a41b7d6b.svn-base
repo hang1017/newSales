@@ -1,0 +1,99 @@
+.payResult {
+  height: 100vh;
+  background: #fff;
+
+  .careText {
+    font-size: 28px;
+    font-weight: 600;
+    color: #187DFB;
+    line-height: 40px;
+    padding: 300px 80px 100px 80px;
+    text-align: center;
+  }
+
+  .payIcon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .payInfo {
+    padding: 100px;
+    text-align: center;
+
+    .payDes {
+      color: #242424;
+      font-weight: 400;
+      font-size: 32px;
+    }
+
+    .payAmount {
+      color: #242424;
+      font-weight: 600;
+      font-size: 64px;
+    }
+
+    .orderDes {
+      margin-top: 30px;
+      color: #929292;
+      font-weight: 400;
+      font-size: 28px;
+    }
+  }
+
+  .footBtn {
+    text-align: center;
+
+    span {
+      padding: 20px 134px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 34px;
+      background: linear-gradient(90deg, #6db4ff 0%, #187dfb 100%);
+      border-radius: 45px;
+    }
+  }
+}
+
+.serviceList {
+  padding: 32px;
+
+  .serviceTitle {
+    color: #242424;
+    font-weight: 400;
+    font-size: 32px;
+    text-align: center;
+
+    span {
+      padding: 0 12px;
+    }
+  }
+
+  .serviceContent {
+    height: auto;
+    max-height: 40%;
+    overflow: scroll;
+  }
+
+  .serviceIcon {
+    width: 42px;
+    height: 22px;
+  }
+
+  .siginPhoneBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 24px;
+    font-size: 30px;
+    border-bottom: #dbdbdb solid 1px;
+
+    .siginPhoneLabel {
+      color: #242424;
+    }
+
+    .siginPhone {
+      color: #A3A3A3;
+    }
+  }
+
+}

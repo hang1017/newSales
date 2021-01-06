@@ -1,0 +1,81 @@
+.refundList {
+    height: 100vh;
+    padding: 32px 0;
+
+    .listCell {
+        background: #fff;
+
+        .listHead {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 32px;
+            color: #333;
+            font-weight: 400;
+            font-size: 28px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .rerundSale {
+            color: #1FA3FF;
+            font-weight: 400;
+            font-size: 32px;
+        }
+
+        .allAccount {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            // margin-top: 20px;
+            color: #333;
+            font-weight: 400;
+            font-size: 26px;
+            text-align: right;
+            border-top: solid 2px #eee
+        }
+
+        .refunDes {
+            margin-right: 30px
+        }
+
+        .money {
+            .allAccount;
+
+            font-weight: 600;
+            font-size: 44px;
+
+        }
+
+        .footBtn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 18px;
+
+            .commonBtn {
+                padding: 8px 16px;
+                font-size: 26px;
+                border-radius: 26px;
+            }
+
+            .grayBtn {
+                .commonBtn;
+
+                color: #333;
+                border: 2px solid #DDD;
+            }
+
+            .blueBtn {
+                .commonBtn;
+
+                margin-left: 20px;
+                color: #1FA3FF;
+                border: 2px solid #1FA3FF;
+            }
+
+        }
+
+    }
+
+
+}

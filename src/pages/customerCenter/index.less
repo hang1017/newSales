@@ -1,0 +1,144 @@
+.customerCenterStyle {
+
+  height: 100%;
+
+  .ccCenter {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .listview {
+    flex: 1;
+    background-color: #f5f7f9;
+
+    .loadding {
+      text-align: center;
+    }
+
+    :global {
+      .am-grid-item {
+        height: 524px !important;
+      }
+
+      .am-grid .am-flexbox .am-flexbox-item .am-grid-item-content {
+        width: auto;
+      }
+
+      .am-flexbox-item .am-grid-item:first-child {
+        margin-right: 30px;
+      }
+
+      .list-view-section-body {
+        padding: 0 24px !important;
+      }
+
+      .am-list-body {
+        background-color: #f5f7f9;
+      }
+    }
+
+    .proRow {
+      display: grid;
+      grid-gap: 14px;
+      grid-template-columns: 1fr 1fr;
+
+      .proItemStyle {
+        display: flex;
+        flex-direction: column;
+        margin-top: 14px;
+        background-color: #fff;
+        border-radius: 8px;
+
+        .proItemImg {
+          width: 100%;
+        }
+
+        .proItemContent {
+          display: flex;
+          flex: 1;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 24px 16px 0 16px;
+
+          .proItemTitle {
+            display: -webkit-box;
+            width: 100%;
+            margin-bottom: 16px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-break: break-all;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+          }
+
+          .proItemFooter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 20px;
+
+            .proItemMoney {
+              .symbol {
+                color: #f53c54;
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 26px;
+              }
+
+              .mainMoney {
+                color: #f53c54;
+                font-weight: 600;
+                font-size: 36px;
+                line-height: 36px;
+              }
+
+              .subMoney {
+                color: #f53c54;
+                font-weight: 600;
+                font-size: 24px;
+                line-height: 28px;
+              }
+            }
+
+            .proItemSend {
+              padding: 6px 28px;
+              color: #2CA5FF;
+              font-weight: 400;
+              font-size: 20px;
+              line-height: 28px;
+              border: 1px solid #2CA5FF;
+              border-radius: 36px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  :global {
+    .am-tabs-default-bar-tab {
+      font-size: 28px;
+      font-weight: 600;
+      color: #95969C;
+      line-height: 40px;
+      border: none;
+    }
+
+    .am-tabs-default-bar-tab-active {
+      font-weight: 600;
+      font-size: 32px;
+      font-weight: 600;
+      color: #041C1E;
+      line-height: 44px;
+    }
+
+    .am-tabs-default-bar-underline {
+      width: 60px !important;
+      height: 8px;
+      background: linear-gradient(90deg, #6db4ff 0%, #187dfb 100%);
+      border: 0;
+      bottom: 10px;
+    }
+  }
+}

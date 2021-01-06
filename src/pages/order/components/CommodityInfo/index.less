@@ -1,0 +1,59 @@
+@import '../../../../global.less';
+
+.pageView {
+  margin-bottom: 24px;
+  padding: 32px 24px;
+  background-color: white;
+  border-radius: 24px;
+
+  .titleView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 32px;
+
+    .redLine {
+      width: 8px;
+      height: 32px;
+      margin-right: 10px;
+      background: @themeBg;
+    }
+
+    span {
+      color: #041c1e;
+      font-size: 32px;
+    }
+  }
+
+  .contenView {
+    padding: 0 16px;
+
+    .content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 32px;
+      font-size: 28px;
+
+      .label {
+        color: #696d6c;
+      }
+
+      .value {
+        color: #041c1e;
+
+        span {
+          font-size: 32px;
+        }
+      }
+
+      .redValue {
+        color: @themeColor;
+
+        span {
+          font-size: 32px;
+        }
+      }
+    }
+  }
+}

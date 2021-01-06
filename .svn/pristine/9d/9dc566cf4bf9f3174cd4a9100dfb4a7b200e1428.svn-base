@@ -1,0 +1,57 @@
+@import '../../../global.less';
+.center {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  background-color: #f5f7f9;
+  .main {
+    flex: 1;
+    height: 0;
+    padding-bottom: 40px;
+    overflow: scroll;
+
+    .warrantyType {
+      margin-top: 24px;
+      overflow: hidden;
+      border-radius: 24px;
+      .amount {
+        padding: 32px;
+        background-color: #fff;
+        .amountTitle {
+          color: #06041e;
+          font-size: 32px;
+        }
+        .amountTips {
+          padding-top: 24px;
+          color: #b3b5b7;
+          font-size: 24px;
+        }
+      }
+      :global {
+        .am-list-body {
+          border: none;
+        }
+        .am-list-item-middle {
+          height: 104px;
+        }
+
+        .alitajs-dform-title {
+          color: #06041e;
+        }
+      }
+    }
+  }
+  .commitFooter {
+    height: 106px;
+    padding: 32px 32px 0;
+    background-color: #fff;
+    .footerBtn {
+      height: 72px;
+      color: #fff;
+      line-height: 72px;
+      text-align: center;
+      background:@themeBg;
+      border-radius: 36px;
+    }
+  }
+}

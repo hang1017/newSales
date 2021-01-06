@@ -1,0 +1,11 @@
+.center {
+  height: 100%;
+  overflow: scroll;
+  background-color: #f5f7f9;
+
+  :global {
+    .am-list-body {
+      background-color: transparent;
+    }
+  }
+}

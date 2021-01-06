@@ -1,0 +1,57 @@
+.checkErrorStyle {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  .errorContent {
+    border-top: 1px solid #ddd;
+    padding: 64px 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+
+
+    .closeImg {
+      width: 100px;
+      height: 100px;
+    }
+
+    .errorTitle {
+      font-size: 36px;
+      font-weight: 400;
+      color: #333333;
+      line-height: 50px;
+      padding-top: 48px;
+    }
+
+    .errorSubTitle {
+      font-size: 26px;
+      font-weight: 400;
+      color: #999999;
+      line-height: 36px;
+      padding-top: 16px;
+    }
+    .qrCode {
+      margin: 28px 0 56px;
+      width: 544px;
+      height: 544px;
+    }
+  }
+
+  .btnDiv {
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    .btn {
+      width: 340px;
+      background: linear-gradient(90deg, #6DB4FF 0%, #187DFB 100%);
+      border-radius: 45px;
+      font-size: 34px;
+      font-weight: 500;
+      color: #FFFFFF;
+      line-height: 48px;
+      padding: 22px;
+    }
+  }
+}

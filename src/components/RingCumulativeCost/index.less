@@ -1,0 +1,185 @@
+.cumulativeItem {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: scroll;
+  // background: linear-gradient(90deg, #FFE330 0%, #FBB618 100%);
+  // border-radius: 8px;
+  // margin: 24px 0;
+  .content {
+    // background: rgba(255, 255, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    width: 300%;
+    // overflow: scroll;
+    // padding: 24px 44px 0 44px;
+    // margin: 4px;
+    .ulLayout {
+      padding: 0px;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      li {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        list-style: none;
+        white-space: nowrap;
+        .alreadyLayout {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+        .already {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 112px;
+          // height: 40px;
+          // width: 140px;
+          // height: 56px;
+          // background: #FFA000;
+          background: #FF5000;
+          border-radius: 24px;
+          // box-shadow: 0px 0px 8px 0px rgba(224, 139, 0, 0.5);
+          // border-radius: 30px;
+          font-size: 26px;
+          color: #FFFFFF;
+          position: relative;
+        }
+        // .already {
+        //   display: flex;
+        //   flex-direction: column;
+        //   align-items: center;
+        //   justify-content: center;
+        //   width: 112px;
+        //   height: 40px;
+        //   background: #FFFAE4;
+        //   border-radius: 24px;
+        //   font-size: 24px;
+        //   color: #B2B6B7;
+        //   margin-top: 16px;
+        // }
+        .moneyText {
+          font-size: 24px;
+          font-weight: 600;
+          color: #FF5000;
+          line-height: 44px;
+        }
+        // .circleNode {
+        //   width: 40px;
+        //   height: 40px;
+        //   background: #FFFFFF;
+        //   border: solid 8px #FFBA1B;
+        //   border-radius: 50%;
+        //   display: flex;
+        //   justify-content: center;
+        //   align-items: center;
+        //   margin: 16px 0;
+        //   position: relative;
+        // }
+        // .bigCircleNode {
+        //   .circleNode;
+        //   width: 56px;
+        //   height: 56px;
+        //   margin: 8px 0;
+        // }
+        // .smallCircleNode {
+        //   .circleNode;
+        //   border: solid 8px #ffffff;
+        //   width: 32px;
+        //   height: 32px;
+        //   margin: 20px 0;
+        //   .greyCircle {
+        //     width: 20px;
+        //     height: 20px;
+        //     background: #E6DEBC;
+        //     border-radius: 50%;
+        //   }
+        // }
+      }
+      // .middleLine {
+      //   display: block;
+      //   height: 16px;
+      //   background: linear-gradient(90deg, #FBB618 0%, #FF9E00 100%);
+      //   border-radius: 16px;
+      //   top: 90px;
+      //   position: absolute;
+      //   right: 0;
+      //   left: 0;
+      //   margin: 0 30px;
+      // }
+      .unfinishedLine {
+        // background: #ffffff;
+        background:#DADADA;
+        border-radius: 16px;
+        height: 16px;
+        display: block;
+        top: 65px;
+        position: absolute;
+        right: 0;
+        left: 0;
+        margin: 0 30px;
+        :global {
+          .am-progress-outer {
+            background: #DADADA;
+            border-radius: 16px;
+            .am-progress-bar {
+              // background: linear-gradient(90deg, #FBB618 0%, #FF9E00 100%);
+              background: #FF6A00;
+              border-radius: 16px;
+              border: none;
+              height: 16px !important
+            }
+          }
+        }
+      }
+    }
+    // .timeTip {
+    //   display: flex;
+    //   justify-content: center;
+    //   font-size: 24px;
+    //   font-weight: 400;
+    //   color: #8A5333;
+    //   line-height: 32px;
+    //   margin: 16px 0 20px 0;
+    // }
+    // :global{
+    //   .ant-steps-item-title {
+    //     font-size: 24px;
+    //   }
+    //   .ant-steps-item-tail::after {
+    //     // background: linear-gradient(90deg, #FBB618 0%, #FF9E00 100%);
+    //     background: linear-gradient(90deg, #FBB618 0%, #FF9E00 100%);
+    //     height: 16px;
+    //   }
+    // }
+  }
+  // .bottom {
+  //   display: flex;
+  //   flex-direction: row;
+  //   font-size: 24px;
+  //   font-weight: 400;
+  //   color: #AF7715;
+  //   line-height: 32px;
+  //   .left {
+  //     margin: 28px 0px 28px 32px;
+  //   }
+  //   .right {
+  //     flex: 1;
+  //     display: flex;
+  //     // text-align: right;
+  //     flex-direction: row-reverse;
+  //     align-items: center;
+  //     color: #FFFFFF;
+  //     .bg {
+  //       padding: 12px 28px 12px 20px;
+  //       background: #E7A517;
+  //       border-radius: 200px 0px 0px 200px;
+  //     }
+  //   }
+  // }
+}

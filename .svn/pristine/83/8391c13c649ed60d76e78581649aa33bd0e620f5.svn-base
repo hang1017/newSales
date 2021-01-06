@@ -1,0 +1,183 @@
+.selectNumberStyle {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .selectAddr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 24px;
+    padding: 32px 0;
+    border-bottom: 2px solid #f4f7f6;
+
+    .selectLeft {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      width: 0;
+
+      .label {
+        color: #041c1e;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 40px;
+      }
+
+      .addrValue {
+        flex: 1;
+        padding-left: 38px;
+        overflow: hidden;
+        color: #041c1e;
+        font-weight: 400;
+        font-size: 28px;
+        line-height: 40px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .selectRight {
+      display: flex;
+      align-items: center;
+
+      .tipsIcon {
+        width: 24px;
+        height: 24px;
+      }
+
+      .tipsText {
+        padding-right: 16px;
+        padding-left: 8px;
+        color: #b3b5b7;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 34px;
+      }
+
+      .rightIcon {
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+
+  .searchContent {
+    display: flex;
+    align-items: center;
+    margin: 32px 24px;
+    padding: 12px 32px;
+    background: #f5f7f9;
+    border-radius: 32px;
+
+    .searchText {
+      flex: 1;
+      margin: 0 16px;
+      background-color: transparent;
+    }
+
+    .searchIcon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  .addrNumList {
+    display: grid;
+    flex: 1;
+    grid-gap: 32px 26px;
+    grid-template-columns: auto auto;
+    padding: 0 24px;
+    overflow: auto !important;
+
+    .numItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 12px 0;
+      background: #f5f7f9;
+      border-radius: 32px;
+    }
+
+    .numItemActive {
+      box-sizing: border-box;
+      padding: 10px 0;
+      background: #fff1f0;
+      border: 2px solid #f53c54;
+    }
+
+    .listHeight {
+      width: 100%;
+      height: 50px;
+    }
+  }
+
+  .noNumList {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+
+    .noNumImg {
+      width: 144px;
+      height: 144px;
+      margin-top: 212px;
+    }
+
+    .noNumText {
+      padding-top: 32px;
+      color: #b3b5b7;
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 40px;
+    }
+  }
+
+  .addrFooter {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 18px 24px 94px 24px;
+    background: #fcfcfc;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.08);
+
+    .footText {
+      color: #696d6c;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 44px;
+    }
+
+    .footValue {
+      flex: 1;
+      color: #b3b5b7;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 44px;
+    }
+
+    .footValueActive {
+      color: #041c1e;
+    }
+
+    .footBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 116px;
+      color: #fff;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 44px;
+      background: linear-gradient(270deg, #f74f4f 0%, #f53c54 100%);
+      border-radius: 44px;
+    }
+  }
+}
+
+.selectNumberCloseIcon {
+  width: 48px;
+  height: 48px;
+}

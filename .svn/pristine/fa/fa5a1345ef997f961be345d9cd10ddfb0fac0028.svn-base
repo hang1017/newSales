@@ -1,0 +1,52 @@
+.center {
+  position: relative;
+  height: 100%;
+
+  .price {
+    height: 180px;
+    color: #f53c54;
+    font-size: 36px;
+    line-height: 180px;
+    text-align: center;
+
+    span {
+      font-size: 60px;
+    }
+  }
+
+  .section {
+    padding: 20px 30px;
+    color: #041c1e;
+    background-color: #f7f7f7;
+  }
+
+  .selectList {
+    padding: 30px;
+    color: #041c1e;
+    font-size: 32px;
+
+    .icon {
+      width: 80px;
+      height: 80px;
+    }
+
+    .selectTag {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .footerBtn {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    left: 30px;
+    height: 80px;
+    color: rgba(255, 255, 255, 1);
+    font-size: 28px;
+    line-height: 80px;
+    text-align: center;
+    background: #f53c54;
+    border-radius: 40px;
+  }
+}

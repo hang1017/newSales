@@ -1,0 +1,130 @@
+.searchBarStyle {
+  display: flex;
+  align-items: center;
+
+  .filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    height: 88px;
+    padding-left: 12px;
+
+    .filterLabel {
+      width: 146px;
+      padding-right: 8px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-align: center;
+      text-overflow: ellipsis;
+    }
+
+    .filterIcon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .filterLight {
+    .filter();
+
+    color: #333;
+    background-color: #fff;
+  }
+
+  .filterDark {
+    .filter();
+
+    color: #fff;
+    background-color: #007aff;
+  }
+
+  .searchBar {
+    flex: 1;
+  }
+
+  .searchBarLight {
+    .searchBar();
+
+    :global {
+      .am-search {
+        background: #fff;
+      }
+
+      .am-search-input {
+        background: rgba(0, 0, 0, 0.04);
+      }
+    }
+  }
+
+  .searchBarDark {
+    .searchBar();
+
+    :global {
+      .am-search {
+        background: #007aff;
+      }
+
+      .am-search-input {
+        background: rgba(0, 0, 0, 0.08);
+
+        input[type='search'] {
+          color: #fff;
+        }
+
+        .am-search-synthetic-ph-placeholder {
+          color: rgb(115, 168, 237);
+        }
+      }
+
+      .am-search-cancel {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.searchBarDrawer {
+  // position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+
+  .drawerStyle {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    .drawSidebar {
+      height: 100%;
+      overflow-y: scroll;
+    }
+
+    .searchBarDrawerNormal {
+      display: flex;
+      padding: 40px 34px 40px 30px;
+      color: #999;
+      background: #fff;
+      border-bottom: solid 2px #edf0f5;
+    }
+
+    .searchBarDrawerSelect {
+      display: flex;
+      padding: 40px 34px 40px 30px;
+      color: #0089ff;
+      background: #fff;
+      border-bottom: solid 2px #edf0f5;
+    }
+
+    .searchBarDrawerItem {
+      flex: 1;
+    }
+
+    :global {
+      .am-drawer-sidebar {
+        box-shadow: 0 0 !important;
+      }
+    }
+  }
+}

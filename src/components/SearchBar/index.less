@@ -1,0 +1,58 @@
+.topView {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px;
+
+  .searchView {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 30px;
+    padding: 12px 20px;
+    background-color: #f1f2f3;
+    border-radius: 32px;
+
+    img {
+      width: 32px;
+      height: 32px;
+      margin-right: 10px;
+    }
+
+    input {
+      flex: 1;
+      color: #041c1e;
+      font-size: 28px;
+      background-color: #f1f2f3;
+    }
+
+    :global {
+      input::-webkit-input-placeholder {
+        color: #b3b5b7;
+        font-size: 28px;
+      }
+    }
+
+    form {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+    }
+  }
+
+  .close {
+    width: 56px;
+    height: 56px;
+  }
+
+  .rightText {
+    color: #696d6c;
+    font-size: 32px;
+  }
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,10 @@
+.maintenanceRecords {
+  overflow-y: scroll;
+  background: #f1f2f3;
+  .trackBlock {
+    margin-top: 114px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 24px;
+  }
+}

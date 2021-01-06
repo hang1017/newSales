@@ -1,0 +1,80 @@
+.emergencyListStyle {
+  overflow: auto;
+  padding-bottom: 20px;
+
+  .listItem {
+    background: #FFFFFF;
+    padding: 24px 32px;
+    display: flex;
+    margin-top: 16px;
+
+    .emImg {
+      width: 180px;
+      height: 180px;
+      flex-shrink: 0;
+    }
+
+    .emContent {
+      padding-left: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+
+      .topText {
+        .emTitle {
+          font-size: 32px;
+          font-weight: 500;
+          color: #242424;
+          line-height: 44px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .emSubTitle {
+          font-size: 24px;
+          font-weight: 400;
+          color: #808080;
+          line-height: 34px;
+          padding-top: 6px;
+          display: -webkit-box;
+          overflow: hidden;
+          text-align: justify;
+          text-overflow: ellipsis;
+          word-break: break-all;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+      }
+
+      .bottomContent {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        .emMoney {
+          font-size: 32px;
+          font-weight: 500;
+          color: #FE4854;
+          line-height: 44px;
+
+        }
+
+        .emBtn {
+          width: 154px;
+          height: 62px;
+          background: linear-gradient(90deg, #6DB4FF 0%, #187DFB 100%);
+          border-radius: 45px;
+          font-size: 28px;
+          font-weight: 500;
+          color: #FFFFFF;
+          line-height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

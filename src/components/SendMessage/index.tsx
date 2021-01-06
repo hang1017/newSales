@@ -1,0 +1,211 @@
+import React, { FC, useEffect, useState } from 'react';
+import { TextareaItem, Flex, InputItem } from 'antd-mobile';
+import { router } from 'alita';
+import { random } from '@/utils';
+import { FACE_MENU_SEND } from '@/utils/faceMenu';
+import {
+  ExpressionPng,
+  VoicePng,
+  SelectOpenPng,
+  SelectClosePng,
+  HoneyBabyPng,
+  HoneyCameraPng,
+  HoneyPhotoPng,
+  HoneyVideoPng,
+} from '@/assets';
+import styles from './index.less';
+
+interface SendMessageProps {
+  value: string | undefined; // 输入框的值
+  valueChange: (val: string | undefined) => void; // 值改变事件
+  confirm?: () => void; // 确认发送消息事件
+  cameraChange?: (vals: any[]) => void; // 拍照事件
+  selectClick?: () => void; // 右侧开关点击时间
+  faceClick?: (vals: string) => void; // 表情点击事件
+}
+
+const SendMessage: FC<SendMessageProps> = (props) => {
+  const {
+    value = '',
+    valueChange,
+    confirm = () => {},
+    cameraChange = () => {},
+    selectClick = () => {},
+    faceClick = () => {},
+  } = props;
+  const [selectFlag, setSelectFlag] = useState<boolean>(false);
+  const [faceFlag, setFaceFlag] = useState<boolean>(false);
+
+  let areaRef: { focus: () => void } | null = null;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    // 监听键盘 enter 键
+    document.addEventListener('keypress', (e) => handleEnterKey(e));
+    return () => document.removeEventListener('keypress', (e) => handleEnterKey(e));
+  }, []);
+
+  const handleEnterKey = (e: KeyboardEvent) => {
+    if (e.keyCode === 13) {
+      document.querySelector('input').blur();
+      confirm();
+      // if (areaRef) areaRef.focus();
+    }
+  };
+
+  /**
+   * 点击事件
+   */
+  const selectItemClick = (e: string) => {
+    if (e === 'baby') {
+      router.push({
+        pathname: '/customerCenter',
+      });
+    }
+  };
+
+  /**
+   * 相册点击事件
+   */
+  const cameraChangeClick = (e: any) => {
+    const { files = {} } = e.target;
+    if (Object.keys(files).length === 0) return;
+    cameraChange(files);
+  };
+
+  /**
+   * 表情选中事件
+   */
+  // const faceClick = (menu: string) => {
+  //   valueChange(`${value}${menu}`);
+  // };
+
+  return (
+    <div id="sendMessageId" className={styles.sendMessageStyle}>
+      <div className={styles.sendMessageContent}>
+        {/* <img src={VoicePng} alt="" className={styles.voiceIcon} /> */}
+        <div className={styles.inputStyle}>
+          <InputItem
+            value={value}
+            // type="search"
+            onChange={valueChange}
+            placeholder="请输入您要咨询的问题"
+            // onVirtualKeyboardConfirm={confirm}
+            // autoHeight
+            onBlur={() => {
+              window.scrollTo(0, 0);
+            }}
+            ref={(e: any) => (areaRef = e)}
+            onFocus={() => {
+              setSelectFlag(false);
+              setFaceFlag(false);
+            }}
+            // onBlur={() => inputBlur()}
+            extra={
+              <div className={styles.sendBtn} onClick={confirm}>
+                发送
+              </div>
+            }
+          />
+          {/* <input value={value} onChange={valueChange} placeholder="请输入您要咨询的问题" /> */}
+        </div>
+        <img
+          src={ExpressionPng}
+          alt=""
+          className={styles.expressIcon}
+          onClick={() => {
+            setSelectFlag(false);
+            setFaceFlag(!faceFlag);
+          }}
+        />
+        <img
+          src={selectFlag ? SelectClosePng : SelectOpenPng}
+          alt=""
+          className={styles.selectIcon}
+          onClick={() => {
+            setSelectFlag(!selectFlag);
+            selectClick();
+            setFaceFlag(false);
+          }}
+        />
+      </div>
+      {faceFlag && (
+        <div className={styles.faceContentStyle}>
+          <div className={styles.faceContent}>
+            {Object.keys(FACE_MENU_SEND).map((item) => (
+              <div className={styles.faceItem} onClick={() => faceClick(item)}>
+                <img src={FACE_MENU_SEND[item]} className={styles.faceItemImg} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {selectFlag && (
+        <div className={styles.selectContentStyle}>
+          <Flex justify="between">
+            <Flex.Item>
+              <div className={styles.selectItem} onClick={() => selectItemClick('baby')}>
+                <div className={styles.selectItemTop}>
+                  <img src={HoneyBabyPng} alt="" className={styles.selectItemImg} />
+                </div>
+                <span className={styles.selectItemText}>宝贝</span>
+              </div>
+            </Flex.Item>
+            <Flex.Item>
+              <div className={styles.selectItem}>
+                <div className={styles.selectItemTop}>
+                  <img src={HoneyPhotoPng} alt="" className={styles.selectItemImg} />
+                </div>
+                <div className={styles.selectItemCamera}>
+                  <input
+                    className={styles.selectItemCameraInput}
+                    type="file"
+                    multiple
+                    size={9}
+                    placeholder="上传图片"
+                    name="file"
+                    accept="image/*"
+                    onChange={cameraChangeClick}
+                    // capture="camera"
+                    // capture="camcorder"
+                  />
+                </div>
+                <span className={styles.selectItemText}>相册</span>
+              </div>
+            </Flex.Item>
+            <Flex.Item>
+              {/* <div className={styles.selectItem}>
+                <div className={styles.selectItemTop}>
+                  <img src={HoneyCameraPng} alt="" className={styles.selectItemImg} />
+                </div>
+                <span className={styles.selectItemText}>拍照</span>
+                <div className={styles.selectItemCamera}>
+                  <input
+                    className={styles.selectItemCameraInput}
+                    type="file"
+                    placeholder="上传图片"
+                    name="file"
+                    accept="image/*"
+                    onChange={cameraChangeClick}
+                    capture="camera"
+                    // capture="camcorder"
+                  />
+                </div>
+              </div> */}
+            </Flex.Item>
+            <Flex.Item>
+              {/* <div className={styles.selectItem}>
+                <div className={styles.selectItemTop}>
+                  <img src={HoneyVideoPng} alt="" className={styles.selectItemImg} />
+                </div>
+                <span className={styles.selectItemText}>短视频</span>
+              </div> */}
+            </Flex.Item>
+          </Flex>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SendMessage;

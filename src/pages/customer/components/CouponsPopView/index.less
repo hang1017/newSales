@@ -1,0 +1,239 @@
+// @import (reference) '../../styles/themes/default.less';
+// 如果直接复制到项目中使用，请注释上面一行，开启下面这行注释
+@rpx: 1px;
+
+.inputView {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 32 * @rpx 26 * @rpx;
+  background-color: #fff;
+
+  .inputBd {
+    flex: 1;
+
+    .inputBdTitle {
+      color: #041c1e;
+      font-size: 28 * @rpx;
+      line-height: 48 * @rpx;
+    }
+
+    .subTitle {
+      margin-left: 28 * @rpx;
+      padding: 4 * @rpx;
+      color: #fff;
+      font-size: 22 * @rpx;
+      line-height: 32 * @rpx;
+      background: #f53c54;
+      border-radius: 4 * @rpx;
+    }
+  }
+
+  .inputFt {
+    flex: 1;
+    text-align: right;
+
+    img {
+      width: 32 * @rpx;
+      height: 32 * @rpx;
+      vertical-align: middle;
+    }
+
+    span {
+      display: inline-block;
+      color: #fe4854;
+      font-weight: 600;
+      font-size: 28 * @rpx;
+      line-height: 48 * @rpx;
+      vertical-align: middle;
+    }
+
+    .placeholder {
+      color: #b3b5b7;
+      font-weight: normal;
+    }
+  }
+}
+
+.couponsMaskView {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.couponsPopView {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  overflow: hidden;
+  background-color: #fff;
+  border-top-left-radius: 24 * @rpx;
+  border-top-right-radius: 24 * @rpx;
+  transform: translateY(100%);
+  transition: 0.2s all ease-in;
+
+  &.show {
+    transform: translateY(0%);
+  }
+
+  .titleView {
+    position: relative;
+    height: 96 * @rpx;
+
+    .title {
+      height: 48 * @rpx;
+      padding: 24 * @rpx 0;
+      color: #041c1e;
+      font-size: 36 * @rpx;
+      line-height: 48 * @rpx;
+      text-align: center;
+    }
+
+    .closeBtn {
+      position: absolute;
+      top: 50%;
+      right: 24 * @rpx;
+      width: 48 * @rpx;
+      height: 48 * @rpx;
+      transform: translateY(-50%);
+    }
+  }
+
+  .tabbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 98 * @rpx;
+    border-bottom: 1 * @rpx solid #f3f3f3;
+
+    .tabbarItem {
+      position: relative;
+      flex: 1;
+      padding-bottom: 16 * @rpx;
+      text-align: center;
+
+      &.activeTab {
+        &::after {
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 60 * @rpx;
+          height: 8 * @rpx;
+          background-color: #2ca5ff;
+          transform: translateX(-50%);
+          content: '';
+        }
+      }
+    }
+  }
+
+  .listView {
+    flex: 1;
+    height: 0;
+    overflow: scroll;
+
+    .headerView {
+      padding: 36 * @rpx 25 * @rpx 28 * @rpx;
+      color: #041c1e;
+      font-size: 24 * @rpx;
+    }
+
+    .listViewItem {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0 24 * @rpx 24 * @rpx;
+      background: #fff;
+      border-radius: 8 * @rpx;
+      box-shadow: 0 8 * @rpx 15 * @rpx 0 rgba(246, 243, 243, 0.5);
+
+      .leftItem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 192 * @rpx;
+        height: 100%;
+        min-height: 160 * @rpx;
+        color: #fff;
+        font-size: 36 * @rpx;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        span {
+          margin-left: -10 * @rpx;
+          font-size: 64 * @rpx;
+        }
+      }
+
+      .rightItem {
+        flex: 1;
+        padding: 16 * @rpx 24 * @rpx;
+
+        .name {
+          color: #041c1e;
+          font-weight: 500;
+          font-size: 29 * @rpx;
+          line-height: 40 * @rpx;
+        }
+
+        .phoneNum,
+        .date {
+          margin-top: 24 * @rpx;
+          color: #696d6c;
+          font-weight: 300;
+          font-size: 20 * @rpx;
+          line-height: 29 * @rpx;
+        }
+
+        .date {
+          margin-top: 8 * @rpx;
+        }
+      }
+
+      .radio {
+        width: 40 * @rpx;
+        height: 40 * @rpx;
+        margin-right: 24 * @rpx;
+      }
+
+      .enableFlag {
+        width: 112 * @rpx;
+        height: 112 * @rpx;
+        margin-right: 24 * @rpx;
+      }
+    }
+  }
+
+  .bottomView {
+    padding: 16 * @rpx 32 * @rpx;
+    background: #fcfcfc;
+    box-shadow: 0 0 8 * @rpx 0 rgba(0, 0, 0, 0.08);
+
+    .okeyBtn {
+      height: 90 * @rpx;
+      color: #fff;
+      font-size: 29 * @rpx;
+      line-height: 90 * @rpx;
+      text-align: center;
+      background: linear-gradient(90deg, #6db4ff 0%, #187dfb 100%);
+      border-radius: 45 * @rpx;
+    }
+  }
+
+  .tipsview {
+    padding: 16 * @rpx 40 * @rpx;
+    color: #041c1e;
+    font-size: 24 * @rpx;
+    line-height: 34 * @rpx;
+  }
+}

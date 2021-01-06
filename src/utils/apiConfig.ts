@@ -1,0 +1,209 @@
+export const imgVerificationCode: string = '/portal/verificationCode'; // 图形验证码
+const tradingCenterHead: string = '/consumer/tms/cart/'; // 交易订单
+const memberCenter: string = `/consumer/mms/member/`; // 会员中心
+const memberAddrCenter: string = `/consumer/mms/member-addr/`; // 会员中心
+const goodsCenter: string = '/consumer/cms/goodsDetail/'; // 商品中心
+const orderCenter: string = '/consumer/oms/custOrder/'; // 订单中心
+const memberAuthCenter: string = '/consumer/mms/';
+const pmsCenter: string = '/consumer/pms/app/promotion/'; // 促销中心
+
+const tradingCenter: string = '/consumer/tms/cartItem/'; // 交易中心
+const skuCenter: string = '/consumer/cms/skuDetail/'; // sku属性
+const evaluationCenter: string = '/consumer/ems/evaluation/'; // 评价中心
+const trardOrderCenter: string = '/consumer/tms/cart-order/'; // 交易订单
+const orderApply: string = '/consumer/oms/OrderApply/'; // 售后服务
+const tmsCenter = '/consumer/tms/'; // tms
+const mcmsCenter = '/consumer/mcms/'; // 权益中心
+
+export const apiCode = {
+  checkMemberPhone: `${memberCenter}checkMemberPhone`, // 校验注册会员手机号码是否存在
+  loginPassword: `${memberCenter}loginPassword`, // 密码登陆
+  sendMsgCode: `${memberCenter}sendMsgCode`, // 发送验证码
+  registerMemberForPhone: `${memberCenter}registerMemberForPhone`, // 会员注册
+  checkMsgCode: `${memberCenter}checkMsgCode`, // 校验手机验证码
+  getMemberDetail: `${memberCenter}getMemberDetail`, // 查询会员详情，包括会员信息、地址信息和账户信息
+  loginMsg: `${memberCenter}loginMsg`, // 短信登陆
+  updateMember: `${memberCenter}updateMember`, // 修改会员信息
+  updateMemberPassword: `${memberCenter}updateMemberPassword`, // 修改密码
+  addAddress: `${memberAddrCenter}add`, // 会员新增收货地址
+  deleteAddress: `${memberAddrCenter}delete`, // 会员收货地址删除
+  queryAddress: `${memberAddrCenter}query`, // 会员收货地址查询
+  dmosbrowse: `${memberCenter}dmosbrowse`, // 统计使用量
+  updateAddress: `${memberAddrCenter}update`, // 会员收货地址修改
+  iDCardCheckAndSave: `/mms/iDCardRealNameAuth/iDCardCheckAndSave`, // 会员中心
+  iDCardCheckAndCheck: '/mms/iDCardRealNameAuth/iDCardCheckAndCheck', // 会员中心认证比对
+  faseIDCardAnalysis: `${memberAuthCenter}iDCardRealNameAuth/faseIDCardAnalysis`,
+  natEmblemIDCardAnalysis: `${memberAuthCenter}iDCardRealNameAuth/natEmblemIDCardAnalysis`,
+  livingCertification: `${memberAuthCenter}iDCardRealNameAuth/cacheBareheadedPhoto`, // 缓存免冠照
+  realPersonAuthApi: `${memberAuthCenter}iDCardRealNameAuth/realPersonAuth`, // 会员实人认证
+  archivesUpAndCertification: `/consumer/mmsextend/number/numberRealNameActivation`, // SIM卡激活接口
+
+  queryCustOrderPageToApp: `${orderCenter}queryCustOrderPageToApp`, // 我的订单列表查询
+  queryCustOrderDetailToApp: `${orderCenter}queryCustOrderDetailToApp`, // 我的订单详情
+  orderPaymentForJF: `${orderCenter}orderPaymentForDK`, // 重新支付
+  cancelOrderById: `${orderCenter}cancelOrderById`, // 取消订单
+  buyerReceive: `${orderCenter}buyerReceive`, // 确认收货
+  queryInvoiceByOrderId: `${orderCenter}queryInvoiceByOrderId`, // 查询发票
+  qryRights: `${mcmsCenter}app/rights/qryRights`, // 根据状态查询的权益
+  qryRightsGoods: `${mcmsCenter}app/rights/qryRightsGoods`, // 查询权益关联的商品
+  queryGoodsDetailById: `${goodsCenter}queryGoodsDetailById`, // 获取商品详情
+  queryGoodsPage: `${goodsCenter}queryGoodsPage`, // 查询商品列表
+  queryDetailByAttr: `${skuCenter}queryDetailByAttr`, // 根据销售属性筛选SKU
+
+  queryEvaluationLabel: `${evaluationCenter}queryList`, // 查询商品评价标签
+  querySellerCommentsPage: `${evaluationCenter}querySellerEvaluationPage`, // 查询商品评价列表
+  addEvaluation: `${evaluationCenter}addEvaluation`, // 新增商品、物流、店铺评价
+  uploadToPublic: `${evaluationCenter}uploadToPublic`, // 文件上传
+
+  addToCart: `${tradingCenter}addGoodsToCart`, // 加入购物车
+  queryCartInfo: `${tradingCenter}queryCartInfo`, // 查询购物车
+  cartItemGoodsDelete: `${tradingCenter}cartItemGoodsDelete`, // 删除购物车商品
+  cartItemCheckGoods: `${tradingCenter}cartItemCheckGoods`, //  购物车商品勾选/取消勾选
+  modifyGoodsNum: `${tradingCenter}modifyGoodsNum`, // 商品数量变更
+  getVisitorId: `${tradingCenter}getVId`, // 获取游客的会员ID
+  queryPhoneNumInfo: `${tradingCenterHead}queryPhoneNumInfo`, // 获取号码信息
+  queryPhoneNumInfoForBilibili: `${tradingCenterHead}queryPhoneNumInfoForBilibili`, // bilibili获取号码信息
+  commitCart: `${trardOrderCenter}commitCart`, // 购物车提交（去结算）
+  getMemberCartNum: `${tradingCenter}getMemberCartNum`, // 会员购物车数量查询
+
+  // queryAreaFatherList: `/portal/stafforg/areas/parent/queryAreaFatherList`, // 查询第一级地址，
+  queryAreaFatherList: `/portal/area/queryChildAreaByParentIdWithoutHighRiskArea`, // 查询第一级地址，
+  queryAreaByLimitCond: `/portal/stafforg/areas/parent/queryAreaByLimitCond`, // 查询限制的一级地址，
+  // queryAreaNextLevel: `/portal/stafforg/areas/parent/queryAreaNextLevel`, // 查询下一级地址，
+  queryAreaNextLevel: `/portal/area/queryChildAreaByParentIdWithoutHighRiskArea`, // 查询下一级地址，
+  selAddress: `${trardOrderCenter}selAddress`, // 收货地址选择
+  commitOrder: `${trardOrderCenter}commitOrder`, // 购物车订单提交
+  phoneNumOccup: `${tradingCenterHead}cart/phoneNumOccup`, // 预占号码
+  phoneNumOccupForBilibili: `${tradingCenterHead}/phoneNumOccupForBilibili`, // bilibili预占接口
+
+  addRefundApply: `${orderApply}addRefundApply`, // 申请退款-申请退款提交服务
+  addReturnApply: `${orderApply}addReturnApply`, // 退货退款-申请单生成
+  queryOrderApplyPage: `${orderApply}queryOrderApplyPageToApp`, // 申请单分页查询
+  quryApplyDetail: `${orderApply}quryApplyDetail`, // 申请单详情查询
+  cancelApply: `${orderApply}cancelApply`, // 撤销申请
+  editApplyInfo: `${orderApply}editApplyInfo`, // 修改申请单信息
+
+  omsUploadImg: `/consumer/oms/file/upload`, // 上传图片
+
+  loginToken: '/portal/login', // 基础重新登录接口
+  genAppLoginMsgCode: '/portal/genAppLoginMsgCode', // 验证码登录
+  addUserMember: '/portal/users/addUserMember', // 用户注册
+  addRegistAndLogin: '/portal/users/addRegistAndLogin', // 注册并登录服务
+
+  promByGoodsQry: `${pmsCenter}promByGoodsQry`,
+
+  tmscalFee: `${tmsCenter}simple-order/calFee`, // 算费接口
+  tmsCommitOrder: `${tmsCenter}simple-order/commitOrder`, // 提交订单
+  commitCartQuickByMember: `${tmsCenter}cart-order/commitCartQuickByMember`, // 新版提交订单
+  selOrderInvoice: `${tmsCenter}cart-order/selOrderInvoice`, // 新版提交订单
+  // receiveOrderPayResultNotify: `/oms/oms/custOrder/receiveOrderPayResultNotify`, // 回调支付接口
+  receiveOrderPayResultNotify: `/consumer/oms/custOrder/receiveOrderPayResultNotify`,
+  valIDCard: '/consumer/tms/simple-order/valIDCard', // 验证身份证
+  queryExpressInfo: `${orderCenter}queryExpressInfo`,
+  qryMyNumberInstList: `/consumer/mmsextend/number/qryMyNumberInstList`, // 查询会员电信业务实例
+  cancel: `/consumer/mmsextend/archives/cancelAutoRenew`, // 取消自动续约
+  delay: `/consumer/mmsextend/archives/delay`, // 档案实例延期
+  addMemberInvoiceTemplate: `/consumer/mms/memberInvoiceTemplate/addMemberInvoiceTemplate`, // 会员发票模板信息新增
+  addInvoice: `${orderCenter}addInvoice`, // 发票开票
+  queryMemberLevel: '/consumer/mms/memberLevel/queryMemberLevel', // 会员等级查询
+  countOrderStatus: `${orderCenter}countOrderStatus`, // 订单状态统计
+  modHeaderPortraitApi: `${memberCenter}modHeaderPortrait`, // 修改头像
+  loginApp: `${memberCenter}loginApp`, // app通过token获取会员信息
+
+  smsLogin: '/portal/smsLogin', // 登录
+  qryMyConsumeUsage: '/consumer/mmsextend/number/qryMyConsumeUsage', // 查询消费使用余量
+  qryCartItemPageApi: '/consumer/csms/goods-detail/qryCartItemPage', // 客服中心宝贝列表
+  qryBuyGoodsPageApi: '/consumer/csms/goods-detail/qryBuyGoodsPage', // 客服中心宝贝，已购买商品列表
+  qrySkuListApi: '/consumer/tms/simple-order/qrySkuList', // 通过业务号码查询商品列表（充值)
+  queryPhoneNumByMemberIdApi: '/consumer/tms/cart/queryPhoneNumByMemberId', // 查询会员的业务号码
+  commitCartQuickApi: '/consumer/tms/cart-order/commitCartQuick', // 立即订购（算费）
+  choosePhoneNum: '/consumer/tms/cart-order/choosePhoneNum', // 订单里设置手机号码
+  cartOrdercommitOrderApi: '/consumer/tms/cart-order/commitOrder', // 购物车订单提交
+  exchangeCertificateOrderCommit: '/consumer/tms/simple-order/exchangeCertificateOrderCommit', // 商品兑换订单提交
+  commitOrderBfCheck: '/consumer/tms/cart-order/commitOrderBfCheck', // 购物车订单提交前校验
+  qryBalance: '/consumer/mmsextend/number/qryBalance', // 账户余额查询
+  logout: '/portal/logout', // 退出登录
+  queryGoodsByFgCategoryApi: '/consumer/cms/goodsDetail/queryGoodsByFgCategory', // 查询类目数据
+  queryGoodsByStoreCatalog: '/consumer/cms/goodsDetail/queryGoodsByStoreCatalog', // 根据店铺类目查询店铺商品数据
+  uploadFileApi: '/consumer/csms/file/uploadToPublic', // 上传文件1
+  queryAutoOrderGoods: '/consumer/goodsSpecialRul/queryAutoOrderGoods',
+  qryGoodsSpecialRuls: '/consumer/goodsSpecialRul/queryAutoOrderGoods',
+  qryWallpaperApi: '/consumer/mcms/app/rights/qryWallpaper', // 查询壁纸
+  exchangeCouponApi: '/consumer/mcms/app/rights/exchangeCoupon', // 券兑换
+  make: '/consumer/mmsextend/contract/make', // 发起自助签约
+  contractList: '/consumer/mmsextend/contract/list', // 会员自助签约列表查询
+  cancelContract: '/consumer/mmsextend/contract/cancel', // 取消自助签约
+  qryRedeemedWallpaperApi: '/consumer/mcms/app/rights/qryRedeemedWallpaper', // 查询兑换后的壁纸
+  checkMemberIdCardNumApi: '/consumer/mms/iDCardRealNameAuth/checkMemberIdCardNum', // 检查实名证件是否可用
+  addEmergencyOrder: '/consumer/tms/cart-order-attr/addEmergencyOrder', // 应急留单
+  qryCscOnlineMsgInfoApi: '/consumer/csms/message/qryCscOnlineMsgInfo', // 在线客服会话历史会话记录
+  payStatus: '/consumer/oms/custOrder/payStatus', // 支付结果回调
+  qryServiceOfferByKeyAttrApi: '/consumer/cms/skuDetail/qryServiceOfferByKeyAttr', // 根据关键属性查询sku和商品
+  commitCartSecondApi: '/consumer/tms/cart-order/commitCartSecond', // 立即办理（二次业务）
+  idCardBackSideVerifyApi: '/consumer/mms/number/makeup/idCardBackSideVerify', // 二次业务(补卡)身份证头像面校验
+  idCardFrontSideVerifyApi: '/consumer/mms/number/makeup/idCardFrontSideVerify', // 二次业务(补卡)身份证国徽面面校验
+  faceAnalysisVerifyApi: '/consumer/mms/number/makeup/faceAnalysisVerify', // 二次业务(补卡)免冠照校验
+  uploadAgreement: '/consumer/tms/file/uploadAgreement', // 上传承诺书
+  uploadAgreementPic: '/consumer/tms/file/uploadAgreementPic', // 上传手持承诺书
+  getDcParamVal: '/portal/dcSystemParam/getDcParamVal', // 获取系统参数
+  queryNoSignPhoneNum: '/consumer/oms/custOrder/queryNoSignPhoneNum', // 查询会员未签约号码--支付成功页面使用
+  numberList: '/consumer/mmsextend/contract/numberList', // 获取签约号码-个人中心
+  qryFlowDetailApi: '/consumer/mmsextend/number/qryFlowDetail', // （流量详单）
+  qryMessageDetailApi: '/consumer/mmsextend/number/qryMessageDetail', // （短信详单）
+  qryVoiceDetailApi: '/consumer/mmsextend/number/qryVoiceDetail', // （语音详单）
+  checkPhoneNumFromSalesApi: '/consumer/tms/cart/checkPhoneNumFromSales', // 二次业务校验手机号码
+  identityAuthApi: '/portal/mall/user/identityAuth', // 详单身份认证接口
+  qryMyConsumeUsageAll: '/consumer/mmsextend/number/qryMyConsumeUsageAll', // 根据号码查询余额
+  queryDefaultOrderGoodsApi: '/consumer/goodsSpecialRul/queryDefaultOrderGoods', // 9元开卡引导商品
+  instQryApi: '/consumer/mcms/app/promotion/cumulativePromotion/instQry', // 会员累计消费促销实例查询
+  receiveCouponUnclaimedApi: '/consumer/mcms/app/promotion/couponUnclaimed/receiveCouponUnclaimed', // 领取待领取券
+  getH5ConfigurationApi: '/portal/getH5Configuration', // 查询配置
+  queryOrderSnapshotApi: `${orderCenter}queryOrderSnapshot`, // 查询快照信息
+  joinRaffleDrawApi: '/consumer/mcms/raffleDraw/joinRaffleDraw', // 抽奖请求接口
+  queryRaffleDrawResultByMemberApi: '/consumer/mcms/raffleDraw/queryRaffleDrawResultByMember', // 抽奖结果查询接口
+  raffleDrawTimeAndAuthorityApi: '/consumer/mcms/raffleDraw/raffleDrawTimeAndAuthority', // 查询时间以及校验是否有抽奖权限接口
+  querySkuIdAndOrderCountApi: '/consumer/mcms/raffleDraw/querySkuIdAndOrderCount', // 订单数和skuId查询
+  sectMemberList: '/consumer/mcms/app/circle/member/list', // 圈子粉丝列表分页查询，用于待审批查询、正常粉丝查询
+  circleList: '/consumer/mcms/app/circle/list', // 圈子列表查询
+  checkSkuNeedOrdAddrApi: '/consumer/tms/cart-order-check/checkSkuNeedOrdAddr', // 权益校验判断是否需要选择地址
+  createMarketingCircle: '/consumer/mcms/app/circle/createMarketingCircle', // 创建圈子
+  circleJion: '/consumer/mcms/app/circle/join', // 圈子加入
+  qryOnlineSourceAPi: '/consumer/csms/message/qryOnlineSource', // 判断客服进入的是IM客服还是新客服
+  queryLimitChildAreaByParentIdApi: '/portal/area/queryLimitChildAreaByParentId', // 归属地选择子层级的数据
+  cancelCreateCircle: '/consumer/mcms/app/circle/cancelCreateCircle', // 归属地选择子层级的数据
+  qryMarketDetail: '/consumer/mcms/app/market/market/qryMarketDetail', // 查询营销活动明细
+  sectOwnerTransfer: '/consumer/mcms/app/circle/circleOwnerTransfer', // 圈子掌门转移
+  sectLeaveMember: '/consumer/mcms/app/circle/leaveCircle', // 退出圈子(掌门踢人),移除
+  sectApplyAuditing: '/consumer/mcms/app/circle/approval/operation', // 掌门审批操作
+  qryCouponUnclaimedList: '/consumer/mcms/app/market/market/qryCouponUnclaimedList', // 活动未领取权益券查询
+  sectAllotCoupon: '/consumer/mcms/app/market/market/allotCoupon', // 权益券分配
+  sectReceiveCoupon: '/consumer/mcms/app/market/market/receiveCoupon', // 权益券领取
+  editCircle: '/consumer/mcms/app/circle/editCircle', // 更新圈子信息
+  shareCircle: '/consumer/mcms/app/circle/shareCircle', // 圈子分享
+  circleDecode: '/consumer/mcms/app/circle/decode', // 圈子信息解密
+  queryTemplateNameByAccNumApi: '/consumer/tms/cart/queryTemplateNameByAccNum', // 订单填写页面校验
+  addSendMsgCode: '/portal/addSendMsgCode', // 生成并发送短信验证码 - 修改绑定手机号码时使用
+  resetPhoneForSelf: '/portal//user/resetPhoneForSelf', // 用户修改自身绑定手机
+  getInvoiceTemplateNameApi: '/consumer/oms/custOrder/getInvoiceTemplateName', // 获取发票抬头来源
+  getSystemParamsCacheByCode: '/portal/polaris/systemParams/getSystemParamsCacheByCode', // 获取公共资源
+  commitCartQuickByMemberApi: '/consumer/tms/cart-order/commitCartQuickByMember', // 立即购买（含新增会员基础信息）
+  cartLoginApi: '/consumer/tms/cart-order/login', // 注册登录（老会员就返回默认地址）
+  getSlideVerificationCode: '/portal/getSlideVerificationCode', // 获取滑块验证
+  checkSlideVerificationCode: '/portal/checkSlideVerificationCode', // 校验滑块验证
+  checkSaleChannelNbrOpenStatus: '/portal/saleChannelNbr/checkSaleChannelNbrOpenStatus', // 渠道验证
+  qryConstellationRightsApi: '/consumer/mcms/app/market/market/qryConstellationRights', // H5权益查询列表查询
+  addOrderApply: '/consumer/oms/OrderApply/addOrderApply', // 售后申请
+  queryApplyHistoryByApplyId: '/consumer/oms/OrderApply/queryApplyHistoryByApplyId',
+  getAttrCacheByAttrNbr: '/portal/attrSpec/getAttrCacheByAttrNbr',
+  custConfirm: `${orderApply}custConfirm`, // 修改申请
+  returnApplyBuyerDeliver: `${orderApply}returnApplyBuyerDeliver`,
+  quryOrderBaseInfoByOrderIdApi: `/consumer/oms/custOrder/quryOrderBaseInfoByOrderId`, // 通过订单id 查询简单的订单详情
+  boostActivityShareApi: '/consumer/mcms/app/market/market/boostActivityShare', // 下单助力分享
+  qryBoostActivityInstDetailByIdApi:
+    '/consumer/mcms/app/market/market/qryBoostActivityInstDetailById', // 助力活动详情
+  addBoostActivityInstDetailApi: '/consumer/mcms/app/market/market/addBoostActivityInstDetail ', // 助力好友点亮头像
+  checkCodeApi: '/portal/checkCode', // 校验是否验证码是否正确
+  applyAttrValApi: '/consumer/tms/cart-order-attr/applyAttrVal', // 订购属性变更(单个属性)
+  qryStandardAddressAttrApi: '/consumer/tms/cart-order-attr/qryStandardAddressAttr', // 查询标准属性
+  qryPageDetailCacheApi: '/consumer/scms/page/qryPageDetailCache', // 查询页面服务
+};

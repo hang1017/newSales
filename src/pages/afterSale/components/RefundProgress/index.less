@@ -1,0 +1,67 @@
+@import '../../../../global.less';
+
+@commonColor: #E5E5E5;
+
+.refundProgress {
+  padding: 36px 40px;
+  // background: #fff;
+
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.commonRound {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%
+}
+
+.activeRound {
+  .commonRound;
+
+  background: @themeBg;
+}
+
+
+.normalRound {
+  .commonRound;
+
+  background: @commonColor;
+}
+
+.commonLine {
+  width: 250px;
+  height: 2px;
+  border-radius: 1px;
+}
+
+.activeLine {
+  .commonLine;
+
+  background: @themeColor;
+
+}
+
+.normalLine {
+  .commonLine;
+
+  background: @commonColor;
+}
+
+
+.progressTextBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+
+  .progressText {
+    color: #333;
+    font-weight: 400;
+    font-size: 24px;
+  }
+}

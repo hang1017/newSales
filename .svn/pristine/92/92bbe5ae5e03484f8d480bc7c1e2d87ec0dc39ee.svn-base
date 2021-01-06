@@ -1,0 +1,142 @@
+.noteStyle {
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .emptyText {
+    font-size: 30px;
+    font-weight: 400;
+    color: #696D6C;
+    line-height: 32px;
+    width: 100%;
+    text-align: center;
+    padding-top: 60px;
+  }
+
+  .noteTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+
+    .noteText {
+      width: 286px;
+      height: 32px;
+      font-size: 28px;
+      font-weight: 400;
+      color: #041C1E;
+      line-height: 32px;
+    }
+
+    .noteValue {
+      width: 286px;
+      height: 32px;
+      font-size: 28px;
+      font-weight: 400;
+      color: #1F90EC;
+      line-height: 32px;
+    }
+  }
+
+  .listTop {
+    padding: 16px 0;
+    background: #F4F7F6;
+    display: flex;
+  }
+
+  .noteListForm {
+    font-size: 24px;
+    font-weight: 400;
+    color: #696D6C;
+    line-height: 32px;
+  }
+
+  .noteListForm1 {
+    .noteListForm();
+    width: 33%;
+    text-align: left;
+    padding-left: 16px;
+  }
+
+  .noteListForm2 {
+    .noteListForm();
+    width: 33%;
+    text-align: center;
+  }
+
+  .noteListForm3 {
+    .noteListForm();
+    width: 33%;
+    text-align: right;
+    padding-right: 16px;
+  }
+
+  .noteListDiv {
+    flex: 1;
+    overflow: scroll !important;
+    height: 0;
+  }
+
+  .noteList {
+    width: 100%;
+    overflow: auto;
+    height: 100%;
+
+    .noteListItem {
+      .itemStyle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 24px 16px;
+
+        .noteTime {
+          font-size: 24px;
+          font-weight: 400;
+          color: #041C1E;
+          line-height: 32px;
+        }
+
+        .noteRight {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+          font-weight: 400;
+          color: #696D6C;
+          line-height: 32px;
+
+          .upAndDownImg {
+            width: 24px;
+            height: 24px;
+          }
+        }
+
+      }
+
+
+      .itemFormStyle {
+        background-color: #FCFCFC;
+        transition: max-height 1s;
+        overflow: hidden;
+        // max-height: 100vh;
+
+        .noteFormItemStyle {
+          display: flex;
+          padding: 14px 0;
+          border-bottom: 2px solid #F5F7F9;
+
+          :first-child {
+            border-top: 2px solid #F5F7F9;
+          }
+        }
+      }
+
+      .heightNone {
+        height: 0;
+        max-height: 0;
+        transition: max-height 1s;
+      }
+    }
+  }
+}

@@ -1,0 +1,264 @@
+import { apiCode } from '@/utils/apiConfig';
+import { requestWithParams, HttpMethod } from './api';
+
+//  加入购物车
+export async function addToCart(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.addToCart,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+/**
+ * 查询购物车信息
+ * @param requestParams
+ */
+export async function queryCartInfo(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.queryCartInfo,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+/**
+ * 删除购物车信息
+ * @param requestParams
+ */
+export async function cartItemGoodsDelete(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.cartItemGoodsDelete,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+/**
+ * 商品数量变更
+ * @param requestParams
+ */
+export async function modifyGoodsNum(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.modifyGoodsNum,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+
+/**
+ * 购物车商品勾选/取消勾选
+ * @param requestParams
+ */
+export async function cartItemCheckGoods(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.cartItemCheckGoods,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+
+/**
+ * 获取游客的会员id
+ *
+ */
+export async function getVisitorId(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.getVisitorId,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.get);
+}
+
+/**
+ * 购物车提交（去结算）
+ * @param requestParams
+ */
+export async function commitCart(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.commitCart,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+/**
+ * 获取新的手机号码
+ * @param requestParams
+ */
+export async function queryPhoneNumInfo(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.queryPhoneNumInfo,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+
+export async function queryPhoneNumInfoForBilibili(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.queryPhoneNumInfoForBilibili,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.post, true, true);
+}
+
+/**
+ * 查询当前会员下的购物车数量
+ * @param requestParams
+ */
+export async function getMemberCartNum(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.getMemberCartNum,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+
+/**
+ * 收货地址选择
+ * @param requestParams
+ */
+export async function selAddress(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.selAddress,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+
+/**
+ * 购物车订单提交
+ * @param requestParams
+ */
+export async function commitOrder(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.commitOrder,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+/**
+ * 号码预占
+ * @param requestParams
+ */
+export async function phoneNumOccup(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.phoneNumOccup,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+
+export async function tmscalFee(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.tmscalFee,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+
+export async function tmsCommitOrder(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.tmsCommitOrder,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+
+export async function phoneNumOccupForBilibili(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.phoneNumOccupForBilibili,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params);
+}
+
+export async function valIDCard(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.valIDCard,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.get);
+}
+export async function commitCartQuickByMember(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.commitCartQuickByMember,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.post);
+}
+export async function selOrderInvoice(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.selOrderInvoice,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.post);
+}
+
+export async function commitCartQuick(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.commitCartQuickApi,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.post, true);
+}
+export async function choosePhoneNum(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.choosePhoneNum,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.post);
+}
+export async function exchangeCertificateOrderCommit(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.exchangeCertificateOrderCommit,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.post, true, true);
+}
+export async function commitOrderBfCheck(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.commitOrderBfCheck,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.post);
+}
+
+/**
+ * 9元开卡引导商品
+ */
+export async function queryDefaultOrderGoodsService(requestParams: any): Promise<any> {
+  const { sType, storeId } = requestParams;
+  const url = `${apiCode.queryDefaultOrderGoodsApi}?sType=${sType}&storeId=${storeId}`;
+  const params = {
+    apiCode: url,
+    requestObject: {},
+  };
+  return requestWithParams(params);
+}
+
+/**
+ * 校验权益兑换是否需要进行地址选择
+ */
+export async function checkSkuNeedOrdAddrService(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.checkSkuNeedOrdAddrApi,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.post, true, true);
+}
+
+/**
+ *
+ */
+export async function applyAttrValService(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.applyAttrValApi,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.post, true, true);
+}
+
+export async function qryStandardAddressAttrService(requestParams: any): Promise<any> {
+  const params = {
+    apiCode: apiCode.qryStandardAddressAttrApi,
+    requestObject: { ...requestParams },
+  };
+  return requestWithParams(params, HttpMethod.post, true, true);
+}

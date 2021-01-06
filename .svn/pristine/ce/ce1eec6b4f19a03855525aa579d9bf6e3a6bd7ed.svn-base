@@ -1,0 +1,165 @@
+@import '../../../global.less';
+
+.paySuccessPage {
+  // height: 100vh;
+  overflow: scroll;
+
+  .payInfo {
+    padding: 30px;
+    color: rgba(255, 255, 255, 1);
+    background: @themeBg;
+    position: relative;
+
+    .btnDiv {
+      position: absolute;
+      top: 74px;
+      right: 30px;
+
+      .btn {
+        background: linear-gradient(90deg, #6DB4FF 0%, #187DFB 100%);
+        border-radius: 40px;
+        font-size: 28px;
+        font-weight: 600;
+        color: #FFFFFF;
+        line-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 20px;
+        height: 60px;
+      }
+    }
+
+    .payIconBlock {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // margin-top: 40pxs;
+
+      .StateViewStyle {
+        display: 'flex';
+        flex-direction: 'column';
+
+        .waitPayStateStyle {
+          display: 'flex';
+          flex-direction: 'row';
+          align-items: 'center';
+        }
+
+        .payAmontStyle {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .whitePage {
+    margin-bottom: 130px;
+    background-color: #f5f7f9;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+  }
+
+  .btnView {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-top: 32px;
+    background-color: #f1f2f3;
+
+    .bottomView {
+      display: flex;
+      flex-direction: row-reverse;
+      padding: 20px 0;
+      background-color: white;
+
+      .btnRedView {
+        min-width: 172px;
+        margin-left: 24px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        color: @themeColor;
+        text-align: center;
+        border: 1px solid @themeColor;
+        border-radius: 36px;
+      }
+
+      .btnGreyView {
+        min-width: 172px;
+        margin-left: 24px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        color: #b3b5b7;
+        text-align: center;
+        border: 1px solid #b3b5b7;
+        border-radius: 36px;
+      }
+    }
+  }
+}
+
+.OrderStateStyle {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .oederstateImgStyle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .orderSubStyle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .orderStateFontStyle {
+    padding-left: 24px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 36px;
+  }
+
+  .payStyle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 32px;
+  }
+
+  .payFontStyle {
+    font-size: 28px;
+  }
+
+  .payFontStylesub {
+    margin-right: 18px;
+    font-size: 36px;
+  }
+
+  .deialStyle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 172px;
+    height: 56px;
+    margin-top: 40px;
+    background-color: #fff;
+    border-radius: 36px;
+  }
+
+  .toPayStyle {
+    color: @themeColor;
+    font-weight: 300;
+    font-size: 26px;
+  }
+}
+
+.footBtn {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
+}

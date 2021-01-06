@@ -1,0 +1,35 @@
+.goodsDetail {
+  background-color: #fff;
+  padding: 32px;
+
+  .detailTitle {
+    padding: 16px 24px;
+
+
+    img {
+      width: 24px;
+      height: 24px;
+      margin-right: 16px;
+      vertical-align: middle;
+    }
+
+    span {
+      color: rgba(4, 28, 30, 1);
+      font-weight: 400;
+      font-size: 28px;
+      line-height: 28px;
+      vertical-align: middle;
+    }
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+  }
+
+  .goodsContent {
+    img {
+      width: 100%;
+    }
+  }
+}

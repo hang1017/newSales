@@ -1,0 +1,134 @@
+.commentView {
+  padding: 24px;
+  background-color: #fff;
+  .commentNavBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    .leftTitle {
+      position: relative;
+      color: rgba(4, 28, 30, 1);
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 44px;
+      &::before {
+        display: inline-block;
+        width: 6px;
+        height: 32px;
+        margin-right: 8px;
+        vertical-align: -5px;
+        background-color: #f53c54;
+        content: '';
+      }
+      span {
+        margin-left: 8px;
+        color: rgba(4, 28, 30, 1);
+        font-weight: 500;
+        font-size: 24px;
+      }
+    }
+
+    .rightItem {
+      &::after {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+        background-image: url(../../../../../assets/img/goodsdetail/right-arrow.png);
+        content: '';
+      }
+    }
+
+    .hideRightArrow {
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .keywordTag {
+    // display: flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+    padding: 24px 0;
+    .tag {
+      display: inline-block;
+      margin-right: 26px;
+      padding: 4px 32px;
+      color: rgba(4, 28, 30, 1);
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 48px;
+      background: rgba(255, 241, 240, 1);
+      border-radius: 28px;
+    }
+  }
+
+  .allComment {
+    padding-top: 24px;
+    color: rgba(105, 109, 108, 1);
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 64px;
+    text-align: center;
+  }
+
+  .commentCell {
+    position: relative;
+    padding: 24px 0;
+    &::after {
+      position: absolute;
+      right: 24px;
+      bottom: 0;
+      left: 24px;
+      height: 1px;
+      background-color: #f4f7f6;
+      content: '';
+    }
+    &:last-child::after {
+      height: 0;
+    }
+
+    .commentHead {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      .hd {
+        flex: 1;
+        img {
+          width: 48px;
+          height: 48px;
+          vertical-align: middle;
+        }
+        span {
+          margin-left: 16px;
+          vertical-align: middle;
+        }
+      }
+      .stars {
+        img {
+          width: 24px;
+          height: 24px;
+          margin-left: 8px;
+        }
+      }
+    }
+    .conmentContent {
+      margin-top: 16px;
+      color: rgba(4, 28, 30, 1);
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 34px;
+    }
+
+    .commentOfferpackage {
+      margin-top: 16px;
+      color: rgba(179, 181, 183, 1);
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+}

@@ -1,0 +1,248 @@
+import React, { FC, useEffect, useState } from 'react';
+import { ConnectProps, connect, NameAuthenticationModelState, history } from 'alita';
+import styles from './index.less';
+import { Card, Toast, Button } from 'antd-mobile';
+import camera from '@/assets/cameraTransparent.png';
+import loading from '@/assets/loading.png';
+import errorInfo from '@/assets/errorInfo.png';
+import { transformFile } from '@/utils';
+import { pushOCRAuthViewController, livingAuthFinish } from '@/utils/NativeBridge';
+import Tools from '@/utils/tool';
+
+const { Header, Body } = Card;
+
+interface PageProps extends ConnectProps {
+  nameAuthentication: NameAuthenticationModelState;
+}
+
+const UploadPhotos: FC<PageProps> = ({ nameAuthentication, dispatch, location }) => {
+  const [showPhotoUploadImg, setPhotoFaceUploadImg] = useState('');
+  const [photoUploadImg, setPhotoUploadImg] = useState('');
+  const [error, setError] = useState('');
+  const [canNext, setCanNext] = useState(false);
+
+  const { catchTime = 0 } = nameAuthentication;
+
+  // 这里发起了初始化请求
+  useEffect(() => {
+    const leave = localStorage.getItem('leave'); // 用来标识如果是从支付页面返回的话，则跳转到我的订单页面
+    localStorage.setItem('leave', '0'); // 用完值要设置成初始值
+    if (leave === '1') {
+      history.push({
+        pathname: '/order/myOrder',
+      });
+    }
+  }, []);
+
+  // 上传图片
+  const uploadChange = (e: any) => {
+    const files = e.target.files as any;
+    if (files && files.length > 0) {
+      transformFile(files[0], 0.2).then((file: any) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+          console.log('reader', file);
+          const base64 = e.target.result;
+          if (!new RegExp('(jpg|jpeg|gif|png)+', 'gi').test(file.type)) {
+            setError('您上传的图片格式有误，请重新上传~');
+          } else {
+            setError('');
+            setPhotoFaceUploadImg(URL.createObjectURL(file));
+            setPhotoUploadImg(this.result);
+            dispatch!({
+              type: 'nameAuthentication/livingCertification',
+              payload: {
+                image: base64,
+                catchTime,
+                callback: () => {
+                  // 调用原生实名认证已完成接口
+                  if (location.query.bsFlag === '1') {
+                    dispatch!({
+                      type: 'myOrder/archivesUpAndCertification',
+                      payload: {
+                        imageBest: base64,
+                        liveNess: '1',
+                        rotate: '1',
+                        orderId: location.query.orderId,
+                        authChannel: '2000',
+                        accNbr: location.query.accNbr,
+                        bsFlag: location.query.bsFlag,
+                        callback: () => {
+                          livingAuthFinish({});
+                          setCanNext(true);
+                        },
+                      },
+                    });
+                  } else {
+                    livingAuthFinish({});
+                    setCanNext(true);
+                  }
+                },
+              },
+            });
+          }
+        };
+        reader.onerror = function () {
+          setError(true);
+        };
+        reader.onprogress = function (event) {
+          if (event.lengthComputable) {
+            if (event.loaded === event.total) {
+              Toast.hide();
+              return;
+            } else {
+              Toast.loading('图片上传中，请稍候...', 0);
+            }
+          }
+        };
+      });
+    }
+  };
+
+  return (
+    <div className={styles.uploadPhotos}>
+      <Card full className={styles.main}>
+        <div>{error}</div>
+        <Header
+          title={
+            <div className={styles.cardHeader}>
+              <span className={styles.cardTitle}>免冠照检测</span>
+              <span className={styles.cardSubtitle}>
+                根据国家实名制要求，请准确提供申办人身份证信息
+              </span>
+            </div>
+          }
+        />
+        <Body>
+          <div className={styles.cardBox}>
+            <input
+              param-action="realPersonPhoto"
+              type="file"
+              name="file"
+              accept="image/*"
+              className={styles.fileUpload}
+              onChange={uploadChange}
+              // onClick={(e) => {
+              //   e.preventDefault();
+              //   pushOCRAuthViewController((params) => {
+              //     setCanNext(false);
+              //     try {
+              //       const base64 = `data:image/png;base64,${params.base64}`;
+              //       setPhotoFaceUploadImg(base64);
+              //       dispatch!({
+              //         type: 'nameAuthentication/livingCertification',
+              //         payload: {
+              //           image: base64,
+              //           callback: () => {
+              //             // 调用原生实名认证已完成接口
+              //             if (location.query.bsFlag === '1') {
+              //               dispatch!({
+              //                 type: 'myOrder/archivesUpAndCertification',
+              //                 payload: {
+              //                   imageBest: base64,
+              //                   liveNess: '1',
+              //                   rotate: '1',
+              //                   orderId: location.query.orderId,
+              //                   authChannel: '2000',
+              //                   accNbr: location.query.accNbr,
+              //                   bsFlag: location.query.bsFlag,
+              //                   callback: () => {
+              //                     livingAuthFinish({});
+              //                     setCanNext(true);
+              //                   },
+              //                 },
+              //               });
+              //             } else {
+              //               livingAuthFinish({});
+              //               setCanNext(true);
+              //             }
+              //           },
+              //           fail: () => {},
+              //         },
+              //       });
+              //     } catch (error) {
+              //       console.log(error);
+              //     }
+              //   });
+              // }}
+            />
+            <div className={styles.cardContent}>
+              {showPhotoUploadImg ? (
+                <img src={showPhotoUploadImg} className={styles.idCardImg} />
+              ) : (
+                <div className={styles.cardImgLeft}>
+                  <img src={camera} className={styles.cameraImg} />
+                </div>
+              )}
+              {showPhotoUploadImg ? (
+                <div className={styles.cardText}>
+                  <span className={styles.reLoad}>
+                    <img src={loading} />
+                    点击重新上传
+                  </span>
+                </div>
+              ) : (
+                <div className={styles.cardText}>
+                  <span className={styles.clickUpload}>点击开始</span>
+                  <span className={styles.personFace}>免冠检测</span>
+                </div>
+              )}
+            </div>
+          </div>
+          <div style={{ display: error ? 'block' : 'none' }} className={styles.uploadPicError}>
+            <img src={errorInfo} />
+            上传的照片与身份证的照片不一致，请核对后再上传
+          </div>
+          <div className={styles.modifyButtonBox}>
+            <Button
+              type="primary"
+              className={styles.modifyButton}
+              disabled={!canNext}
+              onClick={() => {
+                // history.push({
+                //   pathname: '/nameAuthentication/authenticationInfo',
+                // });
+                const source = localStorage.getItem('source');
+                const sn = localStorage.getItem('sn');
+                dispatch!({
+                  type: 'nameAuthentication/realPersonAuthModels',
+                  payload: {
+                    catchTime,
+                  },
+                }).then((flag: boolean) => {
+                  if (!flag) return;
+                  dispatch!({
+                    type: 'payConfirm/commitOrder',
+                    payload: {},
+                  }).then((data: any) => {
+                    if (data) {
+                      const { payUrl, orderId = '' } = data;
+                      if (payUrl) {
+                        localStorage.setItem('leave', '1'); // 用来标识是跳转到支付页面
+                        window.location.href = payUrl;
+                      } else {
+                        window.location.href = `${window.location.origin}/#/customer/paySuccess?retnCode=0000&retnInfo=0000&orderSeq=${orderId}`;
+                      }
+                    }
+                  });
+                });
+              }}
+            >
+              <span param-action="realPersonAuth">立即提交</span>
+            </Button>
+          </div>
+          <div className={styles.hotTip}>
+            温馨提示：根据工信部《电话用户真实身份信息登记实施规范》要求，请您上传与办理人一致的居民身份证正反面照片和正面免冠照片。后续号卡激活时，我们将再次进行身份信息的验证。
+          </div>
+        </Body>
+      </Card>
+    </div>
+  );
+};
+
+export default connect(
+  ({ nameAuthentication }: { nameAuthentication: NameAuthenticationModelState }) => ({
+    nameAuthentication,
+  }),
+)(UploadPhotos);

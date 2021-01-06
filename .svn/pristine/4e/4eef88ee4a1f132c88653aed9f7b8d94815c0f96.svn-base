@@ -1,0 +1,21 @@
+.sectSearchPage {
+    height: 100vh;
+    background: #fff;
+
+    :global {
+        .am-search-input {
+            height: 80px !important;
+            border-radius: 48px;
+        }
+
+        .am-search-input input[type="search"] {
+            height: 80px !important;
+        }
+
+        .am-search-input .am-search-synthetic-ph {
+            height: 80px !important;
+            line-height: 80px;
+
+        }
+    }
+}

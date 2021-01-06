@@ -1,0 +1,118 @@
+.emergency {
+    display: flex;
+    flex-direction: column;
+    // height: 98vh;
+    background: #fff;
+
+
+    .ilTopImg {
+        width: 100%;
+    }
+
+    .productContent {
+        position: relative;
+        flex: 1;
+        height: auto;
+        // max-height: 70vh;
+        margin-top: -35px;
+        padding: 32px 48px 60px 48px;
+        overflow: auto;
+        background: #fff;
+        border-radius: 40px 40px 0 0;
+
+        .formInput {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 32px 0;
+            border-bottom: 2px #F4F7F6 solid;
+        }
+
+        .formIcon {
+            width: 32px;
+            height: 32px;
+            margin-top: -15px;
+            margin-right: 10px;
+        }
+
+        .label {
+            color: #041C1E;
+            font-size: 32px;
+        }
+
+        input::-webkit-input-placeholder {
+            font-size: 32px;
+        }
+
+        input {
+            text-align: right;
+        }
+    }
+
+    .pageTitle {
+        margin-top: 32px;
+        color: #1D81FB;
+        font-weight: 500;
+        font-size: 32px;
+    }
+}
+
+.normalCell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding: 24px 32px;
+    border-radius: 18px;
+
+    .proName {
+        color: #242424;
+        font-weight: bold;
+        font-size: 32px;
+    }
+
+    .des {
+        color: #808080;
+        font-weight: 400;
+        font-size: 24px;
+    }
+
+    .price {
+        color: #FE4854;
+        font-weight: 500;
+        font-size: 32px;
+    }
+}
+
+.unSelect {
+    .normalCell();
+
+    background: #FCFCFC;
+    border: 2px solid #E9EBEC;
+}
+
+.selected {
+    .normalCell();
+
+    background: rgb(235, 249, 254);
+    border: 2px solid #1D81FB;
+
+    .selectIcon {
+        position: absolute;
+        right: 50px;
+        width: 56px;
+        height: 56px;
+        margin-top: -45px;
+    }
+}
+
+.tipMsg {
+    margin-top: 32px;
+}
+
+.footBtn {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+}

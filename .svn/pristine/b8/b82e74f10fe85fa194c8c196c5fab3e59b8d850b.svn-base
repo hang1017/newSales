@@ -1,0 +1,525 @@
+import React, { FC, useEffect, useState, useRef } from 'react';
+import { GooseModelState, ConnectProps, connect, router } from 'alita';
+import { WhiteSpace, Button, Toast } from 'antd-mobile';
+import classnames from 'classnames';
+import _ from 'lodash';
+import { numFormat, getTimeSlot, resetIframeViewPort } from '@/utils';
+import { dateChange } from '@alitajs/dform';
+import Utils from '@/utils/tool';
+import { AllWhiteLoading } from '@/components';
+import moment from 'moment';
+import BigGoosePng from '@/assets/img/goose/bigGoose.png';
+import JoinBgPng from '@/assets/img/goose/joinBg.png';
+import DownPng from '@/assets/img/goose/down.png';
+import GoBtnPng from '@/assets/img/goose/goBtn.png';
+import IPhonePng from '@/assets/img/goose/iPhone.png';
+import HandPng from '@/assets/img/goose/hand.png';
+import LikeGoosePng from '@/assets/img/goose/likeGoose.png';
+import PhonePng from '@/assets/img/goose/threePhone.png';
+import RightPng from '@/assets/img/goose/right.png';
+import MoreRightPng from '@/assets/img/goose/moreRight.png';
+
+import { WhiteCard, StarText } from '../components';
+import styles from './index.less';
+
+import BetterScroll from 'better-scroll';
+import { BScrollConstructor } from '@better-scroll/core/dist/types/BScroll';
+
+interface PageProps extends ConnectProps {
+  goose: GooseModelState;
+}
+
+const DETAIL_LIST = [
+  ['国内语音', '0.1元/分钟', '订购2个(10GB)送2GB'],
+  ['国内短信', '0.1元/条', '订购3个(15GB)送5GB'],
+  ['国内流量', '5元/GB', ''],
+];
+
+let timer: NodeJS.Timeout | null = null;
+
+let bs: BScrollConstructor<{}> | null = null;
+
+const GoosePage: FC<PageProps> = ({ goose, dispatch, location }) => {
+  const [btnShowFlag, setBtnShowFlag] = useState<boolean>(false);
+  const [loadingFlag, setLoadingFlag] = useState<boolean>(true);
+  const [initData, setInitData] = useState<any>({});
+  const [btnAllShowFlag, setBtnAllShowFlag] = useState<boolean>(false);
+  const ref = useRef(null);
+
+  const { timeMenu = [] } = goose;
+
+  let active = {};
+  const timeMenuRef = useRef();
+
+  useEffect(() => {
+    timeMenuRef.current = timeMenu;
+  }, [timeMenu]);
+
+  useEffect(() => {
+    document.getElementsByClassName('rumtime-keep-alive-layout-no')[0].style.height = '100%';
+
+    // 清空订单确认页面
+    dispatch!({
+      type: 'payConfirm/save',
+      payload: {
+        addressInfo: {},
+        orderInfo: {},
+        nameAndNo: {},
+        choosePhoneTypeValue: undefined,
+        invoiceContent: { personal: {}, company: {} },
+        phoneInfo: {},
+        claimValue: '',
+        needShowOrdAddr: '', // 是否需要展示选址的功能
+        claimType: [], // 配送方式
+      },
+    });
+
+    bs = new BetterScroll(ref.current, {
+      probeType: 3,
+      scrollY: true,
+      scrollX: false,
+      click: true,
+      bounce: false,
+    });
+
+    bs.on('scroll', (pos) => {
+      let sTop = pos?.y;
+      if (sTop < -250) {
+        setBtnShowFlag(true);
+        setBtnAllShowFlag(false);
+      } else if (sTop > -200) {
+        if (btnAllShowFlag) {
+          return;
+        }
+        setBtnShowFlag(false);
+      }
+    });
+
+    const source = Utils.getQueryStringSourceAndSn('source') || '';
+    const sn = Utils.getQueryStringSourceAndSn('sn') || '';
+
+    if (source && sn) {
+      localStorage.setItem('source', source);
+      localStorage.setItem('sn', sn);
+
+      Utils.accessPermission({
+        sn: sn.trim(),
+        source: source.trim(),
+        dispatch,
+        successCallBack: () => {},
+      });
+    }
+
+    timer = setInterval(() => {
+      active = {};
+      dispatch!({
+        type: 'goose/save',
+        payload: {
+          timeMenu: JSON.parse(JSON.stringify(timeMenuRef.current)),
+        },
+      });
+    }, 1000);
+    setTimeout(() => {
+      dispatch!({
+        type: 'goose/querySkuIdAndOrderCountModel',
+        payload: {
+          raffleDrawId: '1',
+        },
+      }).then((res: any) => {
+        const { raffleDrawCycleList = [] } = res;
+        setInitData(res);
+        const cList = (raffleDrawCycleList || []).map((cItem: any) => ({
+          ...cItem,
+          raffleDrawId: `${cItem?.raffleDrawId}`,
+          raffleDrawCycleId: `${cItem?.raffleDrawCycleId}`,
+        }));
+        dispatch!({
+          type: 'goose/save',
+          payload: {
+            timeMenu: cList,
+          },
+        });
+
+        setTimeout(() => {
+          bs?.refresh();
+        }, 10);
+      });
+    }, 0);
+    return () => {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+      bs = null;
+    };
+  }, []);
+
+  const pageScroll = (e: any) => {
+    const sTop = e.target.scrollTop;
+    if (sTop > 250) {
+      setBtnShowFlag(true);
+      setBtnAllShowFlag(false);
+    } else if (sTop < 200) {
+      if (btnAllShowFlag) {
+        return;
+      }
+      setBtnShowFlag(false);
+    }
+  };
+
+  /**
+   * 去规则页面
+   */
+  const goToRule = () => {
+    router.push({
+      pathname: '/goose/rules',
+    });
+  };
+
+  /**
+   * 去个人中心
+   */
+  const goToPersonCenter = () => {
+    router.push({
+      pathname: '/customer/myPage',
+      query: {
+        type: 'goose',
+      },
+    });
+  };
+
+  /**
+   * 喜鹅派详情页
+   */
+  const goToDetail = () => {
+    router.push({
+      pathname: '/goose/gooseDetail',
+    });
+  };
+
+  /**
+   * 前往抽奖页面
+   */
+  const goToLuckDraw = () => {
+    if (active && Object.keys(active).length) {
+      const { raffleDrawId = '', raffleDrawCycleId = '' } = active;
+      if (localStorage.getItem('tokenCode')) {
+        dispatch!({
+          type: 'my/queryMemberLevel',
+        }).then((flag: boolean) => {
+          if (flag) {
+            dispatch!({
+              type: 'goose/raffleDrawTimeAndAuthorityModel',
+              payload: {
+                raffleDrawId,
+                raffleDrawCycleId,
+              },
+            }).then((res: any) => {
+              if (res && Object.keys(res).length) {
+                if (res?.authority) {
+                  router.push({
+                    pathname: '/goose/luckDraw',
+                    query: {
+                      raffleDrawId,
+                      raffleDrawCycleId,
+                    },
+                  });
+                } else {
+                  Toast.show(res?.message || '您暂无权限抽奖，请先订购喜鹅派', 2);
+                }
+              } else {
+                router.push({
+                  pathname: '/customer/orderConfirm',
+                  query: {
+                    type: 'goose',
+                    raffleDrawId,
+                    raffleDrawCycleId,
+                  },
+                });
+              }
+            });
+          } else {
+            router.push({
+              pathname: '/customer/orderConfirm',
+              query: {
+                type: 'goose',
+                raffleDrawId,
+                raffleDrawCycleId,
+              },
+            });
+          }
+        });
+      } else {
+        Toast.show('请购买喜鹅派后再参与抽奖', 1);
+        setBtnShowFlag(true);
+        setBtnAllShowFlag(true);
+        // router.push({
+        //   pathname: '/customer/orderConfirm',
+        //   query: {
+        //     type: 'goose',
+        //     raffleDrawId,
+        //     raffleDrawCycleId,
+        //   },
+        // });
+      }
+    } else {
+      Toast.show('活动还未开始，请稍等', 1);
+    }
+  };
+
+  /**
+   * 立即订购点击事件
+   */
+  const goToOrderPay = () => {
+    // dispatch!({
+    //   type: 'indexList/save',
+    //   payload: {
+    //     skuList: [{ skuId: initData?.skuId, quantity: 1 }],
+    //   },
+    // });
+    if (localStorage.getItem('tokenCode')) {
+      dispatch!({
+        type: 'my/queryMemberLevel',
+      }).then((flag: boolean) => {
+        if (flag) {
+          dispatch!({
+            type: 'login/save',
+            payload: {
+              loginFlag: true,
+            },
+          });
+          let urlGoodsList = [{ skuId: initData?.skuId, quantity: 1 }];
+          localStorage.setItem('leave', '0');
+          router.push({
+            pathname: '/customer/payConfirm',
+            query: {
+              type: 'goose',
+              urlGoodsList: JSON.stringify(urlGoodsList),
+            },
+          });
+        } else {
+          router.push({
+            pathname: '/customer/orderConfirm',
+            query: {
+              type: 'goosePayConfirm',
+            },
+          });
+        }
+      });
+    } else {
+      router.push({
+        pathname: '/customer/orderConfirm',
+        query: {
+          type: 'goosePayConfirm',
+        },
+      });
+    }
+  };
+
+  /**
+   * 时间
+   */
+  const timeList = () => (
+    <div className={styles.redContent}>
+      {(timeMenuRef.current || []).map((item, index: number) => {
+        const flag = getTimeSlot(item);
+        if (flag === '火热进行中' && Object.keys(active).length === 0) {
+          active = item;
+        }
+        if (index === 2 && flag === '已结束') {
+          active = item;
+        }
+        return (
+          <div className={styles.timeItem} key={item?.time}>
+            <div
+              className={classnames({
+                [styles.time]: true,
+                [styles.timeActive]: flag === '火热进行中',
+              })}
+            >
+              {moment(new Date(dateChange(item?.beginTime))).format('HH:mm')}
+            </div>
+            {flag === '火热进行中' ? (
+              <div className={styles.timeLabelIng}>{flag}</div>
+            ) : (
+              <div className={styles.timeLabel}>{flag}</div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+
+  /**
+   * 产品介绍
+   */
+  const proIntro = () => (
+    <WhiteCard title="产品介绍">
+      <div className={styles.proIntro}>
+        <div className={styles.subTitle}>自由享无月租</div>
+        <StarText>
+          <div>无固定月基本费，无最低消费，语音短信流量随用随计</div>
+        </StarText>
+        <div className={styles.subTitle}>买的多送的多</div>
+        <StarText>
+          <div>
+            5GB通用流量包优惠购,买<span>10GB送2GB</span>、买<span>15GB送5GB</span>
+          </div>
+        </StarText>
+        <div className={styles.subTitle}>随心用不浪费</div>
+        <StarText>
+          <div>流量包有效期31天，有效期内续订，未使用完的流量可延期</div>
+        </StarText>
+        <div className={styles.moreDetail} onClick={goToDetail}>
+          {'点击查看更多商品详情 >'}
+        </div>
+      </div>
+    </WhiteCard>
+  );
+
+  /**
+   * 多款权益产品
+   */
+  const moreRightPro = () => (
+    <WhiteCard title="多款权益产品">
+      <div className={styles.moreRightProStyle}>
+        <div className={styles.mTitle}>17款热门会员</div>
+        <div>
+          <img src={MoreRightPng} alt="" className={styles.moreRightImg} />
+        </div>
+        <div className={styles.mTwoTitle}>10GB定向免流包 6大类APP免流</div>
+        <div className={styles.shortDiv}>
+          <div className={styles.left}>
+            <StarText>综合视频平台流量包</StarText>
+            <StarText>短视频平台流量包</StarText>
+            <StarText>动漫、游戏平台流量包</StarText>
+          </div>
+          <div className={styles.right}>
+            <StarText>音频娱乐平台流量包</StarText>
+            <StarText>购物、资讯平台流量包</StarText>
+            <StarText>BiliBili专属流量包</StarText>
+          </div>
+        </div>
+        <WhiteSpace />
+      </div>
+    </WhiteCard>
+  );
+
+  /**
+   * 资费详情
+   */
+  const postageDetail = () => (
+    <WhiteCard title="资费详情">
+      <div className={styles.postageDetailStyle}>
+        <div className={styles.rows}>
+          <div className={styles.lan1}>月基本费</div>
+          <div className={styles.lan2}>0元</div>
+          <div className={styles.lan3}>
+            <span className={styles.span1}>可选流量包</span>
+            <span className={styles.span2}>20元</span>
+            <span className={styles.span3}>5GB</span>
+          </div>
+        </div>
+        {DETAIL_LIST.map((item: string[], index: number) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div className={styles.rows} key={index}>
+            <div className={styles.lan1}>{item[0]}</div>
+            <div className={styles.lan2}>{item[1]}</div>
+            <div className={styles.lan3}>{item[2]}</div>
+          </div>
+        ))}
+      </div>
+    </WhiteCard>
+  );
+
+  return (
+    <div
+      style={{ height: document.documentElement.clientHeight }}
+      className={styles.gooseContent}
+      id="gooseIndex"
+    >
+      <div className={styles.btnDiv}>
+        <Button
+          className={classnames({
+            [styles.btn]: true,
+            // [styles.btnHide]: !btnShowFlag,
+          })}
+          onClick={_.debounce(() => goToOrderPay())}
+        >
+          <div className={styles.btns} param-action="gooseAccounts">
+            立即订购
+          </div>
+        </Button>
+      </div>
+      <div className={styles.goose} onScroll={pageScroll} ref={ref}>
+        <div>
+          {/* {loadingFlag && <div className={styles.allWhiteBg} />} */}
+          {loadingFlag && <AllWhiteLoading />}
+          <div className={styles.gooseTop}>
+            <img
+              src={BigGoosePng}
+              alt=""
+              className={styles.bigGoose}
+              onLoad={() => setLoadingFlag(false)}
+            />
+            <img src={JoinBgPng} alt="" className={styles.joinBgImg} />
+            <div className={styles.gooseRule} onClick={goToRule}>
+              活动介绍
+              <img src={RightPng} alt="" className={styles.right} />
+            </div>
+            {/* {Utils.isLogin() && ( */}
+            <div className={styles.goosePersonCenter} onClick={goToPersonCenter}>
+              个人中心
+              <img src={RightPng} alt="" className={styles.right} />
+            </div>
+            {/* )} */}
+          </div>
+          <div className={styles.gooseTimeDiv}>
+            <div className={styles.redBg}>
+              <img src={PhonePng} alt="" className={styles.phonePng} />
+              <img src={IPhonePng} alt="" className={styles.iphonePng} />
+              {timeList()}
+              <img
+                param-action="gooseGo"
+                src={GoBtnPng}
+                alt=""
+                className={styles.goBtnPng}
+                onClick={_.debounce(() => goToLuckDraw(), 500)}
+              />
+              <img
+                param-action="gooseGo"
+                src={HandPng}
+                alt=""
+                className={styles.handPng}
+                onClick={_.debounce(() => goToLuckDraw(), 500)}
+              />
+              {/* <div className={styles.surplus}>剩2次</div> */}
+            </div>
+          </div>
+          <div className={styles.gooseNumDiv}>
+            <img src={DownPng} className={styles.downImg} />
+            <div className={styles.numText}>
+              本轮抽奖已有<span>{initData?.orderCount ? numFormat(initData?.orderCount) : 0}</span>
+              位新用户加入喜鹅派
+            </div>
+          </div>
+          <div className={styles.troDiv}>
+            <img src={LikeGoosePng} alt="" className={styles.likeGooseImg} />
+            {proIntro()}
+            {/* <div className={styles.gooseHeight} />
+        {moreRightPro()} */}
+            <div className={styles.gooseHeight} />
+            {postageDetail()}
+            <div className={styles.hotTips}>温馨提示</div>
+            <div className={styles.smallText}>
+              若连续66天无流量/无语音呼出/无发送短信的,中国电信将暂停向用户提供各项功能(停机);停机期间如需复机,请联系客服(https://pai.189.cn:10000)查询停机;60天后仍未复机的将自动拆机,用户可登录(https://pai.189.cn:10000)查询并联系客服申请退款。
+            </div>
+            <div className={styles.gooseHeightFooter} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default connect(({ goose }: { goose: GooseModelState }) => ({ goose }))(GoosePage);

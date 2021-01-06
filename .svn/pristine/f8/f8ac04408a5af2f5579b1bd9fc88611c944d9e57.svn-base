@@ -1,0 +1,43 @@
+// @import (reference) '../../styles/themes/default.less';
+// 如果直接复制到项目中使用，请注释上面一行，开启下面这行注释
+@rpx: 1px;
+
+.magicTab {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-top: 20 * @rpx;
+  background-color: #f5f5f5;
+
+  .tabItem {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    height: 116 * @rpx;
+    font-weight: 500;
+    font-size: 32 * @rpx;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    &.tabItemActve {
+      position: relative;
+      color: #2ca5ff;
+      border-top-left-radius: 24 * @rpx;
+      border-top-right-radius: 24 * @rpx;
+
+      .tabItemBd {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+    }
+  }
+}

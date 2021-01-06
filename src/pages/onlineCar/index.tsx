@@ -1,0 +1,181 @@
+import React, { FC, useEffect, useState } from 'react';
+import { OnlineCarModelState, ConnectProps, connect, history } from 'alita';
+import { Toast } from 'antd-mobile';
+import { Base64 } from 'js-base64';
+import Utils from '@/utils/tool';
+import { AllWhiteLoading } from '@/components';
+import { FormCard } from '@/pages/onlineCar/components';
+import Car1Png from '@/assets/img/onlineCar/car1.jpg';
+import Car2Png from '@/assets/img/onlineCar/car2.jpg';
+import Car3Png from '@/assets/img/onlineCar/car3.jpg';
+import styles from './index.less';
+
+interface PageProps extends ConnectProps {
+  onlineCar: OnlineCarModelState;
+}
+
+const OnlineCarPage: FC<PageProps> = ({ dispatch, location }) => {
+  const { params = '' } = location?.query;
+  const [loadingFlag, setLoadingFlag] = useState<boolean>(true);
+  const pars = JSON.parse(params ? Base64.decode(params) : '{}');
+
+  const {
+    source = localStorage.getItem('source'),
+    sn = localStorage.getItem('sn'),
+    salesCode = localStorage.getItem('salesCode'),
+    skuId = '',
+  } = pars;
+  console.log(pars, Base64.decode(params));
+
+  useEffect(() => {
+    localStorage.setItem('leave', '0'); // 用完值要设置成初始值
+    localStorage.setItem('tokenCode', '');
+    document.getElementsByClassName('rumtime-keep-alive-layout-no')[0].style.height = '100%';
+    localStorage.setItem('source', source);
+    localStorage.setItem('sn', sn);
+    localStorage.setItem('salesCode', salesCode);
+
+    Utils.accessPermission({
+      sn,
+      source,
+      dispatch,
+      successCallBack: () => {
+        dispatch!({
+          type: 'indexList/dmosbrowse',
+          payload: {
+            sn: sn || '',
+            source: source || '',
+          },
+        });
+      },
+    });
+
+    // 清空订单确认页面
+    dispatch!({
+      type: 'payConfirm/save',
+      payload: {
+        addressInfo: {},
+        orderInfo: {},
+        nameAndNo: {},
+        choosePhoneTypeValue: undefined,
+        invoiceContent: { personal: {}, company: {} },
+        phoneInfo: {},
+        claimValue: '',
+        needShowOrdAddr: '', // 是否需要展示选址的功能
+        claimType: [], // 配送方式
+        halfPaymenet: {}, //
+      },
+    });
+
+    dispatch!({
+      type: 'oldUserLoginSuccess/save',
+      payload: {
+        cartOrderId: '',
+        commonAttrData: [],
+        commonAttrValue: {},
+      },
+    });
+  }, []);
+  const formSubmit = (values: any, newNumData: any) => {
+    const { homeAddr = {}, halfPaymenet } = values;
+    const { label = {}, value = {} } = homeAddr;
+    if (!localStorage.getItem('tokenCode')) {
+      Toast.fail('验证码不正确或验证码已经过期', 1);
+      return;
+    }
+    dispatch!({
+      type: 'payConfirm/save',
+      payload: {
+        nameAndNo: {
+          name: values?.username.trim(),
+          idCard: values?.idenCode.trim(),
+        },
+      },
+    });
+    if (halfPaymenet) {
+      dispatch!({
+        type: 'payConfirm/save',
+        payload: {
+          halfPaymenet,
+        },
+      });
+    }
+    dispatch!({
+      type: 'quickOrder/addAddressModal',
+      payload: {
+        name: values?.username,
+        phoneNumber: values?.accNum,
+        detailAddress: values?.detailAddr,
+        defaultAddr: '1000',
+        provinceId: value[0],
+        province: label[0],
+        cityId: value[1],
+        city: label[1],
+        regionId: value[2],
+        region: label[2],
+      },
+    }).then((addrRes: any) => {
+      if (addrRes) {
+        dispatch!({
+          type: 'oldUserLoginSuccess/commitCartQuick',
+          payload: {
+            goodsList: [
+              {
+                skuId,
+                quantity: 1,
+              },
+            ],
+            commonAttrList: [
+              {
+                attrCode: 'HM',
+                attrValue: values?.selectNum,
+                extMap: { ...newNumData },
+              },
+            ],
+            receiveAddrId: addrRes?.receiveAddrId,
+          },
+        }).then((data: any) => {
+          if (data) {
+            dispatch!({
+              type: 'payConfirm/save',
+              payload: {
+                orderInfo: data,
+              },
+            });
+            localStorage.setItem('leave', '0'); // 用完值要设置成初始值
+            dispatch!({
+              type: 'payConfirm/commitOrderBfCheck',
+              payload: {
+                certData: {
+                  certName: values?.username,
+                  certNum: values?.idenCode,
+                  certType: '1',
+                },
+              },
+            }).then((fl: boolean) => {
+              if (fl === true) {
+                history.push({
+                  pathname: '/nameAuthentication',
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  };
+
+  return (
+    <div className={styles.onlineCarStyle}>
+      {loadingFlag && <AllWhiteLoading />}
+      <img src={Car1Png} alt="" className={styles.carImg} />
+      <FormCard onSubmit={formSubmit} paramAction="onlineCar" />
+      <img src={Car2Png} alt="" className={styles.carImg} />
+      <img src={Car3Png} alt="" className={styles.carImg} onLoad={() => setLoadingFlag(false)} />
+    </div>
+  );
+};
+
+export default connect(({ onlineCar }: { onlineCar: OnlineCarModelState }) => ({ onlineCar }))(
+  OnlineCarPage,
+);

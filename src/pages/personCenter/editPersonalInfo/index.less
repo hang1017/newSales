@@ -1,0 +1,90 @@
+@import '../../../global.less';
+
+.editInfoPage {
+  height: 100%;
+  background: #f5f7f9;
+
+  .myDisbleInfo {
+    padding: 32px;
+    background: #fff;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .formCell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+
+    .labeText {
+      color: #06041e;
+      font-weight: 400;
+      font-size: 32px;
+    }
+
+    .touxDiv {
+      position: relative;
+
+      .touxInput {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 120px;
+        height: 120px;
+        opacity: 0;
+      }
+    }
+
+    .toux {
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+    }
+
+    .formValue {
+      color: #69696d;
+      font-weight: 400;
+      font-size: 28px;
+    }
+
+    &:last-child {
+      border-top: #f3f3f3 1px solid;
+    }
+  }
+
+  .myForm {
+    margin-top: 15px;
+    background: #fff;
+    border-radius: 20px;
+
+    .nickLabel {
+      padding-left: 26px;
+      color: #696d6c;
+    }
+
+    .nickValue {
+      padding-right: 26px;
+      color: #000;
+      font-size: 32px;
+    }
+
+    :global {
+      .alitajs-dform-title {
+        margin-right: 0.1rem;
+        color: #696d6c;
+        font-weight: 500;
+        font-size: 32px !important;
+      }
+    }
+  }
+}
+
+.loginOut {
+  margin-top: 20px;
+  padding: 30px 0;
+  color: @themeColor;
+  font-weight: 400;
+  font-size: 32px;
+  text-align: center;
+  background: #fff;
+}

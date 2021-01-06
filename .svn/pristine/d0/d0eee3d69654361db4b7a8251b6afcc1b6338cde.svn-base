@@ -1,0 +1,96 @@
+.refundResult {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 90px);
+    overflow: hidden;
+
+    .content {
+        flex: 1;
+        overflow-y: scroll;
+    }
+
+
+    .baseInfo {
+        background: #fff;
+    }
+
+    .refundHead {
+        height: 300px;
+        // margin-bottom: 30px;
+        padding-top: 50px;
+        text-align: center;
+
+
+        .fefundStatus {
+            margin: 32px 0 16px 0;
+            color: #333;
+            font-weight: 400;
+            font-size: 36px;
+        }
+
+        .tipMsg {
+            padding: 0 76px;
+            color: #999;
+            font-weight: 400;
+            font-size: 26px;
+        }
+    }
+
+    .orderInfo {
+        margin-top: 20px;
+        padding: 12px 32px 32px 32px;
+        background: #fff;
+
+        .orderInfoCell {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-weight: 400;
+            font-size: 28px;
+
+            .labelText {
+                color: #696D6C;
+            }
+
+            .labelValue {
+                color: #06041E;
+                font-size: 28px;
+            }
+
+        }
+    }
+
+    .refundInfo {
+        margin-top: 20px;
+        padding: 12px 32px 32px 32px;
+        background: #fff;
+
+        &>div {
+            padding-top: 20px;
+        }
+
+        .refundTitle {
+            color: #333;
+            font-weight: 600;
+            font-size: 32px;
+        }
+
+        .refundAddr {
+            color: #333;
+            font-size: 28px;
+        }
+
+        .refundDes {
+            color: #999;
+            font-size: 26px;
+
+        }
+    }
+}
+
+
+.history {
+    margin-top: 20px;
+    padding: 32px;
+    background: #fff;
+}

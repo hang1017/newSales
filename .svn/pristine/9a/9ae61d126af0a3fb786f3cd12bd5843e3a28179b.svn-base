@@ -1,0 +1,109 @@
+.warrper {
+    display: flex;
+    flex-direction: column;
+    // height:calc(100% + 90px);
+
+}
+
+.allWhiteBg {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.content {
+    flex: 1;
+    // height: 0;
+    overflow-y: scroll;
+
+    img {
+        width: 100%;
+    }
+}
+
+.advertBiliPage {
+    padding-bottom: 20px;
+    text-align: center;
+    background: #4342d2;
+
+
+    .whiteBg {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: #fff;
+
+    }
+
+    .bannerImg {
+        // height: 683px;
+        margin-top: -370px;
+        padding-left: 9%;
+
+    }
+
+    .textBlock {
+        padding: 32px;
+        color: #fff;
+        font-size: 24px;
+        text-align: left;
+
+    }
+
+    .pageTitle {
+        font-size: 28px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .buy {
+        width: 70%;
+    }
+}
+
+
+.tipMsg {
+    font-size: 25px;
+}
+
+
+.footBtnBlock {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    // height: 166px;
+    // background: #fff;
+}
+
+
+.footSingleBtn {
+    margin-top: 36px;
+    // padding: 20px 30px 40px 30px;
+
+    .normalBtn() {
+        height: 90px;
+        font-weight: 400;
+        font-size: 32px;
+        line-height: 90px;
+        text-align: center;
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+        // box-shadow: 5px 5px 5px 5px #6db4ff;
+    }
+
+    .submit {
+        .normalBtn();
+
+        color: rgba(255, 255, 255, 1);
+        background: linear-gradient(90deg, #6db4ff 0%, #187dfb 100%);
+    }
+}

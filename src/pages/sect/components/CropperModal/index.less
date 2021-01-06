@@ -1,0 +1,79 @@
+.hooks-cropper-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(#000, 0.3);
+
+  .modal-panel {
+    //  width: 880px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: calc(100vh - 150px);
+    padding: 32px;
+    background: white;
+
+    .button-row {
+      display: flex;
+      justify-content: space-around;
+      height: 50px;
+      margin-top: 20px;
+      margin-bottom: 55px;
+
+      .cancle-button {
+        height: 80px;
+        padding: 0 60px;
+        color: #CCC;
+        line-height: 80px;
+        border: 3px solid #CCC;
+        border-radius: 10px;
+
+      }
+
+      .submit-button {
+        height: 80px;
+        padding: 0 60px;
+        color: #FFF;
+        line-height: 80px;
+        background: #1461FC;
+        border-radius: 10px;
+      }
+    }
+
+    .cropper-container-container {
+      display: flex;
+      flex: 1;
+      align-items: stretch;
+      justify-content: space-between;
+      height: 100%;
+
+      .cropper-container {
+        flex: 1;
+
+
+        .cropper {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .preview-container {
+        display: flex;
+        flex: 1;
+        align-items: flex-end;
+
+        .cropper-preview {
+          width: 180px;
+          height: 180px;
+          overflow: hidden;
+          border: 1px solid #383838;
+        }
+      }
+    }
+  }
+}

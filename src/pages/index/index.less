@@ -1,0 +1,124 @@
+.center {
+  height: 100%;
+  // background:linear-gradient(180deg,rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+  background: #f5f7f9;
+}
+
+.cardItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+  padding: 20px 0;
+  border-bottom: solid 1px #f3f3f3;
+}
+
+.cardIcon {
+  width: 64px;
+  height: 64px;
+  margin-right: 10px;
+}
+
+.rightIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.goodsList {
+  height: calc(100vh - 240px);
+  overflow: scroll;
+  background-color: #f5f7f9;
+
+  .recommend {
+    margin: 16px;
+    background: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+
+    .proTitle {
+      display: -webkit-box;
+      margin: 20px;
+      overflow: hidden;
+      color: rgba(4, 28, 30, 1);
+      font-weight: 400;
+      font-size: 28px;
+      text-align: left;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .price {
+      margin: 20px;
+      color: rgba(245, 60, 84, 1);
+      font-weight: 600;
+      font-size: 36px;
+      text-align: left;
+
+      span {
+        font-weight: 500;
+        font-size: 24px;
+      }
+    }
+
+    .detail {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: 20px;
+      color: #9e9ea3;
+      font-size: 20px;
+    }
+  }
+
+  :global {
+    .am-grid .am-flexbox {
+      // height: 570px;
+      height: 500px;
+      background: transparent;
+    }
+
+    .am-grid-item-content {
+      padding: 0 !important;
+    }
+  }
+}
+
+.tabList {
+  display: flex;
+  padding: 10px 0;
+  background: #fff;
+
+  .tabItem () {
+    flex: 1;
+    font-weight: 400;
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .normalTab {
+    .tabItem ();
+
+    color: #696d6c;
+  }
+
+  .selectTab {
+    .tabItem ();
+
+    color: #041c1e;
+    font-weight: bold;
+
+    span {
+      border-bottom: solid 6px #f74f4f;
+    }
+  }
+}
+
+.bannerBlock {
+  padding: 20px;
+  background: #f5f7f9;
+
+  img {
+    width: 100%;
+  }
+}

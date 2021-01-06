@@ -1,0 +1,89 @@
+.broadbandSelectStyle {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  :global {
+    .alitajs-dform-title {
+      color: #000;
+      font-weight: 400;
+      font-size: 30px !important;
+    }
+
+    .alitajs-dform-input-text {
+      font-size: 30px !important;
+
+      &::placeholder {
+        font-size: 30px !important;
+      }
+    }
+  }
+
+  .searchBarLight {
+
+    :global {
+      .am-search {
+        background: #fff;
+      }
+
+      .am-search-input {
+        background: rgba(0, 0, 0, 0.04);
+        border-radius: 24px;
+      }
+    }
+  }
+
+  .broadList {
+    flex: 1;
+    overflow: auto;
+
+    :global {
+      .am-list-view-scrollview {
+        height: calc(100vh - 460px) !important;
+      }
+    }
+
+    .addrItem {
+      display: flex;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+
+      .checkImg {
+        width: 48px;
+        height: 48px;
+      }
+
+      .addrName {
+        flex: 1;
+        padding-left: 24px;
+      }
+    }
+  }
+
+  .emptyDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding-top: 100px;
+
+    .emptyImg {}
+  }
+
+  .btnDiv {
+    padding: 30px;
+    padding-bottom: 80px;
+    background-color: #fff;
+    border-top: 1px solid #eee;
+
+    .btn {
+      height: 80px;
+      background: linear-gradient(90deg, #6DB4FF 0%, #187DFB 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+  }
+}

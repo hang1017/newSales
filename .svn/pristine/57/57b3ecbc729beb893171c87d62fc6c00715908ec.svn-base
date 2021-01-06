@@ -1,0 +1,4 @@
+.headerSection {
+  overflow: hidden;
+  border-radius: 24px;
+}

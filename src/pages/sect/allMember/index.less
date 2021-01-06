@@ -1,0 +1,72 @@
+.contentLayout {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  height: 100%;
+  .listLayout {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    height: 100%;
+  }
+  .searchBar {
+    :global {
+      .am-search {
+        height: 150px;
+        padding: 0 40px;
+      }
+      .am-search-input {
+          height: 80px !important;
+          border-radius: 48px;
+      }
+
+      .am-search-input input[type="search"] {
+          height: 80px !important;
+      }
+
+      .am-search-input .am-search-synthetic-ph {
+          height: 80px !important;
+          line-height: 80px;
+      }
+      .am-search-input .am-search-clear {
+        top: 10px;
+      }
+    }
+  }
+  .btnLayout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    // margin: 50px 40px 40px 40px;
+    position: fixed;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    .btn {
+      border-radius: 40px;
+      padding: 10px 30px;
+      font-size: 34px;
+      font-weight: 400;
+      color: #1C60FF;
+      border: 3px solid #1C60FF;
+      line-height: 48px;
+      margin-left: 15px;
+      flex: 1;
+      text-align: center
+    }
+    // .bgBtn {
+    //   .btn;
+    //   color: #ffffff;
+    //   background: #1C60FF;
+    //   border: 3px solid transparent;
+    // }
+  }
+}
+.modalLayout {
+  font-size: 34px;
+  font-weight: 500;
+  color: #353535;
+  line-height: 48px;
+  padding: 30px;
+}

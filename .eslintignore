@@ -1,0 +1,4 @@
+/config
+.history
+/scripts
+/src/utils/base64.min.js

@@ -1,0 +1,196 @@
+.fillOrder {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: rgba(241, 242, 243, 1);
+
+  :global {
+    .am-flexbox {
+      margin-top: 16px !important;
+    }
+  }
+
+  .fillAddr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+    color: rgba(4, 28, 30, 1);
+    font-weight: 400;
+    font-size: 24px;
+    background: #fff;
+    background-image: url('../../../assets/img/payment/addr_bg.png');
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+
+    .addrDetails {
+      margin: 20px 0;
+      color: rgba(4, 28, 30, 1);
+      font-weight: 600;
+      font-size: 32px;
+    }
+
+    span {
+      margin-right: 6px;
+      padding: 2px;
+      color: rgba(255, 255, 255, 1);
+      font-weight: 400;
+      font-size: 22px;
+      background: rgba(245, 60, 84, 1);
+      border-radius: 4px;
+    }
+
+    .leftAddr {
+      flex: 6;
+    }
+
+    .rightAddr {
+      flex: 1;
+      text-align: right;
+    }
+  }
+
+  .fillOrderBlock {
+    margin: 30px 0;
+    padding: 24px;
+    color: rgba(4, 28, 30, 1);
+    font-weight: 400;
+    font-size: 28px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 24px;
+  }
+
+  .moreAlertIcon {
+    margin-left: 10px;
+  }
+
+  .blodPriceText {
+    color: rgba(4, 28, 30, 1);
+    font-weight: 600;
+  }
+
+  .tipText {
+    color: #f53c54;
+    font-weight: 600;
+  }
+
+  .marginBottom {
+    margin-bottom: 16px;
+  }
+
+  .grayFont {
+    color: rgba(105, 109, 108, 1);
+    font-weight: 400;
+    font-size: 24px;
+  }
+
+  .prodInfoBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .prodDes {
+      display: -webkit-box;
+      width: 100%;
+      overflow: hidden;
+      color: rgba(4, 28, 30, 1);
+      font-weight: 400;
+      font-size: 28px;
+      text-align: left;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .subDes {
+      color: #b3b5b7;
+      font-size: 22px;
+    }
+
+    .skuBlock {
+      flex: 3;
+      padding-left: 20px;
+
+      div {
+        padding-top: 10px;
+      }
+    }
+
+    .priceBlock {
+      flex: 1;
+      margin-top: -35px;
+      text-align: right;
+
+      .samllText {
+        font-size: 24px;
+      }
+
+      .quantity {
+        color: #b3b5b7;
+        font-size: 24px;
+      }
+    }
+  }
+
+  .prodPriceAndNum {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .prodPrice {
+      margin-right: 20px;
+    }
+  }
+}
+
+.footBtn {
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  // height: 164px;
+  padding: 30px 30px 50px 30px;
+  background: #fff;
+
+  .blockFlex {
+    flex: 1;
+  }
+
+  .submit {
+    padding: 20px 40px;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 400;
+    font-size: 32px;
+    text-align: center;
+    background: linear-gradient(270deg, rgba(247, 79, 79, 1) 0%, rgba(245, 60, 84, 1) 100%);
+    border-radius: 44px;
+  }
+}
+
+.integer {
+  color: #f53c54;
+  font-weight: 600;
+  font-size: 44px;
+}
+
+.decimal {
+  color: #f53c54;
+  font-size: 28px;
+}
+
+.accNumber {
+  margin-right: 10px;
+  padding: 2px;
+  color: rgba(255, 255, 255, 1);
+  font-size: 22px;
+  background: rgba(245, 60, 84, 1);
+  border-radius: 4px;
+}

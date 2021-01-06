@@ -1,0 +1,138 @@
+.normalSectPage {
+    height: 100vh;
+    overflow-y: scroll;
+    background: #fff;
+
+    :global {
+        .am-search-input {
+            height: 80px !important;
+            border-radius: 48px;
+        }
+
+        .am-search-input input[type="search"] {
+            height: 80px !important;
+        }
+
+        .am-search-input .am-search-synthetic-ph {
+            height: 80px !important;
+            line-height: 80px;
+
+        }
+    }
+}
+
+.pageTitle {
+    padding: 32px 0;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 34px;
+    text-align: center;
+    background: #1C60FF;
+}
+
+.normalSectHead {
+    height: 486px;
+    margin-top: -2px;
+    padding: 32px 40px;
+    text-align: center;
+    background-image: url(../../../assets/img/customer/sect/sect_bg.png);
+    background-repeat: no-repeat;
+
+    .cardContent {
+        margin-top: 40px;
+        background: #FFF;
+        border-radius: 40px;
+        box-shadow: 0 14px 42px -18px rgba(60, 25, 255, 0.16);
+
+        .myToux {
+            width: 172px;
+            height: 172px;
+            margin-top: -86px;
+            border-radius: 100%;
+
+        }
+
+        .tipMsg {
+            margin-top: 35px;
+            color: #000;
+            font-weight: 600;
+            font-size: 36px;
+            opacity: 0.6;
+        }
+
+        .btnContent {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 55px;
+            font-weight: 600;
+
+
+            .memberBtn {
+                padding: 20px 70px;
+                color: #135FFC;
+                font-size: 36px;
+                background: #CEDEFF;
+                border-radius: 49px;
+                box-shadow: 0 30px 20px -20px rgba(28, 96, 255, 0.19);
+
+            }
+
+            .creatHead {
+                padding: 20px 36px;
+                color: #FFF;
+                font-size: 34px;
+                background: #135FFC;
+                border-radius: 49px;
+                box-shadow: 0 30px 20px -20px rgba(28, 96, 255, 0.19);
+
+            }
+        }
+
+        .cardCell {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding: 30px;
+            font-size: 26px;
+            border-top: solid 1px #e3e3e3;
+        }
+
+        .leftSpan {
+            margin-left: 10px;
+            color: #333;
+
+        }
+
+        .rigthSpan {
+            margin-right: 4px;
+            color: #1C60FF;
+        }
+
+    }
+}
+
+.headsContent {
+    margin-top: 90px;
+
+    .headList {
+        // height: 41vh;
+        overflow-y: scroll;
+    }
+
+
+}
+
+.iconContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .searchIcon {
+        margin-right: 20px;
+    }
+}

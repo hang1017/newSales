@@ -1,0 +1,123 @@
+.createPage {
+    height: calc(100vh - 90px);
+    overflow: hidden;
+    background: #Fff;
+
+}
+
+.sectIcon {
+    width: 56px;
+    height: 56px;
+}
+
+
+.memberTipMsg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+    color: #999;
+    font-size: 24px;
+    opacity: 0.5;
+
+
+    .tipLine {
+        width: 70px;
+        height: 2px;
+        margin: 0 10px;
+        background: #999;
+    }
+
+}
+
+
+
+.formCell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+
+    .labeText {
+        // color: #06041e;
+        font-weight: 400;
+        font-size: 28px;
+    }
+
+    .touxDiv {
+        position: relative;
+
+        .touxInput {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 80px;
+            height: 80px;
+            opacity: 0;
+        }
+    }
+
+    .toux {
+        width: 80px;
+        height: 80px;
+        border-radius: 100%;
+    }
+
+    .formValue {
+        color: #69696d;
+        font-weight: 400;
+        font-size: 28px;
+    }
+
+    &:last-child {
+        border-top: #f3f3f3 1px solid;
+    }
+}
+
+
+.modalTitle {
+    padding-bottom: 30px;
+    color: #000;
+    font-weight: 500;
+    font-size: 34px;
+    text-align: center;
+
+
+}
+
+.modalBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 30px -30px 0 -30px;
+    border-top: solid 1px #ccc;
+
+    .exitBtn {
+        color: #000;
+        font-weight: 500;
+        font-size: 34px;
+    }
+
+    .inviteMemberBtn {
+        .exitBtn;
+
+        color: #576B95;
+
+    }
+
+    .leftBtn {
+        width: 40%;
+        border-right: solid 1px #ccc;
+    }
+
+    span {
+        display: block;
+        padding: 20px 0;
+    }
+}
+
+:global {
+    .am-modal-transparent .am-modal-content .am-modal-body {
+        padding-bottom: 10px;
+    }
+}

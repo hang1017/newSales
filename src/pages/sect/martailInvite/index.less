@@ -1,0 +1,194 @@
+.invite {
+    height: 100%;
+    padding: 0 46px;
+    overflow-y: scroll;
+    background: #1677FE;
+
+    .head {
+        color: #ffff;
+
+        &>h3 {
+            padding-top: 28px;
+            color: #FFC872;
+            font-weight: 600;
+        }
+
+        div {
+            font-weight: 400;
+            font-size: 28px;
+            line-height: 60px;
+        }
+
+        span {
+            color: #FFC872;
+            font-size: 28px;
+
+        }
+    }
+
+    .contain {
+        height: 2100px;
+        margin-top: 29px;
+        padding: 20px 34px;
+        color: #A2B5EE;
+        font-size: 27px;
+        // text-align: center;
+        text-indent: 2em;
+        background: #0A3DD2;
+        border-radius: 24px 24px 0 0;
+
+        p:nth-child(1) {
+            text-align: center;
+        }
+
+        .copyRight {
+            margin-top: 80px;
+            text-align: center;
+            text-indent: 0;
+
+            span:first-child {
+                // background-image: linear-gradient(, #366AE1);
+                color: transparent;
+                background: linear-gradient(to left, #FFF, #366AE1);
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+
+            span:last-child {
+                // background-image: linear-gradient(, #366AE1);
+                color: transparent;
+                background: linear-gradient(to left, #366AE1, #FFF);
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+        }
+
+        .footer {
+            // margin-top: -63px;
+            // text-indent: 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            .base {
+                position: relative;
+                display: flex;
+                width: 100%;
+                height: 200px;
+                .leftOrRightBase {
+                    display: flex;
+                    flex: 1;
+                    height: 0;
+                    border-color: transparent transparent #fff;
+                    border-style: none solid solid;
+                    border-width: 0 92px 455px 0;
+                }
+
+                .right {
+                    .leftOrRightBase;
+                    transform: rotate(270deg);
+                }
+
+                .left {
+                    .leftOrRightBase;
+                    transform: rotate(90deg) scaleX(-1);
+                }
+            }
+
+            .time {
+                position: relative;
+                margin: -30px 0 50px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                // z-index: 1;
+
+                .show {
+                    display: block;
+                }
+
+                .hide {
+                    display: none;
+                }
+
+                div {
+                    margin-bottom: 20px;
+                    color: black;
+                    font-weight: bold;
+                    font-size: 24px;
+                    text-align: center;
+
+                    span {
+                        color: #1677FE;
+                    }
+                }
+
+                .button {
+                    width: 574px;
+                    height: 80px;
+                    color: #ffff;
+                    font-size: 34px;
+                    background: #1461FC;
+                    border: none;
+                    border-radius: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                }
+
+                .disabeBtn {
+                    .button;
+
+                    color: #FFF;
+                    background: #E6E6E6;
+                }
+
+                .expier {
+                    color: #EF0000;
+                }
+
+            }
+        }
+    }
+
+
+}
+
+.exitLogin {
+    padding: 30px;
+    color: #FFF;
+    font-size: 32px;
+    text-align: right;
+
+
+}
+
+.errorMsg {
+    padding: 30px;
+    color: #000;
+    font-size: 34px;
+    text-align: center;
+    border-top: solid 1px #E5E5E5;
+    border-bottom: solid 1px #E5E5E5;
+}
+
+.activeBtn {
+    padding: 20px;
+    color: #576B95;
+    font-weight: 500;
+    font-size: 34px;
+    text-align: center;
+    border-bottom: solid 1px #E5E5E5;
+}
+
+.cancleBtn {
+    padding: 20px;
+    color: #000;
+    font-weight: 500;
+    font-size: 34px;
+    text-align: center;
+    border-bottom: solid 1px #E5E5E5;
+}

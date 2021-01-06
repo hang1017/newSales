@@ -1,0 +1,133 @@
+.starHelpOrderStyle {
+  background-color: #191736;
+  height: 100%;
+  overflow: auto;
+
+  .imgDiv {
+    position: relative;
+
+    .friendImg {
+      width: 100%;
+    }
+
+    .hideBtn {
+      position: absolute;
+      bottom: 30px;
+      left: 50px;
+      right: 50px;
+      background-color: transparent;
+      height: 100px;
+    }
+  }
+
+
+  .starHelpOrderContainer {
+    padding: 0 32px 130px 32px;
+
+    .frame {
+      background: rgba(3, 28, 78, 0.6);
+      box-shadow: 0px 2px 60px 0px rgba(31, 213, 255, 0.3);
+      border-radius: 12px;
+      padding: 42px 48px;
+
+      .btnDiv {
+        padding: 56px 18px 80px 18px;
+
+        .btn {
+          height: 96px;
+          background: linear-gradient(179deg, #82C9FF 0%, #006DE3 100%);
+          border-radius: 48px;
+          font-size: 34px;
+          font-weight: 600;
+          color: #FFFFFF;
+          line-height: 48px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+        }
+
+        .btns {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .titleText {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 48px;
+
+        .waitImg {
+          width: 68px;
+          height: 12px;
+        }
+
+        .text {
+          font-size: 28px;
+          font-weight: 600;
+          color: #FFFFFF;
+          line-height: 40px;
+          padding: 0 14px;
+        }
+      }
+
+      :global {
+        .am-list-body {
+          background-color: transparent;
+          border-top: none;
+          border-bottom: 1PX solid #BBBBBB;
+        }
+
+        .am-list-item.am-input-item {
+          padding-left: 0px;
+        }
+
+        .am-list-item {
+          background-color: transparent;
+        }
+
+        .am-list-line {
+          padding-right: 0px;
+        }
+
+        .am-list-body div:not(:last-child) .am-list-line {
+          border-bottom: 1PX solid #BBBBBB;
+        }
+
+        .alitajs-dform-title {
+          font-size: 28px;
+          font-weight: 600;
+          color: #FFFFFF;
+          line-height: 40px;
+          text-shadow: 0px 0px 16px #00CBFF;
+        }
+
+        .am-input-control input {
+          color: #fff;
+          font-size: 28px;
+          font-weight: 400;
+          line-height: 40px;
+        }
+
+        .am-input-control input::placeholder {
+          font-size: 28px !important;
+          font-weight: 400 !important;
+          color: #999999 !important;
+          line-height: 40px !important;
+        }
+      }
+    }
+  }
+
+  .codeText {
+    font-size: 28px;
+    font-weight: 400;
+    color: #00E4FF;
+    line-height: 40px;
+  }
+}

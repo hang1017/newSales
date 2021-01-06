@@ -1,0 +1,88 @@
+  .columnLayout {
+    display: flex;
+    flex-direction: column;
+  }
+  .columnLayoutWithMargin {
+    .columnLayout;
+    margin-left: 10px;
+  }
+  .greyLine {
+    height: 2px;
+    background: #EEEEEE;
+  }
+  .listMargin {
+    margin-left: 20px;
+  }
+  .listItem {
+    display: flex;
+    flex-direction: row;
+    .normalLayout {
+      padding: 14px 0;
+      flex: 1;
+    }
+    .checkItem {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex: 1;
+      margin: 20px 0;
+      img {
+        width: 70px;
+        height: 70px;
+      }
+      .nameText {
+        font-size: 30px;
+        font-weight: 500;
+        color: #333333;
+        line-height: 30px;
+        max-width: 350px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+      }
+      .roleText {
+        font-size: 24px;
+        font-weight: 400;
+        color: #999999;
+        line-height: 24px;
+        margin-top: 15px;
+        max-width: 350px;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+      }
+    }
+    .btnLayout {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin-right: 24px;
+      .btn {
+        border-radius: 28px;
+        padding: 10px 30px;
+        font-size: 24px;
+        font-weight: 400;
+        color: #FF481C;
+        border: 2px solid #FF4D22;
+        line-height: 34px;
+        margin-left: 15px;
+      }
+      .blueBtn {
+        .btn;
+        color: #ffffff;
+        background: #1C60FF;
+        border: 2px solid #1C60FF;
+      }
+    }
+    :global{
+      .am-list-item {
+        flex: 1;
+        .am-list-thumb {
+          .am-checkbox-inner {
+            top: 44px !important;
+          }
+        }
+      }
+    }
+  }
+// }

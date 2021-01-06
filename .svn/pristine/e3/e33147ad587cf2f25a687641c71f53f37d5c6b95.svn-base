@@ -1,0 +1,33 @@
+.oldUserLogin {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+}
+
+.orderInfo {
+  padding: 32px;
+
+  .headTitle {
+    color: #242424;
+    font-weight: 600;
+    font-size: 48px;
+  }
+}
+
+.subTitle {
+  margin-top: 50px;
+  padding: 0 32px;
+  color: #464646;
+  font-weight: 400;
+  font-size: 30px;
+}
+
+.skuListInofo {
+  flex: 2;
+  overflow: scroll;
+}
+
+.fooBlock {
+  flex: 1;
+}

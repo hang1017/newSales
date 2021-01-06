@@ -1,0 +1,170 @@
+@import '../../global.less';
+
+.center {
+  padding-right: 48px;
+  padding-left: 48px;
+  overflow: hidden;
+  background: #fff;
+
+  .emergenText {
+    font-size: 28px;
+    font-weight: 400;
+    color: #2CA5FF;
+    line-height: 40px;
+    text-align: right;
+    padding-top: 34px;
+  }
+
+  .topView {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+
+    .close {
+      width: 56px;
+      height: 56px;
+    }
+
+    .registerText {
+      color: #041c1e;
+      font-size: 28px;
+    }
+  }
+
+  .welcome {
+    margin-top: 48px;
+    margin-bottom: 32px;
+    color: #041c1e;
+    font-size: 40px;
+  }
+
+  .btn {
+    margin-top: 48px;
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
+    background: @themeBg;
+    border-radius: 45px;
+  }
+
+  .otherView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 0;
+
+    .tovercode {
+      color: #696d6c;
+      font-size: 28px;
+    }
+
+    .forget {
+      color: @themeColor;
+      font-size: 28px;
+    }
+  }
+}
+
+.loginHint {
+  position: fixed;
+  bottom: 108px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: #696d6c;
+  font-size: 24px;
+
+  .agreement {
+    color: @themeColor;
+  }
+}
+
+:global {
+  .am-modal-transparent {
+    // width: 100%;
+    // // margin: 0 50px;
+
+    .am-modal-title {
+      color: #041c1e;
+      font-size: 36px;
+    }
+  }
+}
+
+.modalView {
+  .hintText {
+    color: @themeColor;
+  }
+
+  .modalButView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 84px;
+
+    .noAgree {
+      flex: 1;
+      padding: 16px;
+      color: #696d6c;
+      font-size: 28px;
+      border-radius: 36px;
+    }
+
+    .agree {
+      flex: 1;
+      padding: 16px;
+      color: #fff;
+      font-size: 28px;
+      background: @themeBg;
+      border-radius: 36px;
+    }
+  }
+}
+
+.sendText {
+  position: absolute;
+  right: 68px;
+  margin-top: -75px;
+  font-size: 28px;
+}
+
+.verifyCode {
+  .sendText();
+
+  color: @themeColor;
+}
+
+.disableBtn {
+  .sendText();
+
+  color: rgb(195, 195, 195);
+}
+
+.tipMsg {
+  margin-top: 30px;
+  color: @themeColor;
+  font-size: 26px;
+}
+
+.loginCodeImg {
+  position: absolute;
+  right: 68px;
+  margin-top: -88px;
+  width: 160px;
+  height: 66px;
+}
+
+
+.appletImg {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  margin-left: -48px;
+  text-align: center;
+}

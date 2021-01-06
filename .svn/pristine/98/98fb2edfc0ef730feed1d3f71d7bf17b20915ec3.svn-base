@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content="telephone=no" name="format-detection" />
+
+  <meta charset="utf-8" />
+  <meta http-equiv="Pragma" contect="no-cache" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no" />
+  <script src="./collection-1.4.1.js"></script>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
+</html>

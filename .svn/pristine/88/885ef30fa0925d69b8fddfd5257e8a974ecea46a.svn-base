@@ -1,0 +1,22 @@
+.priceLabelStyle {
+  .symbol {
+    color: #f53c54;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 26px;
+  }
+
+  .mainMoney {
+    color: #f53c54;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 36px;
+  }
+
+  .subMoney {
+    color: #f53c54;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28px;
+  }
+}

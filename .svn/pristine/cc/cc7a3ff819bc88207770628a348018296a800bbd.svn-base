@@ -1,0 +1,201 @@
+.formCardStyle {
+  border-radius: 20px;
+  padding: 102px 0 52px 0;
+  background-image: url('../../../../assets/img/onlineCar/formBg.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+
+  :global {
+    .am-list-body {
+      border: none;
+      background-color: transparent;
+    }
+
+    .alitajs-dform-input-text {
+      background-color: transparent;
+      color: #000 !important;
+    }
+
+    .am-input-control input {
+      font-size: 28px !important;
+      color: #000;
+    }
+
+    .am-list-item {
+      background-color: transparent;
+    }
+
+    .am-list-item .am-list-line {
+      padding-right: 0px;
+    }
+
+    .am-list-body div .am-list-line {
+      border-bottom: 1px solid #999;
+    }
+
+    .am-list-item .am-list-line .am-list-arrow {
+      background-image: url('../../../../assets/img/onlineCar/right.png');
+      width: 14px;
+      height: 22px;
+    }
+
+    .alitajs-dform-text-text {
+      font-size: 28px;
+    }
+
+    .alitajs-dform-text-content .alitajs-dform-text-text {
+      color: #000 !important;
+    }
+
+    .alitajs-dform-placeholder .alitajs-dform-text-text {
+      color: rgb(164, 170, 182);
+    }
+
+    .alitajs-dform-placeholder .alitajs-dform-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #363636;
+      line-height: 40px;
+    }
+
+    .alitajs-dform-value-content .alitajs-dform-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: #363636;
+      line-height: 40px;
+
+    }
+
+    .am-input-control input::placeholder {
+      // 自定义样式
+      font-size: 28px;
+      color: rgb(164, 170, 182) !important;
+    }
+
+    .alitajs-dform-input-text::placeholder {
+      // 自定义样式
+      font-size: 28px !important;
+      color: rgb(164, 170, 182) !important;
+    }
+
+    .alitajs-dform-input-value::placeholder {
+      // 自定义样式
+      font-size: 28px !important;
+      color: rgb(164, 170, 182) !important;
+    }
+  }
+
+  .formTitle {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+
+    .blingImg {
+      width: 238px;
+      height: 36px;
+    }
+  }
+
+  .formStyle {
+    padding-left: 34px;
+    padding-right: 68px;
+  }
+
+  .busPay {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 48px;
+    padding-top: 36px;
+
+    .payCheckImg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .payText {
+      font-size: 26px;
+      font-family: PingFangSC-Semibold,
+        PingFang SC;
+      font-weight: 600;
+      color: #999999;
+      line-height: 36px;
+      padding-left: 22px;
+      color: #00E4FF;
+    }
+  }
+
+  .formStyle2 {
+    padding-left: 18px;
+    padding-right: 58px;
+    height: 0px;
+    overflow: hidden;
+    transition: height 1s;
+  }
+
+  .formShow {
+    height: 180px;
+  }
+
+  .fcBtnDiv {
+    padding: 28px 74px;
+
+    .fcBtn {
+      background-image: url('../../../../assets/img/onlineCar/carBtn.png');
+      background-size: 100% auto;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 120px;
+      border: none;
+    }
+
+    .fcBtns {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .footBtnDiv {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 74px;
+
+    .checkImg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .text {
+      font-size: 26px;
+      font-weight: 400;
+      color: #999999;
+      line-height: 36px;
+      padding-left: 22px;
+
+      span {
+        // text-decoration: underline;
+        color: #2EA578;
+      }
+    }
+  }
+
+  .codeText {
+    font-size: 28px;
+    font-weight: 600;
+    color: #FFA513;
+    line-height: 40px;
+  }
+
+  .rightImg {
+    width: 14px;
+    height: 22px;
+  }
+
+  .validateCodeImg {
+    width: 200px;
+    height: 66px;
+  }
+}

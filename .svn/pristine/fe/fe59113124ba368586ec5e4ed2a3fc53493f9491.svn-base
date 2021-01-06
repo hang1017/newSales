@@ -1,0 +1,63 @@
+.center {
+  padding: 33px 24px;
+
+  .tip {
+    color: #323138;
+    font-weight: 400;
+    font-size: 32px;
+  }
+
+  .codeForm {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    margin-top: 80px;
+
+    input {
+      width: 64px;
+      color: #041c1e;
+      font-weight: 400;
+      font-size: 64px;
+      line-height: 90px;
+      text-align: center;
+      border-width: 0;
+      border-bottom: 2px solid #ccc;
+    }
+
+    :global {
+      .ant-input:focus {
+        border-color: #fff;
+        border-right-width: 0 !important;
+      }
+
+      .ant-input:hover {
+        border-color: #fff;
+        border-right-width: 0 !important;
+      }
+    }
+  }
+
+  .btn {
+    margin-top: 48px;
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
+    background-color: #f53c54;
+    border-radius: 50px;
+  }
+
+  .countView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    margin-top: 32px;
+    color: #b3b5b7;
+    font-size: 28px;
+
+    .codeTip {
+      color: #f53c54;
+    }
+  }
+}

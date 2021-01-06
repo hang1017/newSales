@@ -1,0 +1,24 @@
+.gooseRuleStyle {
+  font-size: 30px;
+  font-family: PingFangSC-Regular,
+    PingFang SC;
+  font-weight: 400;
+  color: #131415;
+  line-height: 42px;
+  padding: 0px 40px;
+  overflow: auto;
+  background-color: #fff;
+
+  .gooseRuleContent {
+    padding-bottom: 40px;
+  }
+
+  .divs {
+    color: #131415;
+    padding-top: 30px;
+
+    span {
+      color: #2074FB;
+    }
+  }
+}

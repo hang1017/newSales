@@ -1,0 +1,27 @@
+.center {
+    height: 100vh;
+
+}
+
+.rigthIcon {
+    width: 14px;
+    height: 26px;
+}
+
+.footBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 112px;
+    margin-top: 18px;
+    color: #FA5151;
+    font-size: 34px;
+    background: #Fff;
+}
+
+
+.toux {
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+}

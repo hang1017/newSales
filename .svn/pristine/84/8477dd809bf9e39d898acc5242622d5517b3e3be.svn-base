@@ -1,0 +1,12 @@
+.playDesPage {
+    // height: 90vh;
+    padding: 0 40px 120px;
+    overflow-y: scroll;
+    color: #131415;
+    font-size: 30px;
+    background: #fff;
+
+    &>div {
+        padding-top: 40px;
+    }
+}

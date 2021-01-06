@@ -1,0 +1,262 @@
+.rechargeStyle {
+  height: 100%;
+  padding-bottom: 200px;
+  overflow: auto;
+  background-color: rgb(245, 247, 249);
+
+  .recTitle {
+    position: fixed;
+    top: 0;
+    z-index: 11;
+    display: flex;
+    width: 100%;
+    padding: 24px 24px 0 24px;
+    background: linear-gradient(270deg, #f74f4f 0%, #f53c54 100%);
+
+    .recTitleLeft {
+      flex: 1;
+
+      .recTitlebackimg {
+        width: 64px;
+        height: 64px;
+      }
+    }
+
+    .recTitleText {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 1);
+      font-size: 36px;
+      text-align: center;
+    }
+
+    .recTitleRight {
+      flex: 1;
+    }
+  }
+
+  .inputContent {
+    padding-top: 120px;
+
+    :global {
+      .am-list-item {
+        background: transparent;
+      }
+    }
+
+    .inputDiv {
+      width: 70%;
+
+      .claimImg {
+        width: 44px;
+        height: 44px;
+      }
+
+      :global {
+        .am-input-control ::placeholder {
+          color: #fff !important;
+          font-size: 56px;
+        }
+      }
+    }
+  }
+
+  .recTop {
+    position: relative;
+    padding-bottom: 16px;
+    background: linear-gradient(270deg, #f74f4f 0%, #f53c54 100%);
+
+    .recTitle2 {
+      width: 100%;
+    }
+
+    .operators {
+      padding-bottom: 92px;
+      padding-left: 30px;
+      color: rgba(255, 255, 255, 1);
+      font-size: 28px;
+    }
+  }
+
+  .gridStyle {
+    position: relative;
+    width: 100%;
+    margin-top: -70px;
+    padding: 0 22px;
+
+    .gridContent {
+      width: 100%;
+      padding: 26px;
+      background-color: rgba(255, 255, 255, 1);
+      border-radius: 16px;
+
+      .gridAll {
+        display: grid;
+        grid-gap: 24px;
+        grid-template-rows: auto auto auto;
+        grid-template-columns: auto auto auto;
+
+        .gridItem {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 148px;
+          background-color: rgba(255, 255, 255, 1);
+          border: 2px solid rgba(229, 229, 229, 1);
+          border-radius: 16px;
+
+          .gridItemTitle {
+            color: rgba(4, 28, 30, 1);
+            font-size: 40px;
+            text-align: center;
+          }
+
+          .gridItemSubTitle {
+            padding-top: 4px;
+            color: rgba(105, 109, 108, 1);
+            font-size: 28px;
+            text-align: center;
+          }
+
+          .redCheck {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 56px;
+            height: 56px;
+          }
+        }
+
+        .gridItemActive {
+          border: 2px solid rgba(245, 60, 84, 1);
+        }
+      }
+    }
+
+    .gridBottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 54px;
+
+      .gridMoney {
+        color: rgba(4, 28, 30, 1);
+        font-size: 32px;
+
+        span {
+          color: rgb(226, 77, 89);
+        }
+      }
+    }
+  }
+
+  .rechargeInstructions {
+    padding: 28px 30px;
+    color: rgba(179, 181, 183, 1);
+    font-size: 28px;
+    text-align: left;
+  }
+
+  .recordQuery {
+    padding-top: 36px;
+    color: rgba(31, 144, 236, 1);
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .footBtn {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 166px;
+    padding: 24px;
+    background-color: #fff;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.08);
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 72px;
+      color: #fff;
+      font-size: 28px;
+      background-color: rgba(245, 60, 84, 1);
+      border-radius: 36px;
+
+      &:active {
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+.reChargeSearchBarDrawer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  :global {
+    .am-list-item {
+      background-color: transparent;
+    }
+
+    .am-input-clear {
+      background-color: transparent;
+      background-image: url(../../../assets/inputClear.png);
+      background-position: 0 0;
+    }
+
+    .am-input-control ::placeholder {
+      color: #fff !important;
+      font-size: 56px;
+    }
+  }
+
+  .drawTop {
+    background: linear-gradient(270deg, #f74f4f 0%, #f53c54 100%);
+  }
+
+  .drawShadow {
+    flex: 1;
+    padding: 0 28px;
+    background: rgba(0, 0, 0, 0.4);
+
+    .drawListContent {
+      background-color: #fff;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+
+      .drawList {
+        padding: 0 28px;
+
+        .hisItem {
+          padding: 32px 0;
+          border-bottom: 2px solid #f4f7f6;
+
+          .hisItemPhone {
+            color: rgba(4, 28, 30, 1);
+            font-size: 36px;
+          }
+
+          .hisItemName {
+            color: rgba(105, 109, 108, 1);
+            font-size: 24px;
+          }
+        }
+
+        .clearhistory {
+          padding: 32px 0;
+          color: rgba(105, 109, 108, 1);
+          font-size: 28px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

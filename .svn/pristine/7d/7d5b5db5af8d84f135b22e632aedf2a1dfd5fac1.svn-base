@@ -1,0 +1,275 @@
+@import '../../../global.less';
+
+.center {
+  // height: 87%;
+  background-size: 100% 280px;
+
+  .headerContain {
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 80px;
+    color: #fff;
+    font-size: 36px;
+    background: @themeBg;
+
+    .iconBack {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      text-align: left;
+    }
+
+    .headerTitle {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .tabItem {
+    padding-bottom: 10px;
+    background-color: #f5f7f9;
+
+    .searchPhone {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 80px;
+      padding: 24px;
+      font-size: 32px;
+      line-height: 80px;
+      background-color: #fff;
+
+      .phoneNum {
+        width: 70%;
+        text-align: left;
+      }
+
+      .moreInfo {
+        width: 30%;
+        color: @themeColor;
+        font-size: 28px;
+        text-align: right;
+      }
+    }
+
+    .cardContain {
+      background-color: #f5f7f9;
+
+
+      .title {
+        display: flex;
+        height: auto;
+        padding: 10px 0;
+        font-size: 32px;
+        background-color: #fff;
+
+        .iconBg {
+          display: block;
+          width: 8px;
+          height: 54px;
+          margin: auto 0;
+          margin-right: 15px;
+          background-color: @themeColor;
+          border-radius: 15px;
+        }
+
+        .desc {
+          height: 68px;
+          line-height: 68px;
+        }
+      }
+
+      .cardItem {
+        width: 100%;
+        margin-bottom: 20px;
+        padding: 10px 20px;
+        background-color: #fff;
+        border-radius: 24px;
+
+        .saleTitle {
+          font-weight: bold;
+          font-size: 28px;
+        }
+
+        .flowPercentContain {
+          width: 100%;
+          height: 24px;
+          margin: 30px 0 10px 0;
+          background-color: #e9ebec;
+          border-radius: 12px;
+
+          .flowPercent {
+            height: 100%;
+            background: @themeBg;
+            border-radius: 12px;
+          }
+
+          .setMealFlowPercent {
+            background: @themeBg;
+          }
+        }
+
+        .descContain {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          font-size: 24px;
+
+          span {
+            color: #696d6c;
+          }
+
+          .flowNum {
+            color: @themeColor;
+          }
+        }
+
+        .setMealContain {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          color: rgba(4, 28, 30, 1);
+          font-weight: bold;
+          font-size: 28px;
+
+          .title {
+            border-radius: 24px;
+          }
+
+          .flowNum {
+            color: @themeColor;
+          }
+
+          .overflow {
+            height: 34px;
+            color: rgba(105, 109, 108, 1);
+            line-height: 34px;
+          }
+
+          .overflowValue {
+            height: 17px;
+            margin-bottom: 20px;
+            color: @themeColor;
+            font-size: 24px;
+            text-align: right;
+          }
+        }
+
+        .showMore {
+          width: 100%;
+          margin: 20px;
+          color: #696d6c;
+          font-size: 24px;
+          text-align: center;
+
+          .iconDetails {
+            position: relative;
+            top: 10px;
+          }
+        }
+
+        .detailsContain {
+          font-size: 24px;
+
+          .orderTitle {
+            width: 100%;
+            height: 50px;
+            overflow: hidden;
+            color: rgba(4, 28, 30, 1);
+            font-weight: bold;
+            font-size: 28px;
+            line-height: 50px;
+            white-space: nowrap;
+            text-align: left;
+            text-overflow: ellipsis;
+            word-break: keep-all;
+          }
+
+          .flowDetails {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin: 20px 0;
+
+            .flowNum {
+              color: @themeColor;
+            }
+          }
+
+          .expiresTime {
+            margin-bottom: 30px;
+            color: rgba(179, 181, 183, 1);
+          }
+        }
+      }
+    }
+  }
+
+  :global {
+
+    .am-tabs-default-bar-top,
+    .am-tabs-default-bar-bottom {
+      // height: 250px;
+      padding-bottom: 20px;
+      color: #fff;
+      background: @themeBg;
+      // background-size: 100% 100%;
+    }
+
+    .am-tabs-default-bar-top .am-tabs-default-bar-content,
+    .am-tabs-default-bar-bottom .am-tabs-default-bar-content {
+      align-self: flex-end;
+    }
+
+    .am-tabs-default-bar-top .am-tabs-default-bar-tab {
+      font-size: 36px;
+    }
+
+    .am-tabs-default-bar-underline {
+      height: 25px !important;
+    }
+
+    .am-tabs-default-bar-underline::before {
+      position: absolute;
+      display: inline-block;
+      width: 100px;
+      height: 8px;
+      margin-left: -50px;
+      background-color: #fff;
+      border-radius: 24px;
+      content: '';
+    }
+
+    .am-tabs {
+      margin-top: -1px !important;
+    }
+  }
+}
+
+.toalAmount {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 202px;
+  margin-top: -2px;
+  color: #FFF;
+  text-align: center;
+  background: @themeBg;
+
+
+
+  .price {
+    font-weight: 600;
+    font-size: 56px;
+  }
+
+  .label {
+    font-weight: 400;
+    font-size: 28px;
+
+  }
+}

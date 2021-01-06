@@ -1,0 +1,26 @@
+.footSingleBtn {
+  margin-top: 36px;
+  padding: 20px 30px 40px 30px;
+
+  .normalBtn() {
+    padding: 15px;
+    font-weight: 400;
+    font-size: 32px;
+    text-align: center;
+    border-radius: 45px;
+  }
+
+  .submit {
+    .normalBtn();
+
+    color: rgba(255, 255, 255, 1);
+    background: linear-gradient(90deg, #6db4ff 0%, #187dfb 100%);
+  }
+
+  .grayBtn {
+    .normalBtn();
+
+    color: #fff;
+    background: #d4d4d4;
+  }
+}

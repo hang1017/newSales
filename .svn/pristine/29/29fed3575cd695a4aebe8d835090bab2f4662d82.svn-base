@@ -1,0 +1,258 @@
+import React, { FC, useState, useRef, useEffect } from 'react';
+import {
+  BroadbandSelectModelState,
+  ConnectProps,
+  connect,
+  OldUserLoginSuccessModelState,
+  history,
+} from 'alita';
+import { qryStandardAddressAttrService } from '@/services/tradingCenter';
+import { SearchBar, Toast, Button } from 'antd-mobile';
+import LoadMoreListView, { LoadMoreListAttributes } from '@alitajs/list-view';
+import DynamicForm, { useForm, IFormItemProps } from '@/components/DynamicForm';
+
+import SelectPng from '@/assets/img/select_blue.png';
+import UnSelectPng from '@/assets/img/un_select.png';
+import EmptyPng from '@/assets/img/customer/empty_content.png';
+
+import styles from './index.less';
+
+interface PageProps extends ConnectProps {
+  broadbandSelect: BroadbandSelectModelState;
+  oldUserLoginSuccess: OldUserLoginSuccessModelState;
+}
+
+const BroadbandSelectPage: FC<PageProps> = ({
+  broadbandSelect,
+  dispatch,
+  oldUserLoginSuccess,
+  location,
+}) => {
+  const [form] = useForm();
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [selectValue, setSelectValue] = useState();
+  const loadMoreList = useRef<LoadMoreListAttributes>(null);
+  const [initFlag, setInitFlag] = useState<boolean>(true);
+  // const [formsValues, setFormsValues] = useState();
+
+  const { params = '{}', attrValue } = location.query;
+  const paramsData = JSON.parse(params);
+
+  const { homeAddrData = [] } = broadbandSelect;
+  const { commonAttrValue = {} } = oldUserLoginSuccess;
+
+  useEffect(() => {
+    dispatch!({
+      type: 'broadbandSelect/save',
+      payload: {
+        homeAddrData: [],
+      },
+    });
+    // if (attrValue) {
+    //   setFormsValues({
+    //     homeAddr: JSON.parse(attrValue),
+    //   });
+    // }
+  }, []);
+
+  const addrFormData = [
+    {
+      type: 'addressPicker',
+      fieldProps: 'homeAddr',
+      title: '所在地区',
+      placeholder: '请选择-省-市-地区',
+      height: '70vh',
+      level: 3,
+      data: homeAddrData,
+      placeholderList: ['请选择省', '请选择市', '请选择区'],
+      onChangeLevel: (values: (string | number)[]) => {
+        if (values.length > 0 && values.length < 3) {
+          const parentId = values[values.length - 1];
+          dispatch!({
+            type: 'broadbandSelect/queryAreaNextLevel',
+            payload: {
+              parentId,
+            },
+          });
+        } else if (values.length === 0) {
+          dispatch!({
+            type: 'broadbandSelect/queryAreaFatherList',
+          });
+        }
+      },
+    },
+  ] as IFormItemProps[];
+  const formProps = {
+    data: addrFormData,
+    formsValues: {},
+    form,
+  };
+
+  /**
+   * 搜索框确认事件
+   */
+  const searchConfirm = () => {
+    const homeAddr = form.getFieldValue('homeAddr');
+    if (!homeAddr) {
+      Toast.fail('请先选择所在地区', 1);
+      return;
+    }
+    if (homeAddr && homeAddr.value.length !== 3) {
+      Toast.fail('请将所在地区选择完整', 1);
+      return;
+    }
+    if (!searchValue) {
+      Toast.fail('地址关键信息不能为空', 1);
+      return;
+    }
+    setInitFlag(false);
+    setTimeout(() => {
+      if (loadMoreList.current) loadMoreList.current.reloadDataSource();
+    }, 0);
+  };
+
+  /**
+   * 底部按钮确认事件
+   */
+  const confirmClick = () => {
+    const homeAddr = form.getFieldValue('homeAddr');
+    if (!homeAddr) {
+      Toast.fail('请先选择所在地区', 1);
+      return;
+    }
+    const { value = [], label = [] } = homeAddr;
+    if (homeAddr && value.length !== 3) {
+      Toast.fail('请将所在地区选择完整', 1);
+      return;
+    }
+    if (!selectValue) {
+      Toast.fail('请选择安装地址', 1);
+      return;
+    }
+    dispatch!({
+      type: 'oldUserLoginSuccess/applyAttrValModal',
+      payload: {
+        attrCode: paramsData?.attrCode,
+        attrName: paramsData?.attrName,
+        attrValue: selectValue?.id,
+        cartItemId: paramsData?.extMap?.cartItemId,
+        attrValueName: `${selectValue?.fullName}${selectValue?.id}`,
+        extMap: { lanId: selectValue?.cityId },
+      },
+    }).then((f: boolean) => {
+      if (f) {
+        dispatch!({
+          type: 'oldUserLoginSuccess/save',
+          payload: {
+            commonAttrValue: {
+              ...commonAttrValue,
+              [paramsData?.attrCode]: `${label.join(',')},${selectValue?.fullName}`,
+            },
+          },
+        });
+        history.goBack();
+      }
+    });
+  };
+
+  const getListData = async (params: object) =>
+    // eslint-disable-next-line consistent-return
+    new Promise((resolve, reject) => {
+      if (initFlag) {
+        resolve({ data: [], total: 0 });
+      } else {
+        const addr = form.getFieldValue('homeAddr') || {};
+        const { value = [] } = addr;
+        if (value.length !== 3) {
+          resolve({ data: [], total: 0 });
+          Toast.fail('请将所在地区选择完整', 1);
+          return;
+        }
+        // eslint-disable-next-line consistent-return
+        return qryStandardAddressAttrService({
+          ...params,
+          provinceId: value[0],
+          cityId: value[1],
+          areaId: value[2],
+          searchAddress: searchValue,
+        })
+          .then((res: any) => {
+            const { data = {}, errMessage = '', success = true } = res;
+            if (success) {
+              const { records = [], total = 0 } = data;
+              const dataSource = { data: records, total };
+              resolve(dataSource);
+            } else {
+              Toast.fail(errMessage, 1);
+              resolve({ data: [], total: 0 });
+            }
+          })
+          .catch((e: any) => {
+            reject(e.message);
+          });
+      }
+    });
+
+  const renderRow = (item: any) => (
+    <div className={styles.addrItem} onClick={() => setSelectValue(item)}>
+      <img
+        src={item?.id === selectValue?.id ? SelectPng : UnSelectPng}
+        alt=""
+        className={styles.checkImg}
+      />
+      <div className={styles.addrName}>{item?.fullName}</div>
+    </div>
+  );
+  return (
+    <div
+      className={styles.broadbandSelectStyle}
+      style={{ height: document.documentElement.clientHeight - 90 }}
+    >
+      <DynamicForm {...formProps} />
+      <div className={styles.searchBarLight}>
+        <SearchBar
+          placeholder="请输入地址关键信息"
+          maxLength={8}
+          value={searchValue}
+          onChange={(e: string) => setSearchValue(e)}
+          cancelText="查询"
+          onSubmit={searchConfirm}
+          onCancel={searchConfirm}
+        />
+      </div>
+      <div className={styles.broadList}>
+        <LoadMoreListView
+          ref={loadMoreList}
+          requestFunc={getListData}
+          renderRow={renderRow}
+          pullToRefresh={null}
+          initialListSize={30}
+          alias={{ page: 'pageNum', pageSize: 'pageSize' }}
+          noData={
+            <div className={styles.emptyDiv}>
+              <img src={EmptyPng} alt="" className={styles.emptyImg} />
+            </div>
+          }
+        />
+      </div>
+      <div className={styles.btnDiv}>
+        <Button className={styles.btn} onClick={confirmClick}>
+          确定
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+export default connect(
+  ({
+    broadbandSelect,
+    oldUserLoginSuccess,
+  }: {
+    broadbandSelect: BroadbandSelectModelState;
+    oldUserLoginSuccess: OldUserLoginSuccessModelState;
+  }) => ({
+    broadbandSelect,
+    oldUserLoginSuccess,
+  }),
+)(BroadbandSelectPage);

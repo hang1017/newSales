@@ -1,0 +1,51 @@
+.leftTabStyle {
+  height: 100%;
+  background-color: #f5f5f5;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none
+  }
+
+  .leftTabItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 112px;
+    font-size: 30px;
+    white-space: nowrap;
+
+    .leftCategoryName {
+      padding: 0 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .leftTabItemNum {
+      position: absolute;
+      top: 16%;
+      right: 8%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // padding: 0px 6px;
+      width: 30px;
+      height: 30px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 22px;
+      background-color: #fe4854;
+      border-radius: 50%;
+    }
+  }
+
+  .leftTabItemActive {
+    color: #242424;
+    font-weight: 500;
+    line-height: 42px;
+    background-color: #fff;
+  }
+}

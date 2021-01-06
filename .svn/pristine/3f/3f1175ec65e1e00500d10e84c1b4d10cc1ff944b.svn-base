@@ -1,0 +1,362 @@
+import React, { FC, useEffect, useState } from 'react';
+import {
+  NameAuthenticationModelState,
+  ConnectProps,
+  connect,
+  router,
+  PayConfirmModelState,
+} from 'alita';
+import styles from './index.less';
+import { Toast, WhiteSpace, Card, Flex, Button } from 'antd-mobile';
+import { transformFile } from '@/utils';
+import camera from '@/assets/cameraTransparent.png';
+import DynamicForm, { useForm, Store, ValidateErrorEntity, IFormItemProps } from '@alitajs/dform';
+import loading from '@/assets/loading.png';
+
+const { Header, Body } = Card;
+const { Item } = Flex;
+
+interface PageProps extends ConnectProps {
+  nameAuthentication: NameAuthenticationModelState;
+  payConfirm: PayConfirmModelState;
+}
+
+const NameAuthenticationPage: FC<PageProps> = ({
+  nameAuthentication,
+  dispatch,
+  location,
+  payConfirm,
+}) => {
+  console.log(location.query);
+  const { userInfo = {}, catchTime = 0 } = nameAuthentication;
+  const { nameAndNo = {} } = payConfirm;
+  const [form] = useForm();
+  //判断上传完毕后，判断是否表单拥有初始值
+  const [initVisible, setInitVisible] = useState(false);
+  //在页面中显示上传的照片
+  const [showFaceUploadImg, setShowFaceUploadImg] = useState('');
+  const [showBackUploadImg, setShowBackUploadImg] = useState('');
+  const [faceUploadImg, setFaceUploadImg] = useState('');
+  const [backUploadImg, setBackUploadImg] = useState('');
+
+  // 这里发起了初始化请求
+  // useEffect(() => {
+  //   dispatch!({
+  //     type: 'nameAuthentication/query',
+  //   });
+
+  // }, [faceUploadImg, backUploadImg]);
+
+  const onFinish = (values: Store) => {
+    // eslint-disable-next-line no-console
+    console.log('Success:', values);
+  };
+
+  const onFinishFailed = (errorInfo: ValidateErrorEntity) => {
+    // eslint-disable-next-line no-console
+    console.log('Failed:', errorInfo);
+  };
+
+  //上传图片
+  const uploadChange = (e: any, type: string) => {
+    if (type === '') {
+    }
+    const files = e.target.files as any;
+    if (files && files.length > 0) {
+      // const file = files[0];
+      transformFile(files[0], 0.2).then((file: any) => {
+        console.log(file);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+          if (!new RegExp('(jpg|jpeg|gif|png)+', 'gi').test(file.type)) {
+            Toast.fail('您上传的图片格式有误，请重新上传~');
+          } else {
+            if (type === 'face') {
+              // dispatch!({
+              //   type: 'nameAuthentication/save',
+              //   payload: {
+              //     userInfo: {},
+              //   },
+              // });
+              // faseIDCardAnalysis,
+              // natEmblemIDCardAnalysis,
+              // livingCertification,
+              dispatch!({
+                type: 'nameAuthentication/faseIDCardAnalysis',
+                payload: {
+                  image: e.target.result,
+                  bsFlag: location.query.bsFlag === '1',
+                  certName: nameAndNo?.name,
+                  certNum: nameAndNo?.idCard,
+                  callback: (data: any) => {
+                    setShowFaceUploadImg(URL.createObjectURL(file));
+                  },
+                },
+              });
+
+              // setFaceUploadImg(this.result);
+            } else {
+              // setBackUploadImg(this.result);
+              dispatch!({
+                type: 'nameAuthentication/natEmblemIDCardAnalysis',
+                payload: {
+                  image: e.target.result,
+                  bsFlag: location.query.bsFlag === '1',
+                  catchTime,
+                  callback: () => {
+                    setShowBackUploadImg(URL.createObjectURL(file));
+                  },
+                },
+              });
+            }
+          }
+        };
+        reader.onerror = function () {
+          Toast.fail('文件读取失败', 2);
+        };
+        reader.onprogress = function (event) {
+          if (event.lengthComputable) {
+            if (event.loaded === event.total) {
+              Toast.hide();
+              return;
+            } else {
+              Toast.loading('图片上传中，请稍候...', 0);
+            }
+          }
+        };
+      });
+    }
+  };
+
+  const formsData = [
+    {
+      type: 'input',
+      inputType: 'text',
+      placeholder: '请输入姓名',
+      fieldProps: 'custName',
+      title: '姓名',
+      required: true,
+      rules: [
+        {
+          required: true,
+          message: '请输入姓名',
+        },
+        {
+          whitespace: true,
+          message: '姓名不能为空格',
+        },
+      ],
+    },
+    {
+      type: 'input',
+      inputType: 'text',
+      placeholder: '请输入身份证号',
+      fieldProps: 'idCardNumber',
+      title: '身份证号',
+      required: true,
+      rules: [
+        {
+          required: true,
+          message: '请输入身份证号',
+        },
+        {
+          whitespace: true,
+          message: '证件号不能为空格',
+        },
+        {
+          pattern: /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+          message: '证件号码格式错误，请重新输入',
+        },
+      ],
+    },
+    // {
+    //   type: 'rangeDatePicker',
+    //   required: true,
+    //   fieldProps: 'rangeTime5',
+    //   fieldProps2: 'rangeTime6',
+    //   title: '有效日期',
+    //   positionType: 'vertical',
+    // },
+    {
+      type: 'input',
+      inputType: 'text',
+      placeholder: '请输入证件有效期',
+      fieldProps: 'card',
+      title: '证件有效期',
+      required: true,
+    },
+  ] as IFormItemProps[];
+
+  const formProps = {
+    onFinish,
+    onFinishFailed,
+    data: formsData,
+    formsValues: {
+      idCardNumber: userInfo.certNum,
+      custName: userInfo.certName,
+      card: userInfo.date,
+    },
+    form,
+    isDev: false,
+    allDisabled: true,
+  };
+
+  return (
+    <div className={styles.anthentication}>
+      <div className={styles.container}>
+        <WhiteSpace size="lg" />
+        <Card full>
+          <Header
+            title={
+              <div className={styles.cardHeader}>
+                <span className={styles.cardTitle}>上传身份证照片</span>
+                <span className={styles.cardSubtitle}>
+                  根据国家实名制要求，请准确提供申办人身份证信息
+                </span>
+              </div>
+            }
+          />
+          <Body>
+            <Flex>
+              <Item className={styles.cardLeft}>
+                <input
+                  param-action="frontCard"
+                  type="file"
+                  name="file"
+                  accept="image/*"
+                  className={styles.fileUpload}
+                  onChange={(e) => uploadChange(e, 'face')}
+                  onClick={(e) => {
+                    e.target.value = '';
+                  }}
+                />
+                <div className={styles.cardContent}>
+                  {showFaceUploadImg ? (
+                    <img src={showFaceUploadImg} className={styles.idCardImg} />
+                  ) : (
+                      <div className={styles.cardImgLeft}>
+                        <img src={camera} />
+                      </div>
+                    )}
+                  {showFaceUploadImg ? (
+                    <div className={styles.cardText}>
+                      <span className={styles.reLoad}>
+                        <img src={loading} />
+                        点击重新上传
+                      </span>
+                    </div>
+                  ) : (
+                      <div className={styles.cardText}>
+                        <span className={styles.clickUpload}>点击上传</span>
+                        <span className={styles.personFace}>人像面</span>
+                      </div>
+                    )}
+                </div>
+              </Item>
+              <Item className={styles.cardRight}>
+                <input
+                  param-action="backgroudCard"
+                  type="file"
+                  name="file"
+                  accept="image/*"
+                  className={styles.fileUpload}
+                  onClick={(e) => {
+                    if (!showFaceUploadImg) {
+                      e.preventDefault();
+                      Toast.info('请先上传人像面');
+                      e.target.value = '';
+                      return;
+                    }
+                  }}
+                  onChange={(e) => uploadChange(e, 'back')}
+                />
+                <div className={styles.cardContent}>
+                  {showBackUploadImg ? (
+                    <img src={showBackUploadImg} className={styles.idCardImg} />
+                  ) : (
+                      <div className={styles.cardImgRight}>
+                        <img src={camera} />
+                      </div>
+                    )}
+                  {showBackUploadImg ? (
+                    <div className={styles.cardText}>
+                      <span className={styles.reLoad}>
+                        <img src={loading} />
+                        点击重新上传
+                      </span>
+                    </div>
+                  ) : (
+                      <div className={styles.cardText}>
+                        <span className={styles.clickUpload}>点击上传</span>
+                        <span className={styles.personFace}>国徽面</span>
+                      </div>
+                    )}
+                </div>
+              </Item>
+            </Flex>
+          </Body>
+        </Card>
+        <WhiteSpace size="xl" />
+        {/* <Card full>
+          <Header
+            title={
+              <div className={styles.cardHeader}>
+                <span className={styles.cardTitle}>确认证件信息</span>
+                <span className={styles.cardSubtitle}>请确认身份信息，如有误请修改</span>
+              </div>
+            }
+          />
+          <Body>
+            <DynamicForm {...formProps} />
+          </Body>
+        </Card> */}
+      </div>
+      <div className={styles.modifyButtonBox}>
+        <Button
+          type="primary"
+          param-action="uploadIDPhoto"
+          className={styles.modifyButton}
+          disabled={
+            !(
+              userInfo.certNum &&
+              userInfo.certName &&
+              userInfo.date &&
+              showBackUploadImg &&
+              showFaceUploadImg
+            )
+          }
+          onClick={() => {
+            // form.submit();
+            router.push({
+              pathname: '/nameAuthentication/uploadPhotos',
+              query: {
+                bsFlag: location.query.bsFlag,
+                orderId: location.query.orderId,
+                accNbr: location.query.accNbr,
+              },
+            });
+          }}
+        >
+          下一步
+        </Button>
+      </div>
+      <div className={styles.hotTip}>
+        温馨提示：根据工信部《电话用户真实身份信息登记实施规范》要求，请您上传与办理人一致的居民身份证正反面照片和正面免冠照片。后续号卡激活时，我们将再次进行身份信息的验证。
+      </div>
+    </div>
+  );
+};
+
+export default connect(
+  ({
+    nameAuthentication,
+    payConfirm,
+  }: {
+    nameAuthentication: NameAuthenticationModelState;
+    payConfirm: PayConfirmModelState;
+  }) => ({
+    nameAuthentication,
+    payConfirm,
+  }),
+)(NameAuthenticationPage);

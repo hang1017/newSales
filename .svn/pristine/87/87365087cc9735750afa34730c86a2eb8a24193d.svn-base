@@ -1,0 +1,278 @@
+.checkIdentityStyle {
+  overflow: auto;
+
+  .cameraImg {
+    position: relative;
+    top: 24%;
+    left: 41%;
+    z-index: 100;
+    display: block;
+    padding: 12px;
+    background: linear-gradient(90deg, #6DB4FF 0%, #187DFB 100%);
+    border-radius: 32px;
+  }
+
+  .idCardImg {
+    z-index: 100;
+    width: 280px;
+    height: 152px;
+  }
+
+  .fileUpload {
+    z-index: 1000;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
+  }
+
+  .cardCommonContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    padding-top: 24px;
+    background: rgba(245, 247, 249, 1);
+    border-radius: 8px;
+  }
+
+  .cardContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    // margin-top: -2.4rem;
+  }
+
+  .cardHeader {
+    .cardTitle {
+      display: block;
+      color: rgba(6, 4, 30, 1);
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 44px;
+    }
+
+    .cardSubtitle {
+      display: block;
+      margin-top: 16px;
+      color: rgba(179, 181, 183, 1);
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+
+  .cardLeft {
+    position: relative;
+    .cardCommonContent();
+
+    .cardImgLeft {
+      width: 100%;
+      height: 152px;
+      background: url('../../../assets/idCardFront.png') top no-repeat;
+
+      img {
+        .cameraImg();
+      }
+    }
+  }
+
+  .cardRight {
+    position: relative;
+    .cardCommonContent();
+
+    .cardImgRight {
+      width: 100%;
+      height: 152px;
+      background: url('../../../assets/idCardBack.png') top no-repeat;
+
+      img {
+        .cameraImg();
+      }
+    }
+  }
+
+  .cardText {
+    padding: 24px 0;
+    text-align: center;
+
+    .reLoad {
+      color: rgba(6, 4, 30, 1);
+      font-size: 24px;
+      line-height: 32px;
+
+      img {
+        margin-right: 5px;
+        vertical-align: unset;
+      }
+    }
+
+    .clickUpload {
+      margin-right: 16px;
+      color: rgba(6, 4, 30, 1);
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    .personFace {
+      color: #187dfb;
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+
+  :global {
+    .am-card-full {
+      border: none;
+      border-radius: 24px 24px 0 0;
+    }
+  }
+
+  .ckInfo {
+    background-color: #fff;
+
+    :global {
+      .am-list-body {
+        border: none;
+      }
+
+      .am-list-item {
+        height: 112px;
+      }
+    }
+  }
+
+  .liveDiv {
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 24px;
+    padding: 32px;
+
+    .liveTitle {
+      font-size: 32px;
+      font-weight: 400;
+      color: #06041E;
+      line-height: 44px;
+    }
+
+    .liveSubTitle {
+      font-size: 24px;
+      font-weight: 400;
+      color: #B3B5B7;
+      line-height: 32px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+
+    .liveSubTitleTwo {
+      font-size: 24px;
+      font-weight: 400;
+      color: rgb(184, 102, 116);
+      line-height: 32px;
+      padding-top: 16px;
+      padding-bottom: 32px;
+    }
+
+    .livePhotoDiv {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .livePhoto {
+        width: 328px;
+        height: 256px;
+        background: #F5F7F9;
+        border-radius: 8px;
+        padding: 24px;
+        position: relative;
+
+        .liveFileUpload {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          z-index: 3;
+          opacity: 0;
+        }
+
+        .showLiveloadImg {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .liveimg {
+            height: 152px;
+            width: 100%;
+          }
+        }
+
+        .photos {
+
+          height: 152px;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: url('../../../assets/person.png') top no-repeat;
+
+          .photoRadio {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(90deg, #6DB4FF 0%, #187DFB 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+
+            .img {
+              width: 40px;
+              height: 40px;
+            }
+          }
+        }
+
+        .cameraText {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-top: 24px;
+
+          .leftText {
+            font-size: 24px;
+            font-weight: 400;
+            color: #06041E;
+            line-height: 32px;
+
+          }
+
+          .rightText {
+            font-size: 24px;
+            font-weight: 400;
+            color: #F53C54;
+            line-height: 32px;
+            background: linear-gradient(90deg, #6DB4FF 0%, #187DFB 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-left: 16px;
+          }
+        }
+      }
+    }
+  }
+
+  .btnDiv {
+    padding: 34px;
+
+    .btn {
+      background: linear-gradient(90deg, #6DB4FF 0%, #187DFB 100%);
+      border-radius: 45px;
+      font-size: 34px;
+      font-weight: 500;
+      color: #FFFFFF;
+      line-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

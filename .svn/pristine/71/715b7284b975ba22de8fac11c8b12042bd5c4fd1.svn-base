@@ -1,0 +1,77 @@
+.emerPayConfirmStyle {
+  display: flex;
+  flex-direction: column;
+
+  .sendTypeStyle {
+    margin-bottom: 20px;
+
+    .am-list-body {
+      border: none;
+    }
+
+    :global {
+      .am-list-item .am-list-line .am-list-arrow {
+        background-image: url('../../../assets/img/goodsdetail/shop-action.png');
+        width: 48px;
+        height: 48px;
+      }
+    }
+  }
+
+  .allContent {
+    flex: 1;
+    overflow: auto;
+  }
+
+  .orderContent {
+    background-color: #fff;
+    max-height: 600px;
+    overflow: auto;
+  }
+
+  .addrInfo {
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    margin-top: 20px;
+    padding: 30px;
+    background: #fff;
+
+    img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .nameAndPhone {
+      color: #242424;
+      font-weight: 500;
+      font-size: 32px;
+    }
+
+    .userAddr {
+      color: #808080;
+      font-weight: 400;
+      font-size: 28px;
+    }
+  }
+
+  .orderInfoFoot {
+    padding-left: 66px;
+    color: #808080;
+    font-size: 28px;
+
+    span {
+      color: #2ca5ff;
+      font-size: 36px;
+    }
+  }
+
+  :global {
+    .alitajs-dform-title {
+      font-size: 32px !important;
+      font-weight: 400;
+      color: #000000;
+      line-height: 44px;
+    }
+  }
+}

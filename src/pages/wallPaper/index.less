@@ -1,0 +1,136 @@
+.wallPaperStyle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .blurBg {
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+    filter: blur(40px);
+  }
+
+  .wallPaperCenter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .carContent {
+    height: 100%;
+    padding-top: 132px;
+
+    .imgDiv {
+      display: flex;
+      justify-content: center;
+
+      .img {
+        width: 100%;
+        background: #D8D8D8;
+        box-shadow: 0px 10px 30px 0px rgba(4, 20, 39, 0.15);
+        border-radius: 8px;
+
+      }
+    }
+  }
+
+  .footBtn {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 20px 32px;
+    background: #fff;
+    box-shadow: 0 1px 0 0 #e9e9e9;
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 34px;
+      line-height: 48px;
+      background: linear-gradient(90deg, #6db4ff 0%, #187dfb 100%);
+      border-radius: 40px;
+    }
+  }
+
+  :global {
+    .am-carousel-wrap {
+      display: none;
+    }
+  }
+}
+
+.paperRatioModalStyle {
+  :global {
+    .am-modal-content {
+      border-radius: 24px 24px 0 0;
+    }
+  }
+
+  .paperRatioModal {
+    padding: 28px 32px;
+
+    .ratioTitle {
+      padding-bottom: 28px;
+      color: #041c1e;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 40px;
+      text-align: left;
+    }
+
+    .ratioListStyle {
+      display: grid;
+      grid-gap: 34px;
+      grid-template-columns: auto auto;
+      padding-bottom: 40px;
+
+      .ratioItem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 4px 0;
+        color: #041c1e;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 48px;
+        background: #f4f7f6;
+        border-radius: 28px;
+      }
+
+      .activeRatio {
+        padding: 3px 0;
+        color: #2ca5ff;
+        background-color: #e3f2fe;
+        border: 1px solid #2ca5ff;
+      }
+    }
+  }
+
+  .ratioFootBtn {
+    padding: 20px 32px;
+    background: #fff;
+    border-top: 1px solid #e9e9e9;
+    box-shadow: 0 1px 0 0 #e9e9e9;
+
+    .ratioBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+      color: #fff;
+      font-weight: 500;
+      font-size: 34px;
+      line-height: 48px;
+      background: linear-gradient(90deg, #6db4ff 0%, #187dfb 100%);
+      border-radius: 40px;
+    }
+  }
+}

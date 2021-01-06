@@ -1,0 +1,517 @@
+[
+  {
+    "extValues": {},
+    "categoryId": 3005,
+    "categoryName": "这个类目可以-4",
+    "values": [
+      {
+        "extValues": {},
+        "goodsId": 5038,
+        "goodsName": "teset0091",
+        "lowestPrice": 55,
+        "highestPrice": 55,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200814866083.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": "teset0091",
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "A_1002",
+            "attrName": "这个属性可以2",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "2",
+                "name": "属性值2"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      },
+      {
+        "extValues": {},
+        "goodsId": 5029,
+        "goodsName": "测试商品0901",
+        "lowestPrice": 45,
+        "highestPrice": 45,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200814866083.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": "111",
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "A_1002",
+            "attrName": "这个属性可以2",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "2",
+                "name": "属性值2"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      },
+      {
+        "extValues": {},
+        "goodsId": 5028,
+        "goodsName": "测试商品0806dddff",
+        "lowestPrice": 55,
+        "highestPrice": 55,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200814866083.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": "0806dddff",
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "A_1002",
+            "attrName": "这个属性可以2",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "2",
+                "name": "属性值2"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      },
+      {
+        "extValues": {},
+        "goodsId": 5019,
+        "goodsName": "测试商品0831",
+        "lowestPrice": 555,
+        "highestPrice": 555,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200814866083.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": "ddd",
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "A_1002",
+            "attrName": "这个属性可以2",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "2",
+                "name": "属性值2"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      },
+      {
+        "extValues": {},
+        "goodsId": 4082,
+        "goodsName": "测试商品08212",
+        "lowestPrice": 12,
+        "highestPrice": 12,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200814866083.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": "1000008daff",
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "A_1002",
+            "attrName": "这个属性可以2",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "2",
+                "name": "属性值2"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      },
+      {
+        "extValues": {},
+        "goodsId": 4066,
+        "goodsName": "这个商品0819222fff",
+        "lowestPrice": 0,
+        "highestPrice": 0,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200814866083.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": null,
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "A_1002",
+            "attrName": "这个属性可以2",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "2",
+                "name": "属性值2"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      },
+      {
+        "extValues": {},
+        "goodsId": 4065,
+        "goodsName": "UIM卡商",
+        "lowestPrice": 2,
+        "highestPrice": 2,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200805794831.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": "ddd",
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "A_1002",
+            "attrName": "这个属性可以2",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1",
+                "name": "属性值1"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "extValues": {},
+    "categoryId": 19,
+    "categoryName": "视频",
+    "values": [
+      {
+        "extValues": {},
+        "goodsId": 5043,
+        "goodsName": "test000092",
+        "lowestPrice": 555,
+        "highestPrice": 555,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200814866083.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": "test000092",
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "FWQ",
+            "attrName": "服务期（SKU有效期）",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1",
+                "name": "1个月"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "SKU-0024",
+            "attrName": "是否自动续约",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "自动续约"
+              },
+              {
+                "extValues": {},
+                "attrValue": "2000",
+                "name": "不自动续约"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "HDSC",
+            "attrName": "超高清观看时长",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "不限时"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "HDCS",
+            "attrName": "超高清观看次数",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "不限次"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      },
+      {
+        "extValues": {},
+        "goodsId": 5027,
+        "goodsName": "test123",
+        "lowestPrice": 123,
+        "highestPrice": 123,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200814866083.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": null,
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "FWQ",
+            "attrName": "服务期（SKU有效期）",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1",
+                "name": "1个月"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "SKU-0024",
+            "attrName": "是否自动续约",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "自动续约"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "HDSC",
+            "attrName": "超高清观看时长",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "不限时"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "HDCS",
+            "attrName": "超高清观看次数",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "不限次"
+              },
+              {
+                "extValues": {},
+                "attrValue": "1100",
+                "name": "限次"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "SKU-0021",
+            "attrName": "有效期时间单位",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1100",
+                "name": "月"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      },
+      {
+        "extValues": {},
+        "goodsId": 5023,
+        "goodsName": "测试商品0831ttt",
+        "lowestPrice": 24,
+        "highestPrice": 24,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200814866083.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": "测试商品0831ttt",
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "FWQ",
+            "attrName": "服务期（SKU有效期）",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1",
+                "name": "1个月"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "SKU-0024",
+            "attrName": "是否自动续约",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "自动续约"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "HDSC",
+            "attrName": "超高清观看时长",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "不限时"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "HDCS",
+            "attrName": "超高清观看次数",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "不限次"
+              },
+              {
+                "extValues": {},
+                "attrValue": "1100",
+                "name": "限次"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "SKU-0021",
+            "attrName": "有效期时间单位",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1100",
+                "name": "月"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      },
+      {
+        "extValues": {},
+        "goodsId": 5020,
+        "goodsName": "测试商品0831SP",
+        "lowestPrice": 34,
+        "highestPrice": 34,
+        "filePathInServer": "http://10.45.46.252:9999/sms/20200814866083.jpg",
+        "total": null,
+        "applauseRate": null,
+        "goodsDesc": "0831SP",
+        "saleAttrList": [
+          {
+            "extValues": {},
+            "attrCode": "FWQ",
+            "attrName": "服务期（SKU有效期）",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1",
+                "name": "1个月"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "SKU-0024",
+            "attrName": "是否自动续约",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "自动续约"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "HDSC",
+            "attrName": "超高清观看时长",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "不限时"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "HDCS",
+            "attrName": "超高清观看次数",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1000",
+                "name": "不限次"
+              },
+              {
+                "extValues": {},
+                "attrValue": "1100",
+                "name": "限次"
+              }
+            ],
+            "feature": null
+          },
+          {
+            "extValues": {},
+            "attrCode": "SKU-0021",
+            "attrName": "有效期时间单位",
+            "attrValues": [
+              {
+                "extValues": {},
+                "attrValue": "1100",
+                "name": "月"
+              }
+            ],
+            "feature": null
+          }
+        ]
+      }
+    ]
+  }
+]

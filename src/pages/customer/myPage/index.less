@@ -1,0 +1,286 @@
+.myPage {
+  overflow: auto;
+
+  .topInfo {
+    height: 420px;
+    color: #fff;
+    background-image: url('../../../assets/img/customer/my/bg.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+
+  //
+
+  .headInfo {
+    display: flex;
+    padding: 32px;
+
+    .backIcon {
+      flex: 1;
+    }
+
+
+    .pageTitle {
+      flex: 1;
+      font-size: 36px;
+      text-align: center;
+    }
+  }
+
+  .myBaseInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px;
+
+
+    .settingIcon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .toux {
+      position: relative;
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+
+      img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        // border-radius: 100%;
+      }
+
+      .touxInput {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
+    }
+
+    .leftContent {
+      display: flex;
+
+      .userInfo {
+        margin-left: 20px;
+        // padding-bottom: 32px;
+
+        .userName {
+          // color: #242424;
+          font-weight: 600;
+          font-size: 36px;
+        }
+
+        .userPhone {
+          margin-top: 6px;
+          font-weight: 400;
+          font-size: 24px;
+        }
+
+        .noPhone {
+          margin-top: 6px;
+          font-weight: 600;
+          font-size: 36px;
+        }
+      }
+    }
+  }
+
+  .listView {
+    height: auto;
+    max-height: 78%;
+    padding: 0 32px 40px 32px;
+    overflow: scroll;
+
+    .listCell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 34px 0;
+      border-bottom: 1px solid #e9e9e9;
+
+      div {
+        display: flex;
+      }
+
+      span {
+        margin-left: 12px;
+        color: #242424;
+        font-weight: 400;
+        font-size: 32px;
+      }
+    }
+  }
+}
+
+.leftIcon {
+  width: 48px;
+  height: 48px;
+}
+
+.changePhone {
+  margin-left: 10px;
+  padding: 4px 6px;
+  color: #1F90EC;
+  font-size: 20px;
+  background: #FFF;
+  border-radius: 4px;
+  opacity: 0.9;
+}
+
+.accountInfo {
+  display: flex;
+  justify-content: space-around;
+  margin: -12px 24px 0 24px;
+  padding: 32px;
+  text-align: center;
+  background: #FFF;
+  border-radius: 16px;
+
+  .cellTitle {
+    color: #696D6C;
+    font-weight: 400;
+    font-size: 24px;
+  }
+
+  .cellValue {
+    color: #041C1E;
+    font-weight: 600;
+    font-size: 36px;
+  }
+
+  .effDate {
+    color: #B3B5B7;
+    font-weight: 400;
+    font-size: 20px;
+  }
+
+  .smallIcon {
+    width: 138px;
+    height: 40px;
+  }
+}
+
+
+.menuContent {
+  height: auto;
+  max-height: 78%;
+  margin: 95px 24px 0 24px;
+  overflow-y: scroll;
+
+}
+
+
+.actionFootBtn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 32px 0;
+
+  .phoneList {
+    height: 70%;
+    padding: 20px;
+    overflow-y: scroll;
+
+  }
+
+  .baseCss() {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 88px;
+    margin: 22px 0;
+    font-size: 32px;
+    text-align: center;
+
+  }
+
+  .normal {
+    .baseCss();
+
+    color: #242424;
+    background: #FCFCFC;
+    border: 2px solid #E9EBEC;
+    border-radius: 8px;
+    opacity: 0.8;
+
+  }
+
+  .selected {
+    .baseCss();
+
+    color: #242424;
+    font-weight: 500;
+    background: rgba(174, 230, 252, 0.3);
+    border: 4px solid #1D81FB;
+    border-radius: 8px;
+    opacity: 0.8;
+  }
+
+  .selectedIcon {
+    position: absolute;
+    right: -1px;
+    width: 48px;
+    height: 48px;
+    bottom: 0;
+    // margin-top: 35px;
+  }
+}
+
+.normalStatus {
+  display: inline-block;
+  width: 200px;
+  height: 50px;
+  margin-left: 20px;
+  // padding: 8px 24px;
+  color: #1C60FF;
+  font-size: 24px;
+  line-height: 50px;
+  text-align: center;
+  background: #D2DFFF;
+  border-radius: 25px;
+}
+
+.phoneStatusCell {
+  display: flex;
+  align-items: center;
+  padding: 28px 0;
+
+  &>img {
+    width: 24px;
+    height: 30px;
+  }
+
+  .normalPhone {
+    color: #333;
+    font-weight: 600;
+    font-size: 32px;
+  }
+
+
+
+  .stopPhone {
+    .normalStatus;
+
+    color: #999;
+  }
+
+
+
+
+}
+
+.stopStauts {
+  .normalStatus;
+
+  margin-bottom: 15px;
+  color: #FF1B00;
+  background: #FEDECC;
+}

@@ -1,0 +1,78 @@
+@import '../../../global.less';
+
+.editInvoiceStyle {
+  position: relative;
+  height: 100%;
+  background-color: rgb(245, 247, 249);
+
+  .editCenter {
+    width: 100%;
+    margin-bottom: 150px;
+    padding: 24px;
+
+    .editContent {
+      padding-top: 36px;
+      padding-right: 32px;
+      background-color: #fff;
+      border-radius: 16px;
+
+      :global {
+        .alitajs-dform-input .am-input-control input {
+          font-size: 28px !important;
+
+          &::placeholder {
+            font-size: 28px !important;
+          }
+        }
+
+        .am-list-body {
+          border: 0;
+        }
+
+        .am-list-body div:not(:last-child) .am-list-line {
+          border-bottom: 1px solid #f4f7f6;
+        }
+      }
+
+      .editSelect {
+        display: flex;
+        align-items: center;
+        margin-left: 30px;
+        padding-bottom: 28px;
+        padding-left: 18px;
+        border-bottom: 1px solid #f4f7f6;
+
+        .editSelectImg {
+          width: 40px;
+          height: 40px;
+          margin-right: 24px;
+        }
+
+        .editSelectText {
+          padding-right: 80px;
+        }
+      }
+    }
+  }
+
+  .eiBtnDiv {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 188px;
+    padding: 20px 24px 0 24px;
+    background-color: rgba(252, 252, 252, 1);
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08);
+
+    .eiBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 76px;
+      color: #fff;
+      font-size: 28px;
+      background: @themeBg;
+      border-radius: 38px;
+    }
+  }
+}

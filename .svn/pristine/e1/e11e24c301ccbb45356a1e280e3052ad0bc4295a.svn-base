@@ -1,0 +1,297 @@
+import React, { FC, useEffect, useState, useRef } from 'react';
+import { StarPkgModelState, ConnectProps, connect, history } from 'alita';
+import Lottie from 'react-lottie';
+import { Button, Toast } from 'antd-mobile';
+import classnames from 'classnames';
+import { FileModal } from '@/pages/customer/components';
+import Utils from '@/utils/tool';
+import { Card, FormCard } from '@/pages/starPkg/components';
+import BannerPng from '@/assets/img/starPkg/banner.png';
+import FileDetailHtml from '@/assets/file/starPkg_detail.txt';
+import styles from './index.less';
+
+import GifData from '../../../public/data.json';
+
+import BetterScroll from 'better-scroll';
+import { AllWhiteLoading } from '@/components';
+import { BScrollConstructor } from '@better-scroll/core/dist/types/BScroll';
+
+interface PageProps extends ConnectProps {
+  starPkg: StarPkgModelState;
+}
+
+let bs: BScrollConstructor<{}> | null = null;
+
+const privilegeData = [
+  {
+    title: '生日号（幸运号）',
+    list: [
+      '输入生日尾号后四位后，随机出现尾号后三位/四位同用户生日的号码进行选择，如无生日号码，可选择指定幸运号码。',
+    ],
+  },
+  {
+    title: '星座会员权益',
+    list: [
+      '用户下单时在12项权益中选1个作为默认权益，同时12个月都对应不同星座权益，用户每月可以在默认权益和星座权益二选一领取兑换券，共12个月。',
+      '*激活首月起（以星座月日期为参考），连续12个月，每月获赠1张会员权益兑换券，2选1兑换用户下单时指定会员权益月卡或当月指定会员权益月卡。兑换券有效期30天，过期作废。权益兑换路径：青年一派页面（https://pai.189.cn:10000）—个人中心—权益兑换。',
+    ],
+  },
+  {
+    title: '星座月赠流量',
+    list: ['赠送1张20GB国内通用流量兑换券（流量有效期31天），用户可在生日对应星座月有效期内兑换'],
+  },
+  {
+    title: '下单助力送流量',
+    list: [
+      '用户分享助力链接至朋友圈或者微信好友，完成9个助力（朋友送祝福），则一次性赠送5GB通用流量（号卡激活后31天有效）。',
+    ],
+  },
+];
+
+const StarPkgPage: FC<PageProps> = ({ starPkg, dispatch, location }) => {
+  const { source = '', sn = '', skuId = '', salesCode = '' } = location?.query;
+  const [loadingFlag, setLoadingFlag] = useState<boolean>(true); // 页面是否还在加载中的判断
+  const [btnShowFlag, setBtnShowFlag] = useState<boolean>(true); // 按钮是否展示
+  const ref = useRef(null);
+  const [fileFlag, setFileFlag] = useState(false); // 协议弹框标识
+
+  useEffect(() => {
+    localStorage.setItem('leave', '0'); // 用完值要设置成初始值
+    document.getElementsByClassName('rumtime-keep-alive-layout-no')[0].style.height = '100%';
+    localStorage.setItem('tokenCode', '');
+    localStorage.setItem('source', source);
+    localStorage.setItem('sn', sn);
+    localStorage.setItem('salesCode', salesCode);
+
+    Utils.accessPermission({
+      sn,
+      source,
+      dispatch,
+      successCallBack: () => {
+        dispatch!({
+          type: 'indexList/dmosbrowse',
+          payload: {
+            sn: sn || '',
+            source: source || '',
+          },
+        });
+      },
+    });
+  }, []);
+
+  if ((document.readyState === 'complete' || document.readyState === 'interactive') && !bs) {
+    setTimeout(() => {
+      bs = new BetterScroll(ref.current, {
+        probeType: 3,
+        scrollY: true,
+        scrollX: false,
+        click: true,
+        bounce: false,
+      });
+
+      // bs.on('scroll', (pos: any) => {
+      //   let sTop = pos?.y;
+      //   if (sTop < -200) {
+      //     setBtnShowFlag(true);
+      //   } else if (sTop > -150) {
+      //     setBtnShowFlag(false);
+      //   }
+      // });
+    }, 100);
+  }
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: GifData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
+  /**
+   * 监听页面滚动事件
+   */
+  const pageScroll = (e: any) => {
+    const node = document.getElementById(`infoFillId`);
+    const sTop = node.getBoundingClientRect()?.y;
+    if (sTop > 1500) {
+      setBtnShowFlag(true);
+    } else {
+      setBtnShowFlag(false);
+    }
+  };
+
+  /**
+   * 立即订购按钮
+   */
+  const orderClick = () => {
+    const labelNode = document.getElementById(`infoFillId`);
+    if (labelNode) {
+      labelNode.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  /**
+   * 表单提交事件
+   */
+  const formSubmit = (values: any, newNumData: any) => {
+    if (!localStorage.getItem('tokenCode')) {
+      Toast.fail('验证码不正确或验证码已经过期', 1);
+      return;
+    }
+    dispatch!({
+      type: 'payConfirm/save',
+      payload: {
+        nameAndNo: {
+          name: values?.username.trim(),
+          idCard: values?.idenCode.trim(),
+        },
+        halfPaymenet: {
+          type: 'starPkg',
+          phone: newNumData?.phoneNum,
+        },
+      },
+    });
+
+    const { homeAddr = {} } = values;
+    const { label = {}, value = {} } = homeAddr;
+
+    dispatch!({
+      type: 'quickOrder/addAddressModal',
+      payload: {
+        name: values?.username,
+        phoneNumber: values?.accNum,
+        detailAddress: values?.detailAddr,
+        defaultAddr: '1000',
+        provinceId: value[0],
+        province: label[0],
+        cityId: value[1],
+        city: label[1],
+        regionId: value[2],
+        region: label[2],
+      },
+    }).then((addrRes: any) => {
+      if (addrRes) {
+        dispatch!({
+          type: 'oldUserLoginSuccess/commitCartQuick',
+          payload: {
+            goodsList: [
+              {
+                skuId,
+                quantity: 1,
+                memberChooseRightsIds: values?.memberChooseRightsIds,
+              },
+            ],
+            commonAttrList: [
+              {
+                attrCode: 'HM',
+                attrValue: values?.selectNum,
+                extMap: { ...newNumData },
+              },
+            ],
+            receiveAddrId: addrRes?.receiveAddrId,
+          },
+        }).then((data: any) => {
+          if (data) {
+            dispatch!({
+              type: 'payConfirm/save',
+              payload: {
+                orderInfo: data,
+              },
+            });
+            localStorage.setItem('leave', '0'); // 用完值要设置成初始值
+            dispatch!({
+              type: 'payConfirm/commitOrderBfCheck',
+              payload: {
+                certData: {
+                  certName: values?.username,
+                  certNum: values?.idenCode,
+                  certType: '1',
+                },
+              },
+            }).then((data: boolean) => {
+              if (data === true) {
+                history.push({
+                  pathname: '/nameAuthentication',
+                });
+              }
+            });
+          }
+        });
+      }
+    });
+  };
+
+  return (
+    <React.Fragment>
+      <div className={styles.btnDiv} id="submitId">
+        <Button
+          className={classnames({
+            [styles.starPkgBtn]: true,
+            [styles.starPkgBtnHide]: !btnShowFlag,
+          })}
+          onClick={orderClick}
+        >
+          立即订购
+        </Button>
+      </div>
+      <div className={styles.starPkgStyle} onScroll={pageScroll}>
+        <div>
+          <div className={styles.bannerTop}>
+            <img
+              src={BannerPng}
+              alt=""
+              className={styles.bannerImg}
+              onLoad={() => setLoadingFlag(false)}
+            />
+            <div className={styles.clickDiv} onClick={() => setFileFlag(true)} />
+          </div>
+          <div className={styles.starMain}>
+            <Lottie options={defaultOptions} width="100%" />
+            <Card title="星座派特权">
+              <div className={styles.privilegeStyle}>
+                {privilegeData.map((item) => (
+                  <div key={item?.title} className={styles.privilegeItem}>
+                    <div className={styles.privilegeTitle}>{item?.title}</div>
+                    {item?.list.map((it, index) => (
+                      <div className={styles.privilegeContent}>
+                        <div className={styles.privilegeCycle} />
+                        <div className={styles.privilegeText} key={index}>
+                          {it}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </Card>
+            <div className={styles.privilegeHeight} id="infoFillId" />
+            <Card title={'信息填写'}>
+              <div className={styles.infoFill}>
+                <FormCard onSubmit={formSubmit} paramAction="starPkg" />
+              </div>
+            </Card>
+            <div className={styles.warnTitle}>温馨提示</div>
+            <div className={styles.warnText}>
+              用户激活后，从激活当日起每66天内消费金额应达到36元（包括日常使用发生的通话、短信、流量资费，以及在青年一派（https://pai.189.cn:10000）上购买的流量包、来电铃音、推荐组合及生态权益消费，不包括向您的账户充值发生的费用）。若每66天内的实际消费金额低于36元，将在每66天届满后的次日于您的账户金额中扣除36元与实际消费金额之间的差额。
+              商品暂不支持开通以下功能：彩信、呼叫转移、国际及中国台湾、中国香港、中国澳门地区长途直拨和漫游。
+            </div>
+          </div>
+          <div style={{ height: '3rem' }} />
+        </div>
+        {loadingFlag && <AllWhiteLoading />}
+      </div>
+      <FileModal
+        visible={fileFlag}
+        pathUrl={FileDetailHtml}
+        title="星座派宝贝详情"
+        close={() => {
+          setFileFlag(false);
+        }}
+      />
+    </React.Fragment>
+  );
+};
+
+export default connect(({ starPkg }: { starPkg: StarPkgModelState }) => ({ starPkg }))(StarPkgPage);

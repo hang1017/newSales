@@ -1,0 +1,196 @@
+.listItem {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  padding: 0 32px 24px 24px;
+  background-color: #fff;
+  border-radius: 24px;
+
+  .finishImg {
+    position: absolute;
+    right: 88px;
+    width: 112px;
+    height: 112px;
+    margin-top: -24px;
+  }
+
+  .titleView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 32px;
+
+    .titleLeftView {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .logoImg {
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+      }
+
+      span {
+        color: #041c1e;
+        font-size: 28px;
+      }
+    }
+
+    .titleRightView {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      .deleteImg {
+        width: 40px;
+        height: 40px;
+        margin-left: 24px;
+      }
+    }
+  }
+
+  .centerSingleView {
+    display: flex;
+    flex-direction: row;
+    margin-top: 28px;
+
+    .productImg {
+      width: 200px;
+      height: 200px;
+      margin-right: 24px;
+    }
+
+    .rightView {
+      // display: flex;
+      flex: 1;
+      flex-direction: column;
+      width: 0;
+      .title {
+        display: -webkit-box;
+        margin-bottom: 24px;
+        overflow: hidden;
+        color: #041c1e;
+        font-size: 28px;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 2; // 设置最多显示两行
+        -webkit-box-orient: vertical;
+      }
+
+      .skuAttr {
+        // width: fit-content;
+        display: block;
+        padding: 10px 24px;
+        overflow: hidden;
+        font-size: 22px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        background-color: #f4f7f6;
+        border-radius: 24px;
+      }
+
+      .priceView {
+        margin-top: 42px;
+
+        .priceSmall {
+          color: #f53c54;
+          font-size: 24px;
+        }
+
+        .price {
+          color: #f53c54;
+          font-size: 36px;
+        }
+      }
+    }
+  }
+
+  .centerMultiView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
+
+    .leftView {
+      display: inline-block;
+      width: 560px;
+      // height                       : fit-content;
+      overflow-x: scroll;
+      white-space: nowrap;
+      // -webkit-overflow-scrolling: touch;
+
+      .multiImg {
+        display: inline-block;
+        margin-right: 24px;
+
+        .dataImg {
+          width: 160px;
+          height: 160px;
+        }
+      }
+    }
+
+    .rightView {
+      display: flex;
+      flex-direction: row;
+
+      .shadow {
+        width: 1px;
+        height: 100px;
+        margin-right: 10px;
+        background-color: #888;
+      }
+
+      .totalView {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .priceView {
+          color: #041c1e;
+        }
+
+        .total {
+          color: #b3b5b7;
+          font-size: 24px;
+        }
+      }
+    }
+  }
+
+  .line {
+    height: 2px;
+    margin-top: 40px;
+    margin-bottom: 32px;
+    background-color: #f3f3f3;
+  }
+
+  .bottomView {
+    display: flex;
+    flex-direction: row-reverse;
+
+    .btnRedView {
+      min-width: 172px;
+      margin-left: 24px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      color: #ff483d;
+      text-align: center;
+      border: 1px solid #ff483d;
+      border-radius: 36px;
+    }
+
+    .btnGreyView {
+      min-width: 172px;
+      margin-left: 24px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      color: #b3b5b7;
+      text-align: center;
+      border: 1px solid #b3b5b7;
+      border-radius: 36px;
+    }
+  }
+}

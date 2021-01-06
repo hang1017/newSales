@@ -1,0 +1,79 @@
+.businessItem {
+  margin: 24px 0 0 0;
+  padding: 24px;
+  background: #fff;
+  border-radius: 24px;
+
+  .itemHeader {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 24px;
+    border-bottom: solid 1.2px #e7e6eb;
+
+    .phoneNum {
+      color: #06041e;
+      font-weight: 400;
+      font-size: 28px;
+    }
+
+    .cardStatus {
+      color: #696d6c;
+      font-weight: 400;
+      font-size: 24px;
+    }
+  }
+
+  .itemContent {
+    display: flex;
+    padding-top: 24px;
+    color: #b3b5b7;
+    font-weight: 400;
+    font-size: 22px;
+
+    .contentTitle {
+      color: #041c1e;
+      font-weight: bold;
+      font-size: 32px;
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+
+    .cardInfo {
+      flex: 3;
+      margin-left: 20px;
+
+      & > div {
+        padding-top: 10px;
+      }
+    }
+
+    .btnBlock {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .renewBtn {
+      padding: 10px 64px;
+      color: #fff;
+      font-size: 24px;
+      background: #f53c54;
+      border-radius: 38px;
+    }
+  }
+  .operContent {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: end;
+  }
+  .cancleBtn {
+    padding: 10px 64px;
+    color: #041c1e;
+    font-size: 24px;
+    background: #fff;
+    border: 1px solid #b3b5b7;
+    border-radius: 38px;
+  }
+}

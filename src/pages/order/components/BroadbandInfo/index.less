@@ -1,0 +1,172 @@
+.productView {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  padding: 32px 24px;
+  background-color: white;
+  border-radius: 24px;
+
+  .pageView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .leftView {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+
+      .iconLeft {
+        width: 32px;
+        height: 32px;
+        margin-top: 8px;
+        margin-right: 8px;
+      }
+
+      .centerView {
+        display: flex;
+        flex-direction: column;
+        color: #041c1e;
+        font-size: 28px;
+      }
+    }
+
+    .iconRight {
+      width: 32px;
+      height: 32px;
+      margin-left: 24px;
+    }
+  }
+
+  .orderNumberView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 32px 0;
+
+    .leftView {
+      flex: 1;
+      color: #041c1e;
+      font-weight: 600;
+      font-size: 28px;
+    }
+
+    .delivery {
+      color: #041c1e;
+      font-size: 28px;
+    }
+  }
+
+  .storeView {
+    .centerSingleView {
+      display: flex;
+      flex-direction: row;
+      margin-top: 28px;
+
+      .productImg {
+        width: 200px;
+        height: 200px;
+        margin-right: 24px;
+      }
+
+      .rightView {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+
+        .title {
+          display: -webkit-box;
+          margin-bottom: 10px;
+          overflow: hidden;
+          color: #041c1e;
+          font-size: 28px;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 1; // 设置最多显示两行
+          -webkit-box-orient: vertical;
+        }
+
+        .attr {
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 10px;
+          color: #696d6c;
+          font-size: 24px;
+        }
+
+        .skuAttr {
+          width: fit-content;
+          margin-bottom: 10px;
+          color: #696d6c;
+          font-size: 24px;
+        }
+
+        .priceView {
+          margin-top: 70px;
+
+          .priceSmall {
+            color: #f53c54;
+            font-size: 24px;
+          }
+
+          .price {
+            color: #f53c54;
+            font-size: 36px;
+          }
+        }
+      }
+    }
+
+    .bottomView {
+      display: flex;
+      flex-direction: row-reverse;
+
+      .btnRedView {
+        min-width: 172px;
+        margin-left: 24px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        color: #ff483d;
+        text-align: center;
+        border: 1px solid #ff483d;
+        border-radius: 36px;
+      }
+
+      .btnGreyView {
+        min-width: 172px;
+        margin-left: 24px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        color: #b3b5b7;
+        text-align: center;
+        border: 1px solid #b3b5b7;
+        border-radius: 36px;
+      }
+    }
+
+    .line {
+      width: 100%;
+      height: 2px;
+      margin-top: 32px;
+      background-color: #f3f3f3;
+    }
+  }
+
+  .contactView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+
+    img {
+      width: 48px;
+      height: 48px;
+      margin-right: 20px;
+    }
+
+    span {
+      color: #041c1e;
+      font-size: 24px;
+    }
+  }
+}

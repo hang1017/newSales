@@ -1,0 +1,55 @@
+@import '../../../global.less';
+
+.editUserNamePage {
+  height: 100%;
+  background: #fff;
+  padding: 0 48px;
+
+  .sendText {
+    position: absolute;
+    right: 68px;
+    margin-top: -75px;
+    font-size: 28px;
+  }
+  
+  .verifyCode {
+    .sendText();
+  
+    color: @themeColor;
+  }
+  
+  .disableBtn {
+    .sendText();
+  
+    color: rgb(195, 195, 195);
+  }
+  .tipText {
+    color: #333333;
+    font-size: 28px;
+    margin-top: 15px;
+  }
+
+  .tipTitle {
+    .tipText;
+    font-size: 32px;
+    font-weight: bolder;
+  }
+  .btn {
+    margin-top: 48px;
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
+    background: @themeBg;
+    border-radius: 45px;
+  }
+  .submitDisableBtn {
+    .btn;
+    background: #E6E6E6;
+  }
+}
+
+.submitBtn {
+  color: @themeColor;
+  font-weight: 400;
+  font-size: 32px;
+}

@@ -1,0 +1,180 @@
+import React, { FC, useState, useEffect } from 'react';
+import { ConnectProps, connect, QuickOrderModelState, history } from 'alita';
+import { Base64 } from 'js-base64';
+import { Toast } from 'antd-mobile';
+import { AllWhiteLoading } from '@/components';
+import { FormCard } from '@/pages/nepia/components';
+import Utils from '@/utils/tool';
+import Nepia1Png from '@/assets/img/nepia/nepia1.png';
+import Nepia2Png from '@/assets/img/nepia/nepia2.png';
+import Nepia3Png from '@/assets/img/nepia/nepia3.png';
+import styles from './index.less';
+
+interface NepiaPageProps extends ConnectProps {
+  quickOrder: QuickOrderModelState;
+}
+
+const NepiaPage: FC<NepiaPageProps> = ({ dispatch, location }) => {
+  const { params = '' } = location?.query;
+  const [loadingFlag, setLoadingFlag] = useState<boolean>(true);
+  const pars = JSON.parse(params ? Base64.decode(params) : '{}');
+  const { source = '', sn = '', skuId = '', salesCode = '' } = pars;
+  // {"source":"1","sn":"1","skuId":"1","salesCode":""}
+  console.log(pars);
+
+  useEffect(() => {
+    localStorage.setItem('leave', '0'); // 用完值要设置成初始值
+    localStorage.setItem('tokenCode', '');
+    document.getElementsByClassName('rumtime-keep-alive-layout')[0].style.height = '100%';
+    localStorage.setItem('source', source);
+    localStorage.setItem('sn', sn);
+    localStorage.setItem('salesCode', salesCode);
+
+    Utils.accessPermission({
+      sn,
+      source,
+      dispatch,
+      successCallBack: () => {
+        dispatch!({
+          type: 'indexList/dmosbrowse',
+          payload: {
+            sn: sn || '',
+            source: source || '',
+          },
+        });
+      },
+    });
+
+    // 清空订单确认页面
+    dispatch!({
+      type: 'payConfirm/save',
+      payload: {
+        addressInfo: {},
+        orderInfo: {},
+        nameAndNo: {},
+        choosePhoneTypeValue: undefined,
+        invoiceContent: { personal: {}, company: {} },
+        phoneInfo: {},
+        claimValue: '',
+        needShowOrdAddr: '', // 是否需要展示选址的功能
+        claimType: [], // 配送方式
+        halfPaymenet: {}, //
+      },
+    });
+
+    dispatch!({
+      type: 'oldUserLoginSuccess/save',
+      payload: {
+        cartOrderId: '',
+        commonAttrData: [],
+        commonAttrValue: {},
+      },
+    });
+  }, []);
+
+  const submitOrderFun = (values: any, newNumData: any, addrRes?: any) => {
+    dispatch!({
+      type: 'oldUserLoginSuccess/commitCartQuick',
+      payload: {
+        goodsList: [
+          {
+            skuId,
+            quantity: 1,
+          },
+        ],
+        commonAttrList: [
+          {
+            attrCode: 'HM',
+            attrValue: values?.selectNum,
+            extMap: { ...newNumData },
+          },
+        ],
+        receiveAddrId: addrRes ? addrRes?.receiveAddrId : undefined,
+      },
+    }).then((data: any) => {
+      if (data) {
+        dispatch!({
+          type: 'payConfirm/save',
+          payload: {
+            orderInfo: data,
+          },
+        });
+        dispatch!({
+          type: 'payConfirm/commitOrderBfCheck',
+          payload: {
+            certData: {
+              certName: values?.username,
+              certNum: values?.idenCode,
+              certType: '1',
+            },
+          },
+        }).then((flag: boolean) => {
+          if (flag === true) {
+            history.push({
+              pathname: '/nameAuthentication',
+            });
+          }
+        });
+      }
+    });
+  };
+
+  const formSubmit = (values: any, newNumData: any) => {
+    dispatch!({
+      type: 'payConfirm/save',
+      payload: {
+        nameAndNo: {
+          name: values?.username.trim(),
+          idCard: values?.idenCode.trim(),
+        },
+      },
+    });
+    const { homeAddr = {} } = values;
+    const { label = {}, value = {} } = homeAddr;
+    if (!localStorage.getItem('tokenCode')) {
+      Toast.fail('验证码不正确或验证码已经过期', 1);
+      return;
+    }
+    if (source !== 'store') {
+      dispatch!({
+        type: 'quickOrder/addAddressModal',
+        payload: {
+          name: values?.username,
+          phoneNumber: values?.accNum,
+          detailAddress: values?.detailAddr,
+          defaultAddr: '1000',
+          provinceId: value[0],
+          province: label[0],
+          cityId: value[1],
+          city: label[1],
+          regionId: value[2],
+          region: label[2],
+        },
+      }).then((addrRes: any) => {
+        if (addrRes) {
+          submitOrderFun(values, newNumData, addrRes);
+        }
+      });
+    } else {
+      submitOrderFun(values, newNumData);
+    }
+  };
+  return (
+    <div className={styles.nepiaStyle}>
+      {loadingFlag && <AllWhiteLoading />}
+      <img src={Nepia1Png} alt="" className={styles.nepiaImg} />
+      <FormCard onSubmit={formSubmit} paramAction="nepia" />
+      <img src={Nepia2Png} alt="" className={styles.nepiaImg} />
+      <img
+        src={Nepia3Png}
+        alt=""
+        className={styles.nepiaImg}
+        onLoad={() => setLoadingFlag(false)}
+      />
+    </div>
+  );
+};
+
+export default connect(({ quickOrder }: { quickOrder: QuickOrderModelState }) => ({ quickOrder }))(
+  NepiaPage,
+);

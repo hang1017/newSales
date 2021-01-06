@@ -1,0 +1,298 @@
+.luckDrawStyle {
+  width: 100%;
+  background-color: #2C31D4;
+  overflow: scroll;
+  height: 100%;
+  position: relative;
+
+  .luckDrawContent {
+    padding-bottom: 162px;
+  }
+
+  .allWhiteBg {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 2;
+  }
+
+  .topStyle {
+    width: 100%;
+    position: relative;
+
+    .drawBigBgImg {
+      width: 100%;
+    }
+
+    .gooseRule {
+      position: absolute;
+      right: 0;
+      top: 80px;
+      background: linear-gradient(90deg, #AB47FF 0%, #0048FF 100%);
+      border-radius: 100px 0 0 100px;
+      padding: 14px 38px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 34px;
+
+
+      .right {
+        width: 8px;
+        height: 16px;
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .cutDownTimeStyle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30px;
+
+    .cutDownLabel {
+      font-size: 32px;
+      font-family: PingFangSC-Semibold,
+        PingFang SC;
+      font-weight: 600;
+      color: #FDD988;
+      line-height: 44px;
+      padding-right: 8px;
+    }
+
+    .timeItem {
+      background: linear-gradient(180deg, #FFB34A 0%, #FBAC40 100%);
+      border-radius: 4px;
+      padding: 2px 12px;
+      font-size: 40px;
+      font-family: PingFangSC-Semibold,
+        PingFang SC;
+      font-weight: 600;
+      color: #FFF4DC;
+      line-height: 56px;
+    }
+
+    .mao {
+      font-size: 32px;
+      font-family: PingFangSC-Semibold,
+        PingFang SC;
+      font-weight: 600;
+      color: #966923;
+      line-height: 44px;
+      padding: 0 4px;
+    }
+  }
+
+  .drawStyle {
+    padding: 0 30px;
+
+    .trunableStyle {
+      background-image: url('../../assets/img/goose/drawBg.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 32px;
+      padding: 80px 68px;
+
+      .menuItem {
+        background-image: url('../../assets/img/goose/itemBg.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        position: relative;
+      }
+
+      .menuItemActive {
+        background-image: url('../../assets/img/goose/itemBgActive.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        position: relative;
+      }
+
+      .menuItem::before {
+        content: "";
+        padding-top: 100%;
+        display: block;
+      }
+
+      .menuItemAbs {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+
+        .menuImgItem {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          .menuImg {
+            width: 58px;
+            height: auto;
+          }
+
+          .menuImgText {
+            font-size: 28px;
+            font-family: PingFangSC-Semibold,
+              PingFang SC;
+            font-weight: 600;
+            color: #B8382D;
+            line-height: 40px;
+            padding-top: 8px;
+            white-space: nowrap;
+          }
+        }
+
+        .menuTextItem {
+          height: 100%;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-size: 36px;
+          font-family: PingFangSC-Semibold,
+            PingFang SC;
+          font-weight: 600;
+          color: #B8382D;
+          line-height: 50px;
+        }
+
+        .menuClickItem {
+          width: 100%;
+          height: 100%;
+
+          img {
+            width: 100%;
+            height: 100%;
+            animation: drawAnimation 1s infinite;
+          }
+        }
+      }
+    }
+  }
+
+  .user {
+    text-align: center;
+    font-size: 26px;
+    font-family: PingFangSC-Regular,
+      PingFang SC;
+    font-weight: 400;
+    color: #FFEAC4;
+    line-height: 36px;
+    padding-top: 24px;
+    padding-bottom: 20px;
+  }
+
+  .giftNode {
+    position: relative;
+    padding-top: 20px;
+  }
+
+  .prizeTop {
+    padding: 0 70px;
+
+    .prizeTopImg {
+      width: 100%;
+    }
+  }
+
+  .giftDiv {
+    // padding: 0 102px;
+    padding: 0 70px;
+
+    .giftContent {
+      background-image: url('../../assets/img/goose/yellowBg.png');
+      // height: 100px;
+      border-radius: 0px 0px 8px 8px;
+      padding-bottom: 40px;
+      margin-top: -20px;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+
+      .myGiftTitle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 30px;
+
+        .giftImg {
+          width: 32px;
+          height: 32px;
+          margin-right: 8px;
+        }
+
+        .giftTitleText {
+          font-size: 32px;
+          font-family: PingFangSC-Semibold,
+            PingFang SC;
+          font-weight: 600;
+          color: #84540D;
+          line-height: 44px;
+        }
+      }
+
+      .giftEmpty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .giftEmptyImg {
+          width: 80px;
+          height: 80px;
+          margin-top: 16px;
+        }
+
+        .giftEmptyText {
+          font-size: 24px;
+          font-family: PingFangSC-Regular,
+            PingFang SC;
+          font-weight: 400;
+          color: #84540D;
+          line-height: 34px;
+        }
+      }
+
+      .giftList {
+        padding: 0 36px;
+        padding-top: 24px;
+
+        .giftItem {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 24px;
+          font-family: PingFangSC-Regular,
+            PingFang SC;
+          font-weight: 400;
+          color: #84540D;
+          line-height: 34px;
+          padding-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes drawAnimation {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}

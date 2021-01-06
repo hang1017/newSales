@@ -1,0 +1,32 @@
+.center {
+  padding-right: 48px;
+  padding-left: 48px;
+
+  .topView {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+
+    .close {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  .welcome {
+    margin-top: 48px;
+    margin-bottom: 32px;
+    color: #041c1e;
+    font-size: 40px;
+  }
+
+  .btn {
+    margin-top: 48px;
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
+    background-color: #f53c54;
+    border-radius: 50px;
+  }
+}
